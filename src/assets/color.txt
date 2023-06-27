@@ -1,0 +1,3 @@
+Light pink EB455F
+light purple: 4B56d2
+hover pink : EB4557

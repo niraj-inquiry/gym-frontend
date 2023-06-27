@@ -1,0 +1,131 @@
+.dashboard-container{
+    width:95%;
+    margin: auto;
+    display: flex;
+}
+.dashboard-left{
+    width:18%;
+}
+.dashboard-left ul li a{
+    text-decoration: none;
+    color:white;
+}
+.dashboard-right{
+    width:82%;
+}
+/* graph css start */
+.dash-container{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.dash-graph-item{
+    width:calc(100%/2.2);
+    
+    margin-bottom:3rem;
+}
+.dash-graph-item:first-child{
+  
+    position: relative;
+}
+.dash-graph-item:first-child::after{
+    position: absolute;
+    content: '';
+    top:0%;
+    right:-11%;
+    width:1px;
+    height:100%;
+    background-color: black;
+}
+/* graph css end */
+
+/* center list start */
+.center-list-main{
+ width:95%;
+ margin: auto;
+}
+  /* .add-center-list-container{
+    display: flex;
+    justify-content: flex-end;
+  } */
+  .create-center-container-hide{
+    display: none;
+    transition:0.5s;
+  }
+  .create-center-container-show{
+    display:block;
+    transition:0.5s;
+
+  }
+  .add-center-list-container button{
+    background-color:orangered;
+    color:white;
+    padding:0.3rem 0.7rem 0.4rem 0.7rem;
+    font-weight: bold;
+    border:none;
+    border-radius:5px;
+    transition:0.5s;
+  }
+  .add-center-list-container button:hover{
+    background-color:transparent;
+    border:1px solid orangered;
+    color:black ;
+    transition:0.5s;
+
+  }
+  .center-list-table{
+    width:95%;
+    margin: auto;
+    margin-top:2rem;
+  }
+  table tbody tr td:last-child button{
+    border:none;
+    margin:0.1rem 0.3rem;
+    font-size: 25px;
+    background: transparent;
+  }
+  table tbody tr td:last-child button:hover{
+    color: orangered;
+    transform: scale(1.1);
+  }
+/* center list end */
+
+/* details page */
+
+.title{
+  display: flex;
+  justify-content: space-between;
+}
+.title-feature{
+  display: flex;
+  justify-content: flex-end;
+}
+.show-basics{
+  display: block;
+}
+.hide-basics{
+  display: none !important;
+}
+body{
+  background-color: black;
+}
+.asx{
+  border: 1px solid black;
+  border-radius:10px;
+  margin-top:2rem;
+  padding-bottom:2rem;
+}
+.hide-feature{
+  display: none !important;
+}
+.show-feature{
+  display: block !important;
+}
+.asx button{
+  padding:0.2rem 0.5rem;
+  border-radius: 5px;
+  color: black;
+  font-weight: 600;
+  border:1px solid orangered;
+}

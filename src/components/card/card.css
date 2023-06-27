@@ -1,0 +1,58 @@
+@import url("https://fonts.cdnfonts.com/css/euclid-circular-a");
+body{
+    font-family: "Euclid Circular A", sans-serif;
+}
+.layout{
+    align-items: center;
+    width: 300px;
+    
+    /* height:600px; */
+}
+.cardpass{
+    height: 100%;
+    text-align: left;
+    margin-right:auto;
+    box-shadow: 0px 0px 10px grey;
+}
+.imgbody{
+    position: absolute;
+    height: 15%;
+    top: -5%;
+    border-radius: 150px;
+}
+.passtype{
+    float: right; 
+    background-color: darkblue;
+    color: white; 
+}
+.planname{
+    font-size: 42px;
+    margin-bottom: 15px; 
+}
+.aboutus{
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+.rate{
+    font-size: 42px;
+}
+.discount{
+    float: right;
+    color: orangered;
+}
+.benefits{
+    border: 2px solid grey;
+}
+.benefitslist{
+    font-size: 20px;
+}
+.checkicon{
+    color: orangered;
+    font-size:25px;
+}
+.createplan{
+    float: right;
+    background-color: green;
+    color:white;
+    
+}

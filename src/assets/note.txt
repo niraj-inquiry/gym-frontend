@@ -1,0 +1,22 @@
+search left right side image
+Membership
+Login button change
+Dropdown no need
+color change
+No image in only classy box
+dark gray heading
+
+one membership for fitness, wellness, and beauty
+
+light-blue 64b5f6
+gray: 2a2d36
+cobalt: 0047AB
+
+https://www.figma.com/file/FJIVxYMaNV6Wy1UuJ2I5JZ/Figma-Web-UI?node-id=0%3A1&t=8lzO9ap294Qhhqxe-1
+
+A network of fitness centres, spas, swimming pools, and other facilities is called GYM. You have unlimited access to fitness with just one pass.
+
+What would we do here, create this page or add dropdown option 
+
+
+Pl
