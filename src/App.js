@@ -94,7 +94,7 @@ function App() {
                 <Route path="/flexible-gym-day-and-monthly-passes" element={<Explore_passes />} />
                 <Route path="/centers" element={<Findgym />} />
                 <Route path="/flexible-fitness" element={<Flexible_fitness />} />
-                <Route path="/account" element={isUserAuthenticated ?<Account />:<Navigate to="/login" />} />
+                <Route path="/account" element={<Account />} />
                 <Route path="/Payment_Details" element={<Payment_Details />} />
                 <Route path="/Partnership" element={<Partnership />} />
                 <Route path="/How_it_works" element={<How_it_works />} />
