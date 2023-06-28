@@ -516,7 +516,7 @@ input:checked+.slider:before {
   background-color:var(--custom_pink);
   color:white !important;
 } */
-/Responsive code start/
+/* /Responsive code start/ */
 @media screen and (max-width: 1920px) and (min-width: 1401px) {
   .not-found-layout{
     top:30%;
