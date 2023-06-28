@@ -35,7 +35,13 @@ const Findgym = () => {
     const [nodatafound, setNodatafound] = useState();
     const [filteropen, setFilteropen] = useState();
     const [getamentities, setGetamentities] = useState();
-
+    const [getequipments, setGetequipments] = useState();
+    const [getshow, setGetshow] = useState();
+    const [doubletappingamentities, setDoubletappingamentities] = useState(false);
+    const [selectitem, setSelectitem] = useState(null);
+    const [selectequipitem, setSelectequipitem] = useState(null);
+    const [selectshowitem, setSelectshowitem] = useState(null);
+    console.log('selectitem', selectitem)
     // const [img, setImg] = useState();
     console.log('data', data)
     const Carddata = () => {
@@ -44,6 +50,7 @@ const Findgym = () => {
             API.get(`v1.0/gymcenter/gym-locationbase-data/${searchdata}`).then(res => {
                 if (res.data.status) {
                     setData(res.data.data);
+                    setGetamentities(res.data.data)
                 }
             })
         }
@@ -54,10 +61,6 @@ const Findgym = () => {
 
 
     };
-
-
-
-
 
     const Searchmap = () => {
         return (
@@ -110,6 +113,7 @@ const Findgym = () => {
             if (loaddata?.data?.status === true) {
                 if (isEmpty(templocation)) {
                     setData(loaddata?.data?.data)
+                    setGetamentities(loaddata.data.data)
                 }
                 else {
                     const countryfilter = loaddata?.data?.data.filter(resp => resp?.country == templocation)
@@ -156,27 +160,21 @@ const Findgym = () => {
 
                     <ul className="filtermenu">
                         <li className="dropdown-item">
-                            <input type="radio"  className='w-auto' /> Pools
+                            <input type="radio" className='w-auto' /> Pools
                         </li>
                         <li className="dropdown-item"><input type="radio" className='w-auto' /> Outdoor Fitness</li>
                         <hr className='my-0' />
                         <li><NavLink className="dropdown-item" onClick={() => setShowmorefilter(!showmorefilter)}>See all filters...</NavLink></li>
 
                     </ul>
-
-
                 )}
             </>
 
         )
     }
-    // useEffect(() => {
-    //     onTextSearch()
-    // }, [])
+
     useEffect(() => {
         onTextSearch()
-
-        // }, [mapstatus, searchdata])
     }, [])
 
     const showme = [
@@ -195,19 +193,91 @@ const Findgym = () => {
     ]
     console.log('gym data finggym', location?.state?.searchdata, data, location?.state?.findstate)
 
-    const onFilters = (index, item) => {
-        console.log('onFilters', item,data);
-        setGetamentities(index, item);
-        const filtersdata = data.filter((element) =>
-
-            element.amentitiesData[0].amentitiesName === item
+    const onAmentitiesFilters = (item, index) => {
+        // setDoubletappingamentities(!getamentities,data)
+        setGetequipments(false)
+        setGetshow(false)
+        setSelectitem(index);
+        // setDoubletappingamentities(true,index)
+        API.get('v1.0/gymcenter/get-verify-all-data').then(res => {
+            if (res.data.status) {
+                setData(res.data.data);
+                // setGetamentities(res.data.data)
+            }
+        })
+        const filtersdata = data.filter((element) => {
+            return element?.amentitiesData?.map((amentities) => amentities?.amentitiesName)?.join(', ') === item;
+        }
 
         )
-        // setGetamentities(filtersdata)
-        setData(filtersdata);
-
+        setGetamentities(filtersdata)
         console.log('filtersdata', filtersdata)
     }
+
+    const handleDoubleClick = (item, index) => {
+        // console.log('!selectitem',selectitem,index)
+        setSelectitem(index);
+        API.get('v1.0/gymcenter/get-verify-all-data').then(res => {
+            if (res.data.status) {
+                setData(res.data.data);
+                setGetamentities(res.data.data)
+            }
+        })
+    };
+
+    const onEquipmentFilters = (item, index) => {
+        setGetamentities(false)
+        setGetshow(false)
+        setSelectequipitem(index)
+        API.get('v1.0/gymcenter/get-verify-all-data').then(res => {
+            if (res.data.status) {
+                setData(res.data.data);
+            }
+        })
+        console.log('onEquipmentFilters', data)
+        const lowerCaseQuery = item.toLowerCase();
+        const filtersdata = data.filter((element) =>
+            element?.equipmentData?.map((equipment) => equipment?.equipment_name).join(',') === item
+        )
+
+        setGetequipments(filtersdata)
+        console.log('setGetequipments', filtersdata)
+    }
+
+    const handleEquipDoubleClick = (item, index) => {
+        // console.log('!selectitem',selectitem,index)
+        setSelectequipitem(index);
+        API.get('v1.0/gymcenter/get-verify-all-data').then(res => {
+            if (res.data.status) {
+                setData(res.data.data);
+                setGetequipments(res.data.data)
+            }
+        })
+    }
+
+    const onShowFilter = (item, index) => {
+        setGetamentities(false)
+        setGetequipments(false)
+        setSelectshowitem(index)
+        API.get('v1.0/gymcenter/get-verify-all-data').then(res => {
+            if (res.data.status) {
+                setData(res.data.data);
+                setGetshow(res.data.data)
+            }
+        })
+    }
+    const handleShowClick = (item, index) => {
+        setGetamentities(false)
+        setGetequipments(false)
+        setSelectshowitem(index)
+        API.get('v1.0/gymcenter/get-verify-all-data').then(res => {
+            if (res.data.status) {
+                setData(res.data.data);
+                setGetshow(res.data.data)
+            }
+        })
+    };
+    console.log('selectitem', selectitem)
     console.log('getamentities', getamentities);
     return (
         <>
@@ -273,9 +343,15 @@ const Findgym = () => {
                                 <h3 className='fw-bold'>Show me</h3>
                                 <div className='d-flex mx-2 '>
                                     {showme?.map((item, index) => {
-                                        return <button className='mx-3 my-2 filterbutton px-4 py-2 rounded-pill' T={console.log('showme', item)} key={index}>
+                                        return <div
+                                            className={`filterbutton pe-4 ps-4 py-2 rounded-pill me-3 ${selectshowitem === index ? "tappingbutton" : ""} `}
+                                            T={console.log('showme', item)}
+                                            key={index}
+                                            onClick={() => onShowFilter(item, index)}
+                                            onDoubleClick={() => handleShowClick(index)}
+                                        >
                                             {item}
-                                        </button>
+                                        </div>
                                     })}
                                 </div>
                             </div>
@@ -283,25 +359,31 @@ const Findgym = () => {
                                 <h3 className='fw-bold'>Most used</h3>
                                 <div className='d-flex mx-2 '>
                                     {mostused?.map((item, index) => {
-                                        return <button className='mx-3 my-2 filterbutton px-4 py-2 rounded-pill' T={console.log('showme', item)} key={index}>
+                                        return <div
+                                            className="mx-3 my-2 filterbutton px-4 py-2 rounded-pill"
+                                            T={console.log('showme', item)}
+                                            key={index}
+
+                                        >
                                             {item}
-                                        </button>
+                                        </div>
                                     })}
                                 </div>
                             </div>
                             <div className='my-3'>
                                 <h3 className='fw-bold'>Amenities</h3>
-                                <div className='d-flex mx-2 '>
-                                    {amentities?.map((item, index) => {
-                                        return <button className='mx-3 my-2 filterbutton px-4 py-2 rounded-pill'
-                                            T={console.log('showme', item)}
-                                            key={index}
-                                            value={getamentities}
-                                            //  onClick={() =>setGetamentities(index,item)}
-                                            onClick={() => onFilters(index, item)}
-                                        >
-                                            {item}
-                                        </button>
+                                <div className='d-flex mx-2'>
+                                    {amentities.map((item, index) => {
+                                        return (
+                                            <div key={index} className={`filterbutton pe-4 ps-4 py-2 rounded-pill me-3 ${selectitem === index ? "tappingbutton" : ""} `}
+                                                // onClick={()=>setSelectitem(!selectitem,index,item)}
+                                                // onClick={() => onAmentitiesFilters(item, index)}
+                                                onClick={() => onAmentitiesFilters(item, index)}
+                                                onDoubleClick={() => handleDoubleClick(index)}
+                                            >
+                                                {item}
+                                            </div>
+                                        )
                                     })}
                                 </div>
                             </div>
@@ -309,13 +391,20 @@ const Findgym = () => {
                                 <h3 className='fw-bold'>Equipment and Machines</h3>
                                 <div className='d-flex mx-2 flex-wrap'>
                                     {equipmachine?.map((item, index) => {
-                                        return <button className='mx-3 my-2 filterbutton px-4 py-2 rounded-pill' key={index}>
-                                            {item}
-                                        </button>
+                                        return (
+                                            <div
+                                                className={`filterbutton pe-4 ps-4 py-2 my-2 rounded-pill me-3 ${selectequipitem === index ? "tappingbutton" : ""} `}
+                                                key={index}
+                                                onClick={() => onEquipmentFilters(item, index)}
+                                                onDoubleClick={() => handleEquipDoubleClick(index)}
+                                            >
+                                                {item}
+                                            </div>
+                                        )
                                     })}
                                 </div>
                             </div>
-                            <div className='my-3'>
+                            {/* <div className='my-3'>
                                 <h3 className='fw-bold'>Facilities</h3>
                                 <div className='d-flex mx-2 w-auto'>
                                     {facilities?.map((item, index) => {
@@ -324,21 +413,18 @@ const Findgym = () => {
                                         </button>
                                     })}
                                 </div>
-                            </div>
+                            </div> */}
 
                         </div>
                         <section>
                             <div className='container px-0'>
-                                <div className='row row-cols-1 row-cols-md-3 row-col-lg-4 m-1 g-4 w-100 mx-0' style={{}}>
+                                <div className={showmorefilter ? "hidemorefilter" : "row row-cols-1 row-cols-md-3 row-col-lg-4 m-1 g-4 w-100 mx-0"} style={{}}>
                                     {mapstatus === false ? data?.length > 0 && data?.map((vendoritem, i) =>
 
                                         <CardView vendoritem={vendoritem} lat={geolocation?.location?.coordinates?.lat} lng={geolocation?.location?.coordinates?.lng} />
 
                                     ) : (
                                         <>
-                                            {/* <div style={{ height: 700, width: 1000 }}>
-                                        <GoogleMapfilter data={data} />
-                                    </div> */}
                                             <div style={{ height: 700, width: '100%' }} className='px-0'>
                                                 <GoogleMapfilter data={data} />
                                             </div>
@@ -353,6 +439,47 @@ const Findgym = () => {
                                         </div>
                                     }
 
+
+                                </div>
+                                <div className={showmorefilter ? "showmorefilter row row-cols-1 row-cols-md-3 row-col-lg-4 m-1 g-4 w-100 mx-0" : "hidemorefilter"}>
+                                    {getamentities?.length > 0 && getamentities?.map((vendoritem, i) =>
+                                        <CardView vendoritem={vendoritem} lat={geolocation?.location?.coordinates?.lat} lng={geolocation?.location?.coordinates?.lng} />
+                                    )}
+                                    {getamentities?.length === 0 &&
+                                        <div className='col-12 py-3 px-5 rounded' style={{ boxShadow: '0 0 10px 0 rgba(35,31,32,.1)', }}>
+                                            <div className='fs-4 mb-2 row fw-bold' style={{}}>{"No Gyms Found"}</div>
+                                            <div className='fs-6 row'>
+                                                {"Try adjusting your search by changing your location,removing some filters or increasing your search radius."}
+                                            </div>
+                                        </div>
+
+                                    }
+                                </div>
+                                <div className={showmorefilter ? "showmorefilter row row-cols-1 row-cols-md-3 row-col-lg-4 m-1 g-4 w-100 mx-0" : "hidemorefilter"}>
+                                    {getequipments?.length > 0 && getequipments?.map((vendoritem, i) =>
+                                        <CardView T={console.log('equipcarddata', getequipments)} key={i} vendoritem={vendoritem} lat={geolocation?.location?.coordinates?.lat} lng={geolocation?.location?.coordinates?.lng} />
+                                    )}
+                                    {getequipments?.length === 0 &&
+                                        <div className='col-12 py-3 px-5 rounded' style={{ boxShadow: '0 0 10px 0 rgba(35,31,32,.1)', }}>
+                                            <div className='fs-4 mb-2 row fw-bold' style={{}}>{"No Gyms Found"}</div>
+                                            <div className='fs-6 row'>
+                                                {"Try adjusting your search by changing your location,removing some filters or increasing your search radius."}
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div className={showmorefilter ? "showmorefilter row row-cols-1 row-cols-md-3 row-col-lg-4 m-1 g-4 w-100 mx-0" : "hidemorefilter"}>
+                                    {getshow?.length > 0 && getshow?.map((vendoritem, i) =>
+                                        <CardView T={console.log('equipcarddata', getequipments)} key={i} vendoritem={vendoritem} lat={geolocation?.location?.coordinates?.lat} lng={geolocation?.location?.coordinates?.lng} />
+                                    )}
+                                    {getshow?.length === 0 &&
+                                        <div className='col-12 py-3 px-5 rounded' style={{ boxShadow: '0 0 10px 0 rgba(35,31,32,.1)', }}>
+                                            <div className='fs-4 mb-2 row fw-bold' style={{}}>{"No Gyms Found"}</div>
+                                            <div className='fs-6 row'>
+                                                {"Try adjusting your search by changing your location,removing some filters or increasing your search radius."}
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
 
                             </div>

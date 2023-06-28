@@ -1383,3 +1383,22 @@ z-index: 100;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /* color:#f !important; */
 }
+
+
+.filterbutton{
+  background-color: #fff;
+  color:#000;
+  border:1px solid #000;
+  cursor: pointer;
+}
+.filterbutton:focus {
+  background-color: #000;
+  color:#fff;
+  border:1px solid #000;
+}
+
+.tappingbutton{
+  background-color: #000;
+  color:#fff;
+  cursor: pointer;
+}
