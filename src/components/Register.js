@@ -57,46 +57,9 @@ const onLoad=async()=>{
 
     const OnRegister = async () => {
 
-//         if(!firstname){
-//             setFirstnamevalid(true);
-//         };
-//         if(!firstname.match(name)){
-//             console.log('first name-------');
-//             setFirstnameregrex(true);
-//         }
+        
 
-//         if(!lastname){
-//             setLastnamevalid(true);
-//         };
-
-//         if (!email) {
-//             setEmailvalid(true);
-//         };
-//         if(!email === IsEmail(email)){
-//             console.log('Isemail-------');
-//             setEmailcheckregrex(true);
-//         }
-
-//         if(!password){
-//             setPassvalid(true);
-//         }
-
-//         if(!postcode){
-//             setPostcodevalid(true);
-//         }
-//         if(!postcode.match(validatePIN)){
-//             console.log('pincode------')
-//             setPostcoderegrex(true);
-//         }else{
-//             setPostcoderegrex(false);
-//         }
-
-//         if(!isEmpty(description)){
-//             setDescriptionvalid(true);
-//         }
-// console.log("dddd",description)
-//         if (firstname != null && lastname != null && email != null && password != null && postcode != null && description==!null && value == true)
-//          {
+        
     API.post('v1.0/user/register', {
                 first_name: firstname,
                 last_name: lastname,
@@ -105,37 +68,18 @@ const onLoad=async()=>{
                 post_code: postcode,
                  description:'',
                 user_type: vendoroptions[description]?.rolename
-            }).then(Res=>{
-              
-              if(Res.data.status){
-                localStorage.setItem("token",Res.data.token)
-                localStorage.setItem("userdata",JSON.stringify(Res.data.data))
-                localStorage.setItem("usertype",Res.data.data.user_type)
-                setMessage(Res?.data?.message)
-                // alert(Res.data.message);
-                if((Res?.data?.data?.user_type).toLowerCase()==="user"){
-                    setMessage(Res?.data?.message)
-                    navigate('/account');
-                }
-                else{
-                    // navigate('/vendor');
-                    setMessage(Res?.data?.message)
-                    navigate('/dashboard');
-                }
-              }  
-              else{
-                setMessage(Res?.data?.message)
-                // alert(Res.data.message);
+            }).then(res=>{
+              console.log('res',res);
+              if (res.data.data.user_type==="User") {
+                navigate('/login')
+              }else{
+                navigate('/vendor-login')
               }
+              
+            }).catch((err)=>{
+                console.log(err);
+                alert('Failed Registration. Try again !')
             })
-
-          
-               
-        // }
-        // else {
-        //     alert("Please enter all field")
-        // }
-
     }
 
     return (
