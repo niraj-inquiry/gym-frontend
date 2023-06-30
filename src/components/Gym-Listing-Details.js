@@ -41,6 +41,7 @@ const Gym_Listing_Details = () => {
     const d = new Date();
     let day = d.getDay()
     const [state, setState] = useState([])
+    console.log('state',state);
     const [gymstate, setGymstate] = useState()
     const [facilitiesstate, setFacilitiestate] = useState([])
     const [equip, setEquip] = useState([])
@@ -67,25 +68,7 @@ const Gym_Listing_Details = () => {
         API.post('v1.0/gymcenterdetails/get-gym-center-all-details', body).then((gymdata) => {
             console.log("ddddddddddddddd", gymdata?.data?.data)
             if (gymdata?.data?.status === true) {
-                // if (gymdata?.data?.data?.gymcenterinfo?.length === 0) {
-
-                //     API.get(`v1.0/plan/get-plan/${!isEmpty(geolocation?.country) ? geolocation?.country : gymdata?.data?.data?.country}/${gymdata?.data?.data?.created_by_userid}`).then(res => {
-                //         if (res?.data?.status) {
-
-                //             setState(res?.data?.data);
-                //         }
-
-                //     })
-                // }
-                // else {
-                //     API.get(`v1.0/plan/get-plan/${!isEmpty(geolocation?.country) ? geolocation?.country : gymdata?.data?.data?.gymcenterinfo?.country}/${gymdata?.data?.data?.gymcenterinfo?.created_by_userid}`).then(res => {
-                //         if (res?.data?.status) {
-
-                //             setState(res?.data?.data);
-                //         }
-
-                //     })
-                // }
+               
                 if (gymdata?.data?.data) {
 
                     API.get(`v1.0/plan/get-plan/${!isEmpty(geolocation?.country) ? geolocation?.country : gymdata?.data?.data?.country}/${gymdata?.data?.data?._id}`).then(res => {
@@ -96,32 +79,10 @@ const Gym_Listing_Details = () => {
 
                     })
                 }
-                // else {
-                //     API.get(`v1.0/plan/get-plan/${!isEmpty(geolocation?.country) ? geolocation?.country : gymdata?.data?.data?.gymcenterinfo?.country}/${gymdata?.data?.data?.gymcenterinfo?.created_by_userid}`).then(res => {
-                //         if (res?.data?.status) {
-
-                //             setState(res?.data?.data);
-                //         }
-
-                //     })
-                // }
-
+              
 
                 setGymstate(gymdata?.data?.data)
-                // if (gymdata.data.data?.gymcenterinfo?.photos?.length > 0) {
-                //     setMultiplephoto([...gymdata.data.data?.gymcenterinfo?.photos])
-                // }
-                // else {
-                //     setMultiplephoto([...gymdata.data.data?.photos])
-                // }
-
-                // fetchImage(`${baseURL}${gymdata.data.data?.gymcenterinfo?.photos[0]}`).then(res => {
-                //     setImgurl(res)
-                // })
-                // fetchImage(`${baseURL}${gymdata.data.data?.gymcenterinfo?.photos}`).then(res => {
-                //     console.log('image res',res)
-                //     setImgurl(res)
-                // })
+               
 
                 setEquip(gymdata.data.data?.gymeqeuipmentsinfo)
                 let trainertemp = []
@@ -135,7 +96,7 @@ const Gym_Listing_Details = () => {
 
 
         })
-        // userReview();
+       
         allUserReview();
 
     }
@@ -150,29 +111,38 @@ const Gym_Listing_Details = () => {
 
     const navigate = useNavigate()
     const onLink = (item) => {
-        console.log('onLink', item)
+        console.log('datai',item);
         const forwardData = Object?.assign({}, item, gymstate);
-
-        const userdata = JSON.parse(localStorage.getItem('userdata'))
-        const usertype = userdata?.user_type
-        console.log('usertype', usertype)
-        console.log('forwardData', forwardData)
-
-        if (!isEmpty(usertype)) {
-            switch (usertype) {
-                case "User":
-                    // navigate('/revieworder', { state: { plan: item, vendor: gymstate } })
-                    navigate('/booking_appointment', { state: { plan: forwardData } })
-                    break;
-
-                default:
-                    navigate('/dashboard')
-                    break;
-            }
-        }
-        else {
+        const newforwardData=JSON.stringify(forwardData)
+        console.log('newforwardData',newforwardData);
+        localStorage.setItem('selectdat',newforwardData)
+        const loggedUser=JSON.parse(localStorage.getItem('userAuth'))
+        if (loggedUser) {
+            navigate('/booking_appointment')
+        } else {
             navigate('/login')
         }
+        // const userdata = JSON.parse(localStorage.getItem('userdata'))
+        // console.log('userdata',userdata);
+        // const usertype = userdata?.user_type
+        // console.log('usertype', usertype)
+        // console.log('forwardData', forwardData)
+
+        // if (!isEmpty(usertype)) {
+        //     switch (usertype) {
+        //         case "User":
+                   
+        //             navigate('/booking_appointment', { state: { plan: forwardData } })
+        //             break;
+
+        //         default:
+        //             navigate('/dashboard')
+        //             break;
+        //     }
+        // }
+        // else {
+        //     navigate('/login')
+        // }
 
 
 
@@ -222,11 +192,9 @@ const Gym_Listing_Details = () => {
     const userReview = async () => {
 
         let body = {
-            // rating: rating,
-            // feedback_by_userid: userinfo?._id,
+           
             centerid: centerid,
-            // comment: comment,
-            // like,
+           
         }
         const resdata = await API.post(`v.1.0/feedbackwithrating/add-new-feedbackwithrating`, body)
         console.log('resdata------------', resdata)
@@ -265,14 +233,9 @@ const Gym_Listing_Details = () => {
                 <>
                     <Header Logo={Images.logo} Hamburger={Images.menu} />
                     <div className="container-fluid px-4">
-                        {/* <div className="row justify-content-start pt-4 mx-0">
-
-                    {gymstate?.gymcenterinfo?.center_name}
-
-                </div> */}
+                     
                         <div className=" px-0 mx-0 py-4 ">
-                            {/* title */}
-                            {/* <h2 className="text-start pt-2 pt-5">{gymstate?.gymcenterinfo?.center_name}</h2> */}
+                           
                             <h2 className="text-start pt-2 pt-5">{gymstate?.center_name}</h2>
                             {/* address */}
                             <div className="row">

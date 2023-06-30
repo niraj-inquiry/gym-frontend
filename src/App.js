@@ -107,7 +107,7 @@ function App() {
                 <Route path="/user-history" element={<UserHistory />} />
                 <Route path="/revieworder" element={<Revieworder />} />
                 
-                <Route path="/dashboard/*" element={isVendorAuthenticated ?<Dashboard />:<Navigate to="/vendor-login" />} />
+                <Route path="/dashboard/*" element={<Dashboard />} />
 
                 <Route path="/members" element={<MembersList />} />
                 <Route path="/my-centers" element={<CenterList />} />

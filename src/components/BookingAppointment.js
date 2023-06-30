@@ -59,33 +59,56 @@ const BookingAppointment = () => {
 
   const onCardClick = (templocation) => {
     console.log('find-gym-item', localStorage.getItem('usertype'))
-
-    if (!isEmpty(userdata?.user_type)) {
-      switch (userdata?.user_type) {
-        case "User":
-          navigation('/revieworder', { state: { plan: templocation, vendor: templocation?.vendor } })
+    navigation('/revieworder')
+    // if (!isEmpty(userdata?.user_type)) {
+    //   switch (userdata?.user_type) {
+    //     case "User":
+    //       navigation('/revieworder', { state: { plan: templocation, vendor: templocation?.vendor } })
           
-          break;
+    //       break;
 
-        default:
-          navigation('/dashboard')
-          break;
-      }
-    }
-    else {
-      navigation('/login')
-    }
+    //     default:
+    //       navigation('/dashboard')
+    //       break;
+    //   }
+    // }
+    // else {
+    //   navigation('/login')
+    // }
 
   }
 
   let previousdata = location?.state?.plan
   localStorage.setItem('previousdata',JSON.stringify(previousdata))
   console.log('BookingAppointment',previousdata)
+  const selectedPData=JSON.parse(localStorage.getItem('selectdat'))
+
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
-
-      <div className='row mx-0 align-items-center justify-content-center py-3 mt-5 px-5'>
+      <div className="container pt-4">
+        <div className="row">
+          <div className="col-lg-6 offset-lg-6">
+             <table className='table' >
+               <thead>
+                <tr>
+                  <th>Center Name</th>
+                  <th>Pass Type</th>
+                  <th>Price</th>
+                </tr>
+               </thead>
+               <tbody>
+                <tr>
+                  <td>{selectedPData.center_name}</td>
+                  <td>{selectedPData.planname}</td>
+                  <td>{selectedPData.country==='India' ? `₹ ${selectedPData.rate}` :` $ ${selectedPData.rate}` }</td>
+                </tr>
+               </tbody>
+             </table>
+          </div>
+        </div>
+      </div>
+      <div className='row mx-0 align-items-center justify-content-center pb-3  px-5'>
         <h1 className='text-center mt-2 mb-5 fw-bold'>{previousdata?.center_name}</h1>
         <div className='col-3 border mx-5 rounded billing py-5'>
           <h1 className='text-center py-2'>Billing Information</h1>
@@ -108,7 +131,7 @@ const BookingAppointment = () => {
                 type="email"
                 id="email"
                 name="email"
-                //   value={getData.email}
+               
                 className="form-control"
                 onChange={(e) => handleInput(e)}
                 required
@@ -145,7 +168,7 @@ const BookingAppointment = () => {
               <select
                 id="country"
                 name="country"
-                //   value={getData.value}
+               
                 className="form-control"
                 onChange={(e) => onSelectCountry(e)}
                 required
@@ -162,7 +185,7 @@ const BookingAppointment = () => {
               <select
                 id="state"
                 name="state"
-                //   value={getData.state}
+                
                 className="form-control"
                 onChange={(e) => onSelectstate(e)}
                 required
@@ -180,7 +203,7 @@ const BookingAppointment = () => {
               <select
                 id="city"
                 name="city"
-                //   value={getData.city}
+              
                 className="form-control"
                 onChange={(e) => setDistrict(e.target.value)}
                 required
@@ -207,6 +230,7 @@ const BookingAppointment = () => {
         onClick={() => onCardClick(templocation)} 
         >
           <span className="position-relative fs-5">
+            
             Proceed
           </span>
         </button>

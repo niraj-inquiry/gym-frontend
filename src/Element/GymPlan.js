@@ -18,13 +18,10 @@ export const GymPlan = ({
     return (
         <div className="">
             <div className="pass-box" style={{backgroundColor:'#fff'}}>
-                {/* <div className="d-flex align-items-center">
-                    <ImageShow imageurl={PassIcon&&PassIcon}/>
-                    <h3 className="fw-bold">{PassTitle}</h3>
-                </div> */}
+               
                 <div className="row align-items-center">
                     <div className="col-2">
-                        {/* <ImageShow imageurl={PassIcon && PassIcon} /> */}
+                        
                         <img src={Images.monthlypass} />
                     </div>
                     <div className="col text-start">
@@ -32,15 +29,7 @@ export const GymPlan = ({
                     </div>
                 </div>
                 <div className="row w-100 ">
-                    {/* <ul className="row border w-100 ">
-                        {Features?.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))}
-                        <li>Multi-gym access</li>
-                        <li>Unlimited visits</li>
-                        <li>No contracts, cancel anytime</li>
-                        <li>Fitness apps included</li>
-                    </ul> */}
+                   
 
                     <ul className="col-8  mx-auto">
                         <li>Multi-gym access</li>

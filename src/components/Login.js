@@ -51,7 +51,14 @@ const Login = () => {
       
       if (data.data.email && data.data.password ) {
         if (data.data.user_type==="User") {
-          navigate('/account')
+          const getSelectData=JSON.parse(localStorage.getItem('selectdat'))
+          // console.log('getSelectData',getSelectData);
+          if (getSelectData) {
+            navigate('/booking_appointment')
+          } else {
+            navigate('/account')
+          }
+         
           localStorage.setItem('userAuth', JSON.stringify(uData) )
         } else {
           alert('Your Authentication is Vender Type! Do you want to Login as a Vendor')
