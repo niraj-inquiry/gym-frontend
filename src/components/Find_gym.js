@@ -338,7 +338,7 @@ const Findgym = () => {
                                 {/* <button className='me-3 explore-btn rounded-pill'>Reset Filters</button> */}
                                 <button className=' explore-btn rounded-pill' onClick={() => setShowmorefilter(false)}>Close & Apply Filters</button>
                             </div>
-                            <h2 className='fw-bold'>Filter gyms by:</h2>
+                            <h2 className='fw-bold'>Filter Activities by:</h2>
                             <div className='my-3'>
                                 <h3 className='fw-bold'>Show me</h3>
                                 <div className='d-flex mx-2 '>

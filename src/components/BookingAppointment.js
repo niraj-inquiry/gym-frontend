@@ -88,8 +88,10 @@ const BookingAppointment = () => {
       <Header Logo={Images.logo} Hamburger={Images.menu} />
       <div className="container pt-4">
         <div className="row">
-          <div className="col-lg-6 offset-lg-6">
-             <table className='table' >
+          <div className="col-lg-6 ">
+          
+            <h2>Your Choosen Plan</h2>
+             <table className='table table-info' >
                <thead>
                 <tr>
                   <th>Center Name</th>

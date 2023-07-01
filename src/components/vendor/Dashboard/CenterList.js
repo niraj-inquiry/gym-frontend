@@ -448,13 +448,13 @@ const CenterList = () => {
                               name="district"
                               value={district}
                               className="form-control"
-                              onChange={(e) =>setDistrict(e.target.value)}
+                              onChange={(e) => setDistrict(e.target.value)}
                               required
 
                             >
                               <option>Choose City</option>
                               {Cities.filter(
-                                (item) => item.sname ===state
+                                (item) => item.sname === state
                               ).map((itm) => {
                                 return itm.cityname.map((ev, i) => {
                                   return (

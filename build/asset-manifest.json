@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.b42e2030.css",
-    "main.js": "./static/js/main.46881912.js",
+    "main.css": "./static/css/main.c6b9fef5.css",
+    "main.js": "./static/js/main.53d022bb.js",
     "static/js/787.4159b215.chunk.js": "./static/js/787.4159b215.chunk.js",
     "static/media/newbanimg.png": "./static/media/newbanimg.65d728f387c089802528.png",
     "static/media/android.png": "./static/media/android.ee50bdc7e9d3f75ca929.png",
@@ -40,7 +40,6 @@
     "static/media/sa_logo.png": "./static/media/sa_logo.2982452c11d5c168e620.png",
     "static/media/gym-refer.jpg": "./static/media/gym-refer.a8473728765d473ae27a.jpg",
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "./static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
-    "static/media/loading.gif": "./static/media/loading.90672f1deffccbcdf4f1.gif",
     "static/media/equipments.jpg": "./static/media/equipments.cca57670a0a41c888c7b.jpg",
     "static/media/blogequipment.jpg": "./static/media/blogequipment.7a7ed29d27c9258a6294.jpg",
     "static/media/logingym.jpg": "./static/media/logingym.e2b11ce8d3fd405a102d.jpg",
@@ -58,12 +57,12 @@
     "static/media/eye.png": "./static/media/eye.77791c932ab34a38b80f.png",
     "static/media/add_equipment.png": "./static/media/add_equipment.6aac3c419b2a432fed9a.png",
     "index.html": "./index.html",
-    "main.b42e2030.css.map": "./static/css/main.b42e2030.css.map",
-    "main.46881912.js.map": "./static/js/main.46881912.js.map",
+    "main.c6b9fef5.css.map": "./static/css/main.c6b9fef5.css.map",
+    "main.53d022bb.js.map": "./static/js/main.53d022bb.js.map",
     "787.4159b215.chunk.js.map": "./static/js/787.4159b215.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b42e2030.css",
-    "static/js/main.46881912.js"
+    "static/css/main.c6b9fef5.css",
+    "static/js/main.53d022bb.js"
   ]
 }
