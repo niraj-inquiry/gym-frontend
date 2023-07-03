@@ -9,3 +9,59 @@ font-weight: 600;
 .custom-box{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+.card{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.plan-btn button{
+    width:calc(100%/3.1);
+    font-size:12px;
+    border:1px solid #FE5B27;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.plan-btn button:hover{
+ background-color: #FE5B27;
+ color:#fff;
+}
+.card-title{
+    font-weight: 700;
+}
+.input-group-text{
+    background-color: #FE5B27 !important;
+    color:#fff !important;
+}
+.input-group input{
+    border: 1px solid #FE5B27;
+    border-radius:5px;
+    border-right:none;
+}
+.input-group input:focus{
+    outline: none !important;
+    border: 1px solid #FE5B27;
+
+}
+.add-filter{
+    display: flex;
+    justify-content: flex-end;
+}
+.add-filter span{
+    border: 1px solid #FE5B27;
+    padding:0.5rem;
+    margin-left:1rem;
+    border-radius:5px;
+    cursor: pointer;
+}
+.add-filter span:hover{
+  background-color: #FE5B27;
+  color:#fff;
+}
+.add-filter span:first-child{
+    position: relative;
+}
+.show-filter-item{
+    display: block;
+    border: 1px solid #FE5B27;
+}
+.hide-filter-item{
+    display: none;
+}

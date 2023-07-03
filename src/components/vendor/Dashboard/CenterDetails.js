@@ -451,28 +451,7 @@ const CenterDetails = (props) => {
                 <div className="col-lg-6 text-end">
                   <button type="submit" className="center_details_btn">Add Schedule</button>
                 </div>
-                <div className="col-12">
-                  <table className="table table-striped table-responsive" >
-                    <thead>
-                      <tr>
-                        <th>Day</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {getCenter.scheduleData?.map((item, index) => {
-                        return (
-                          <tr key={index} >
-                            <td>{item.day}</td>
-                            <td>{item.startTime} AM </td>
-                            <td>{item.endTime} PM</td>
-                          </tr>
-                        )
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                
               </div>
             </form>
           </div>
