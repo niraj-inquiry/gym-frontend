@@ -8,6 +8,19 @@ const Findgym = () => {
   const [getPlan, setGetPlan] = useState([]);
   const [getFilterData, setGetFilterData] = useState("");
   const [showFilterItem, setShowFilterItem] = useState(false);
+  const [getCategory, setGetCategory] = useState([]);
+  const [activeClasses, setActiveClasses] = useState(
+    Array(getCategory.length).fill(false)
+  );
+  const [activeClasses1, setActiveClasses1] = useState(
+    Array(getCategory.length).fill(false)
+  );
+  const [activeClasses2, setActiveClasses2] = useState(
+    Array(getCategory.length).fill(false)
+  );
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [getCateData, setGetCateData] = useState("");
+  const [getCateItem, setGetCateItem] = useState([]);
   const getCenterData = () => {
     axios
       .get(
@@ -24,10 +37,45 @@ const Findgym = () => {
         setGetPlan(res.data.data);
       });
   };
-  console.log("getCenter", getCenter);
+  const getItemByCategory = () => {
+    axios
+      .get("https://gym-api-3r8c.onrender.com/api/get-centertype")
+      .then((res) => {
+        setGetCategory(res.data.data);
+      });
+  };
+  const getCateItems = () => {
+    axios
+      .get("https://gym-api-3r8c.onrender.com/api/get-centerfeatureitem")
+      .then((res) => {
+        setGetCateItem(res.data.data);
+      });
+  };
+  const handleClick = (index, value) => {
+    setActiveIndex(index);
+    setGetCateData(value);
+  };
+  const handleClickItem = (index) => {
+    const updatedClasses = [...activeClasses];
+    updatedClasses[index] = !updatedClasses[index];
+    setActiveClasses(updatedClasses);
+  };
+  const handleClickItem1 = (index) => {
+    const updatedClasses = [...activeClasses1];
+    updatedClasses[index] = !updatedClasses[index];
+    setActiveClasses1(updatedClasses);
+  };
+  const handleClickItem2 = (index) => {
+    const updatedClasses = [...activeClasses2];
+    updatedClasses[index] = !updatedClasses[index];
+    setActiveClasses2(updatedClasses);
+  };
+  console.log("getCateItem", getCateItem);
   useEffect(() => {
     getCenterData();
     getAllPlan();
+    getItemByCategory();
+    getCateItems();
   }, []);
   return (
     <>
@@ -61,8 +109,69 @@ const Findgym = () => {
             </div>
           </div>
         </div>
-        <div className={showFilterItem? 'show-filter-item':'hide-filter-item'}>
-            <h2>show filter item</h2>
+        <div
+          className={showFilterItem ? "show-filter-item" : "hide-filter-item"}
+        >
+          <div className="row">
+            <div className="col-12 filter-item-span">
+              <h2 className="px-4 pt-4">Show me</h2>
+              <div className="d-flex p-4">
+                {getCategory.map((item, index) => {
+                  return (
+                    <span
+                      key={index}
+                      onClick={() => handleClick(index, item.name)}
+                      className={activeIndex === index ? "category-active" : ""}
+                    >
+                      {item.name}
+                    </span>
+                  );
+                })}
+              </div>
+              <hr />
+              <h3 className="px-4">Amenities</h3>
+              <div className="d-flex p-4">
+                {getCateItem
+                  .filter(
+                    (filtItem) => filtItem.centerFeatureId === "Amenities" 
+                  )
+                  .map((item, index) => {
+                    return <span key={index}
+                    onClick={()=>handleClickItem(index)}
+                    className={activeClasses[index] ? 'category-active' : ''}
+                    >{item.name.length>0?item.name:'Amenities Data Not Added'}</span>;
+                  })}
+              </div>
+              <hr />
+              <h3 className="px-4">Equipment and Machines</h3>
+              <div className="d-flex p-4">
+                {getCateItem
+                  .filter(
+                    (filtItem) => filtItem.centerFeatureId === "Equipments"
+                  )
+                  .map((item, index) => {
+                    return <span key={index}
+                    onClick={()=>handleClickItem1(index)}
+                    className={activeClasses1[index] ? 'category-active' : ''}
+                    >{item.name.length>0?item.name:'Equipments Data Not Added'}</span>;
+                  })}
+              </div>
+              <hr />
+              <h3 className="px-4" >Facilities</h3>
+              <div className="d-flex p-4">
+              {getCateItem
+                  .filter(
+                    (filtItem) => filtItem.centerFeatureId === "Facilities"
+                  )
+                  .map((item, index) => {
+                    return <span key={index}
+                    onClick={()=>handleClickItem2(index)}
+                    className={activeClasses2[index] ? 'category-active' : ''}
+                    >{item.name}</span>;
+                  })}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="row">
           {getCenter

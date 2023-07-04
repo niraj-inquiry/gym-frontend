@@ -61,7 +61,18 @@ font-weight: 600;
 .show-filter-item{
     display: block;
     border: 1px solid #FE5B27;
+    border-radius:10px;
 }
 .hide-filter-item{
     display: none;
+}
+.filter-item-span span{
+    border: 1px solid #FE5B27;
+    padding:0.3rem 0.6rem;
+    border-radius:25px;
+    margin-right:0.4rem;
+}
+.category-active{
+    background-color: black;
+    color: #fff;
 }
