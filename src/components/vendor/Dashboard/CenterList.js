@@ -352,7 +352,7 @@ const CenterList = () => {
 
                         </>
                       )}
-                      {selectedChoice === "Activity Center" && (
+                      {selectedChoice === "Activities Center" && (
                         <>
                           <div className="col-lg-6 mb-4 ">
                             <label htmlFor="center_name">Center Name</label>

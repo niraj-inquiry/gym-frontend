@@ -43,14 +43,16 @@ export const HomeBanner = ({ ImageLocate, ImageGymStudio,title,subtitle }) => {
     const onSearchLocation = async () => {
 
         if (!isEmpty(country)) {
-            navigate('/centers', { state: { country: country,searchdata: searchdata,findstate:findstate} })
+            navigate(`${removedFirstWord}`, { state: { country: country,searchdata: searchdata,findstate:findstate} })
         }
         else {
-            navigate('/centers', { state: "" })
+            navigate(`${removedFirstWord}`, { state: "" })
         }
 
 
     }
+    const removedFirstWord = findstate ? (([_, ...words]) => words.join("-"))(findstate.replace(",", "").split(" ")).toLowerCase() : '';
+    console.log('finds',typeof findstate);
     useEffect(() => {
         getLocation()
     }, [])
@@ -86,7 +88,7 @@ export const HomeBanner = ({ ImageLocate, ImageGymStudio,title,subtitle }) => {
             if (event.key === 'Enter') {
                 // event.preventDefault();
 
-                navigate('/centers', { state: {  country: country,searchdata: searchdata,findstate:findstate} })
+                navigate(`${removedFirstWord}`, { state: {  country: country,searchdata: searchdata,findstate:findstate} })
                 // 👇️ your logic here
                 // myFunction();
             }
@@ -196,14 +198,15 @@ export const SubHomeBanner=({ ImageLocate})=>{
     const onSearchLocation = async () => {
 
         if (!isEmpty(country)) {
-            // navigate('/centers', { state: { country: country } })
-            navigate('/centers', { state: { country: country,searchdata: searchdata,findstate:findstate} })
+            // navigate(`${removedFirstWord}`, { state: { country: country } })
+            navigate(`${removedFirstWord}`, { state: { country: country,searchdata: searchdata,findstate:findstate} })
         }
         else {
-            navigate('/centers', { state: "" })
+            navigate(`${removedFirstWord}`, { state: "" })
         }
 
     }
+    const removedFirstWord = findstate ? (([_, ...words]) => words.join("-"))(findstate.replace(",", "").split(" ")).toLowerCase() : '';
     useEffect(() => {
         getLocation()
     }, [])
@@ -238,7 +241,7 @@ export const SubHomeBanner=({ ImageLocate})=>{
             if (event.key === 'Enter') {
                 // event.preventDefault();
 
-                navigate('/centers', { state: { finddata: findstate } })
+                navigate(`${removedFirstWord}`, { state: { finddata: findstate } })
                 // 👇️ your logic here
                 // myFunction();
             }

@@ -53,18 +53,18 @@ function App() {
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
   const isVendorAuthenticated = JSON.parse(localStorage.getItem("vendorAuth"));
   console.log("isVendorAuthenticated", isVendorAuthenticated);
-  useEffect(() => {
-    if (isUserAuthenticated) {
-        navigate('/account')
-    }
+  // useEffect(() => {
+  //   if (isUserAuthenticated) {
+  //       navigate('/account')
+  //   }
 
-  }, []);
-  useEffect(() => {
-    if (isVendorAuthenticated) {
-        navigate('/dashboard')
-    }
+  // }, []);
+  // useEffect(() => {
+  //   if (isVendorAuthenticated) {
+  //       navigate('/dashboard')
+  //   }
     
-  }, []);
+  // }, []);
   return (
     <div className="App">
       {/* <AuthContextProvider> */}
@@ -91,7 +91,7 @@ function App() {
           path="/flexible-gym-day-and-monthly-passes"
           element={<Explore_passes />}
         />
-        <Route path="/centers" element={<Findgym />} />
+        <Route path="/:centerparameter" element={<Findgym />} />
         <Route path="/flexible-fitness" element={<Flexible_fitness />} />
         <Route
           path="/account"

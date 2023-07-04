@@ -1,4 +1,4 @@
-const CenterType=["Gym Center", "Activity Center"]
+const CenterType=["Gym Center", "Activities Center"]
 
 const Country=["India", "USA"]
 
