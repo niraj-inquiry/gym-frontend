@@ -76,3 +76,6 @@ font-weight: 600;
     background-color: black;
     color: #fff;
 }
+.center-card{
+    cursor: pointer;
+}

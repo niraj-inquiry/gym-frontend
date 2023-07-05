@@ -43,16 +43,16 @@ export const HomeBanner = ({ ImageLocate, ImageGymStudio,title,subtitle }) => {
     const onSearchLocation = async () => {
 
         if (!isEmpty(country)) {
-            navigate(`${removedFirstWord}`, { state: { country: country,searchdata: searchdata,findstate:findstate} })
+            navigate(`${findstate}`, { state: { country: country,searchdata: searchdata,findstate:findstate} })
         }
         else {
-            navigate(`${removedFirstWord}`, { state: "" })
+            navigate(`${findstate}`, { state: "" })
         }
 
 
     }
-    const removedFirstWord = findstate ? (([_, ...words]) => words.join("-"))(findstate.replace(",", "").split(" ")).toLowerCase() : '';
-    console.log('finds',typeof findstate);
+    // const findstate = findstate ? (([_, ...words]) => words.join("-"))(findstate.replace(",", "").split(" ")).toLowerCase() : '';
+    // console.log('finds',typeof findstate);
     useEffect(() => {
         getLocation()
     }, [])
@@ -88,7 +88,7 @@ export const HomeBanner = ({ ImageLocate, ImageGymStudio,title,subtitle }) => {
             if (event.key === 'Enter') {
                 // event.preventDefault();
 
-                navigate(`${removedFirstWord}`, { state: {  country: country,searchdata: searchdata,findstate:findstate} })
+                navigate(`${findstate}`, { state: {  country: country,searchdata: searchdata,findstate:findstate} })
                 // 👇️ your logic here
                 // myFunction();
             }
@@ -144,7 +144,7 @@ export const HomeBanner = ({ ImageLocate, ImageGymStudio,title,subtitle }) => {
                         <div className="main-search">
                         {status === true ? searchdata?.map((item) => (
                             
-                            <div onClick={()=>setFinestate(`${item?.address} ${item?.pincode}`)} className="searchdata">
+                            <div onClick={()=>setFinestate(`${item?.address} `)} className="searchdata">
                                 <div>{item?.address} {item?.pincode}</div>
                             </div>
                            
@@ -198,15 +198,15 @@ export const SubHomeBanner=({ ImageLocate})=>{
     const onSearchLocation = async () => {
 
         if (!isEmpty(country)) {
-            // navigate(`${removedFirstWord}`, { state: { country: country } })
-            navigate(`${removedFirstWord}`, { state: { country: country,searchdata: searchdata,findstate:findstate} })
+            // navigate(`${findstate}`, { state: { country: country } })
+            navigate(`${findstate}`, { state: { country: country,searchdata: searchdata,findstate:findstate} })
         }
         else {
-            navigate(`${removedFirstWord}`, { state: "" })
+            navigate(`${findstate}`, { state: "" })
         }
 
     }
-    const removedFirstWord = findstate ? (([_, ...words]) => words.join("-"))(findstate.replace(",", "").split(" ")).toLowerCase() : '';
+    // const findstate = findstate ? (([_, ...words]) => words.join("-"))(findstate.replace(",", "").split(" ")).toLowerCase() : '';
     useEffect(() => {
         getLocation()
     }, [])
@@ -241,7 +241,7 @@ export const SubHomeBanner=({ ImageLocate})=>{
             if (event.key === 'Enter') {
                 // event.preventDefault();
 
-                navigate(`${removedFirstWord}`, { state: { finddata: findstate } })
+                navigate(`${findstate}`, { state: { finddata: findstate } })
                 // 👇️ your logic here
                 // myFunction();
             }
@@ -282,7 +282,7 @@ export const SubHomeBanner=({ ImageLocate})=>{
                         <div className="main-search">
                         {status === true ? searchdata?.map((item) => (
                             
-                            <div onClick={()=>setFinestate(`${item?.address} ${item?.pincode}`)} className="searchdata">
+                            <div onClick={()=>setFinestate(`${item?.address}`)} className="searchdata">
                                 <div>{item?.address} {item?.pincode}</div>
                             </div>
                            

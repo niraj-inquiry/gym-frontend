@@ -20,7 +20,7 @@ const Revieworder = () => {
     const selectedPData=JSON.parse(localStorage.getItem('selectdat'))
   
     const handlePayment = () => {
-        fetch("http://localhost:8000/order", {
+        fetch("https://gym-api-3r8c.onrender.com/order", {
           method: "GET",
           mode: 'cors',
           headers: {}
