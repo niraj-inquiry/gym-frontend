@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import "./style.css";
-import { API } from "../../../generalfunction";
+
 const Days = [
   "Monday",
   "Tuesday",

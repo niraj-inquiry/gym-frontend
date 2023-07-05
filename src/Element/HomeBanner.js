@@ -144,7 +144,7 @@ export const HomeBanner = ({ ImageLocate, ImageGymStudio,title,subtitle }) => {
                         <div className="main-search">
                         {status === true ? searchdata?.map((item) => (
                             
-                            <div onClick={()=>setFinestate(`${item?.address} `)} className="searchdata">
+                            <div onClick={()=>setFinestate(`${item?.address  } `)} className="searchdata">
                                 <div>{item?.address} {item?.pincode}</div>
                             </div>
                            

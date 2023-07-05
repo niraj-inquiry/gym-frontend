@@ -3,10 +3,12 @@ import { Header } from "../Element/Header";
 import Multiplesection_footer from "../Element/Multiplesection_footer";
 import axios from "axios";
 import "../css/Style.css";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
+
+
 const Findgym = () => {
   const { centerparameter } = useParams();
- const navigate=useNavigate()
+  const navigate = useNavigate();
   const [getCenter, setGetCenter] = useState([]);
   const [getPlan, setGetPlan] = useState([]);
   const [getFilterData, setGetFilterData] = useState("");
@@ -91,22 +93,20 @@ const Findgym = () => {
     updatedClasses[index] = !updatedClasses[index];
     setActiveClasses2(updatedClasses);
   };
- const handleNavigate=(id)=>{
-  localStorage.setItem('selectedId', id);
-  navigate('/gym_listing_details')
-  
- }
- console.log('center',centerparameter);
+  const handleNavigate = (id) => {
+    localStorage.setItem("selectedId", id);
+    navigate("/gym_listing_details");
+  };
+  console.log("center", centerparameter);
 
- const filteredCenters = getCenter.filter((center) => {
-  const centerAddress = center.address.toLowerCase();
-  const searchParameter = centerparameter.toLowerCase();
-  console.log('ch',centerAddress===searchParameter?true:false);
-  return centerAddress.includes(searchParameter);
-});
+  const filteredCenters = getCenter.filter((center) => {
+    const centerAddress = center.address.toLowerCase();
+    const centerPincode = center.pincode.toLowerCase();
+    const searchParameter = centerparameter.toLowerCase();
+    return centerAddress.includes(searchParameter) || centerPincode.includes(searchParameter);
+  });
 
-console.log('reg',filteredCenters);
-
+  console.log("reg", filteredCenters);
 
   const filteredData = filteredCenters.filter(
     (filteritem) =>
@@ -114,16 +114,15 @@ console.log('reg',filteredCenters);
         .toLowerCase()
         .includes(getFilterData.toLowerCase()) ||
       filteritem.address.toLowerCase().includes(getFilterData.toLowerCase()) ||
-      filteritem.pincode.toLowerCase().includes(getFilterData.toLowerCase())  
+      filteritem.pincode.toLowerCase().includes(getFilterData.toLowerCase())
   );
 
-
-  const categoryFilteredData =filteredData.filter((filteritem) => {
+  const categoryFilteredData = filteredData.filter((filteritem) => {
     // Check if the center type matches the selected category
     const isCategoryMatch = filteritem.centertype
       .toLowerCase()
       .includes(getCateData.toLowerCase());
-  
+
     // Check if any of the selected amenities are included in the item's amenitiesData
     const isAmenityMatch =
       selectedAmenities.length === 0 ||
@@ -132,7 +131,7 @@ console.log('reg',filteredCenters);
           (item) => item.amentitiesName === amenity
         )
       );
-  
+
     // Check if any of the selected equipment are included in the item's equipmentData
     const isEquipmentMatch =
       selectedEquipment.length === 0 ||
@@ -141,11 +140,10 @@ console.log('reg',filteredCenters);
           (item) => item.equipment_name === equipment
         )
       );
-  
+
     // Return true if all conditions match, false otherwise
     return isCategoryMatch && isAmenityMatch && isEquipmentMatch;
   });
-  
 
   console.log("selectedEquipment", selectedEquipment);
   useEffect(() => {
@@ -311,9 +309,10 @@ console.log('reg',filteredCenters);
               }
             })
             .map((item, index) => (
-              
-              <div className="col-lg-4 center-card" key={index} 
-              onClick={() => handleNavigate(item._id)}
+              <div
+                className="col-lg-4 center-card"
+                key={index}
+                onClick={() => handleNavigate(item._id)}
               >
                 <div className="card">
                   <img
