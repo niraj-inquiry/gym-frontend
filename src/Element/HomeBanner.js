@@ -123,7 +123,7 @@ export const HomeBanner = ({ ImageLocate, ImageGymStudio,title,subtitle }) => {
 
                         <div className="search fs-5 text-start mx-3">
                             <input
-                                value={findstate}
+                                value={findstate ? findstate.substring(0, 32) : ''}
                                 onChange={(e) => setFinestate(e.target.value) && onChangetext()}
                                 placeholder="Enter Your postcode or location"
                                 type="text"
