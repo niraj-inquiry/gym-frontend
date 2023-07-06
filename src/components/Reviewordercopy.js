@@ -8,7 +8,7 @@ import { CustomButton } from "../Element/vendercom/AddButton";
 import { InputBoxCustom, InputBoxcmp } from "../Element/vendercom/InputBox";
 import useGeoLocation from "../geolocation";
 
-const Revieworder = () => {
+const Revieworders = () => {
     //  const {id}=state.id
     // console.log("location",id)
 
@@ -411,4 +411,4 @@ const Revieworder = () => {
     )
 }
 
-export default Revieworder
+export default Revieworders

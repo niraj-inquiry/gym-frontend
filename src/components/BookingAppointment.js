@@ -82,7 +82,7 @@ const BookingAppointment = () => {
   localStorage.setItem('previousdata',JSON.stringify(previousdata))
   console.log('BookingAppointment',previousdata)
   const selectedPData=JSON.parse(localStorage.getItem('selectdat'))
-
+console.log('selectedPData',selectedPData);
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />

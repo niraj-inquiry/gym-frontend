@@ -483,7 +483,7 @@ const VendorHome = () => {
                     />
                     <InputBox
                       type="text"
-                      label={"Gst Number"}
+                      label={"Gst         Number"}
                       state={gstnumber}
                       setState={setGstnumber}
                     />

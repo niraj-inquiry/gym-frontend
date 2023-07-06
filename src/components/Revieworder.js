@@ -2,6 +2,7 @@ import React,{useEffect} from 'react'
 import { Header } from '../Element/Header'
 import { Footer } from '../Element/Footer'
 import './style.css'
+import { useNavigate } from 'react-router-dom';
 const loadScript = (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -18,7 +19,7 @@ const loadScript = (src) => {
 
 const Revieworder = () => {
     const selectedPData=JSON.parse(localStorage.getItem('selectdat'))
-  
+    const navigate=useNavigate()
     const handlePayment = () => {
         fetch("https://gym-api-3r8c.onrender.com/order", {
           method: "GET",
@@ -48,8 +49,13 @@ const Revieworder = () => {
     
             const paymentObject = new window.Razorpay(options);
             paymentObject.open();
+            
     
-          }).catch(err => {
+          }).then(()=>{
+            navigate('/thank-you')
+          })
+          
+          .catch(err => {
             console.log("error : ", err)
           })
     

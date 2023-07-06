@@ -37,7 +37,7 @@ const Gym_Listing_Details = () => {
   console.log("getCentId", getCentId);
   const onLink = (item) => {
     console.log("datai", item);
-    const forwardData = Object?.assign({}, item, gymstate);
+    const forwardData = Object?.assign({}, item, getCentId);
     const newforwardData = JSON.stringify(forwardData);
     console.log("newforwardData", newforwardData);
     localStorage.setItem("selectdat", newforwardData);
@@ -78,7 +78,7 @@ const Gym_Listing_Details = () => {
         <div className="row position-relative" style={{ height: 450 }}>
           <div className="col h-100">
             <img
-              src={Images.Aboutus}
+              src={Images.equipmentgym}
               className={"rounded-2"}
               height={"100%"}
               width={"100%"}
@@ -88,7 +88,7 @@ const Gym_Listing_Details = () => {
           <div className="col h-100 justify-content-between">
             <div className="h-50">
               <img
-                src={Images.Aboutus}
+                src={Images.partnership}
                 className={"rounded-2"}
                 height={"100%"}
                 width={"100%"}
@@ -98,7 +98,7 @@ const Gym_Listing_Details = () => {
             <div className="h-50 pt-4">
               {/* <ImageShow imageurl={multiplephoto[2]} height={"100%"} width={'100%'} className={"rounded-2"} /> */}
               <img
-                src={Images.Aboutus}
+                src={Images.refer_image}
                 className={"rounded-2"}
                 height={"100%"}
                 width={"100%"}

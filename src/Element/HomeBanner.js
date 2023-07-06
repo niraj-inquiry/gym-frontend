@@ -90,9 +90,7 @@ export const HomeBanner = ({
   useEffect(() => {
     onChangetext();
     const keyDownHandler = (event) => {
-      setTimeout(() => {
-        setStatus(false);
-      }, 3000);
+     
       console.log("User pressed: ", event.key);
 
       if (event.key === "Enter") {

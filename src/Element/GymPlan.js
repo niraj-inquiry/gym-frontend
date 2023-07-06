@@ -42,7 +42,7 @@ export const GymPlan = ({
 
                 <div className="line"></div>
                 <p>
-                    From {item.country == 'India' ? '₹' : '£'}<span>{Amount}</span>
+                    From {item.country == 'India' ? '₹' : '£'}<span>{Amount}/</span> <b> {PassTitle.slice(0, PassTitle.indexOf(" "))}</b>
                 </p>
                 <div onClick={onClick} className="linkbutton">{LinkText}</div>
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import "../css/Style.css";
 import * as Images from "../assets";
 import { Header, AllPageBanner, Footer } from "../components";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
 // import { toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import { API, isEmpty } from "../generalfunction";
@@ -50,6 +50,7 @@ const Login = () => {
       }
       
       if (data.data.email && data.data.password ) {
+       if (data.data.verify_status===true) {
         if (data.data.user_type==="User") {
           const getSelectData=JSON.parse(localStorage.getItem('selectdat'))
           // console.log('getSelectData',getSelectData);
@@ -64,6 +65,9 @@ const Login = () => {
           alert('Your Authentication is Vender Type! Do you want to Login as a Vendor')
           navigate('/vendor-login')
         }
+       }else{
+        alert('Account is Not Veryfied. We sent an Email that you Provide at the time of registration')
+       }
       }
       
     } catch (err) {
@@ -121,7 +125,7 @@ const Login = () => {
                   src={Images.LoginImage}
                 />
               </div>
-              <div className="col-lg-6 col-md-6 p-5">
+              <div className="col-lg-6 col-md-6 px-0 ">
                 {/* <div className="tab-btn">
                                     <button className="active-tab">
                                         User Login
@@ -204,6 +208,8 @@ const Login = () => {
                         <button type="submit" onClick={() => onSubmit()}>
                           Login
                         </button>
+                        <p className="m-0 w-100 py-3">Don't You Have <Link to="/register" > Account ?</Link></p>
+                        
                       </div>
                     </div>
                   </div>

@@ -772,7 +772,7 @@ footer .footer-bottom {
 
 .refer-friend-box {
   
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
     background: #f6f6f6;
     border: 1px solid #cbcbcb;
@@ -1084,7 +1084,7 @@ small a {
 .form-info-box {
     /* width: 90%; */
     width: 80%;
-    margin: 30px auto;
+    margin: 10px auto;
     padding: 10px auto;
 }
 
@@ -1202,10 +1202,10 @@ small a {
     background: white;
     /* padding: 5px 0; */
     padding: 3px 0;
-    text-align: center;
+    text-align: start;
     /* border: 1px solid #6b6b6b; */
     border-radius: 10px;
-    font-size: 18px;
+    font-size: 16px;
     /* font-size: 17px; */
     /* margin: 0 0 10px 0; */
     margin: 0 0 10px 0;
@@ -1268,7 +1268,7 @@ small a {
 
 .control-height-login {
     /* height: 652px; */
-    height: 700px;
+    height: 600px;
 }
 
 /*Gym Listing Page*/

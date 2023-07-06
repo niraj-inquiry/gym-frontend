@@ -47,7 +47,8 @@ import ForgotPassword from "./components/ForgotPassword";
 import Calendar from "./Element/Calendar";
 import BookingAppointment from "./components/BookingAppointment";
 import VenderLogin from "./components/VenderLogin";
-
+import ThankYou from "./components/ThankYou";
+import Revieworders from "./components/Reviewordercopy";
 function App() {
   const navigate = useNavigate();
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
@@ -69,8 +70,9 @@ function App() {
     <div className="App">
       {/* <AuthContextProvider> */}
       <Routes>
+        <Route path="/review" element={<Revieworders/>} />
         <Route path="/" element={<Home />} />
-
+        <Route path="/thank-you" element={<ThankYou/>} />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
         <Route path="/privacy_policy" element={<Privacy_Policy />} />

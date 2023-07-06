@@ -3,7 +3,7 @@ import "../css/Style.css";
 import * as Images from "../assets";
 import { Header, AllPageBanner, Footer } from "../components";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API, isEmpty } from "../generalfunction";
 import { IsEmail, name, validatePIN } from "../validation";
 import SocialWithFirebase from "../Element/SocialWithFirebase";
@@ -284,6 +284,7 @@ const onLoad=async()=>{
                                                     <button type="submit" onClick={() => OnRegister()}>
                                                         Register
                                                     </button>
+                                                    <p className="m-0 w-100 py-2">Do You Have <Link to="/login" > Account ?</Link></p>
                                                 </div>
                                             </div>
                                         </div>
