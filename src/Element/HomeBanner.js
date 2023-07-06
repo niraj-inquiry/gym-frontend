@@ -90,6 +90,9 @@ export const HomeBanner = ({
   useEffect(() => {
     onChangetext();
     const keyDownHandler = (event) => {
+      setTimeout(() => {
+        setStatus(false);
+      }, 3000);
       console.log("User pressed: ", event.key);
 
       if (event.key === "Enter") {
@@ -158,10 +161,11 @@ export const HomeBanner = ({
               </button>
             </div>
             <div className="main-search">
-              {status === true ? (
+              {status ? (
+                searchdata?.length > 1 &&
                 searchdata?.map((item) => (
                   <div
-                    onClick={() => setFinestate(`${item?.address} `)}
+                    onClick={() => setFinestate(`${item?.address}`)}
                     className="searchdata"
                   >
                     <div>
@@ -303,7 +307,8 @@ export const SubHomeBanner = ({ ImageLocate }) => {
           </button>
         </div>
         <div className="main-search">
-          {status === true ? (
+          {status ? (
+            searchdata?.length > 1 &&
             searchdata?.map((item) => (
               <div
                 onClick={() => setFinestate(`${item?.address}`)}
