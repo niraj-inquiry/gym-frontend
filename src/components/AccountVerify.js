@@ -7,9 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./style.css"
 const AccountVerify = () => {
     const {verificationtocken}=useParams()
-    // toast.success("Your Account successfully Verified!", {
-    //     position: "top-center",
-    // });
+    toast.success("Your Account successfully Verified!", {
+        position: "top-center",
+    });
   return (
     <>
      <Header/>
