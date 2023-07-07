@@ -49,6 +49,7 @@ import BookingAppointment from "./components/BookingAppointment";
 import VenderLogin from "./components/VenderLogin";
 import ThankYou from "./components/ThankYou";
 import Revieworders from "./components/Reviewordercopy";
+import AccountVerify from "./components/AccountVerify";
 function App() {
   const navigate = useNavigate();
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
@@ -71,6 +72,7 @@ function App() {
       {/* <AuthContextProvider> */}
       <Routes>
         <Route path="/review" element={<Revieworders/>} />
+        <Route path="/verify-user/:verificationtocken" element={<AccountVerify/>} />
         <Route path="/" element={<Home />} />
         <Route path="/thank-you" element={<ThankYou/>} />
         <Route path="/about" element={<About />} />

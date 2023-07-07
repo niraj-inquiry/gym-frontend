@@ -64,6 +64,7 @@ const Amentities = ({ centerdetails }) => {
                     </div>
                 </div>
             </form>
+            <ToastContainer/>
             <div className="row">
                 <div className="col-12">
                     <table className="table table-striped table-responsive"  >

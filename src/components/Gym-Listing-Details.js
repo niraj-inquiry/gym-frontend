@@ -8,7 +8,7 @@ import { themes } from "@mobiscroll/react";
 import { GymPlan } from "../Element/GymPlan";
 import { useNavigate } from "react-router-dom";
 import { GymArtifact } from "../Element/GymArtifact";
-
+import './style.css'
 const Gym_Listing_Details = () => {
   const navigate = useNavigate();
   const daysname = [
@@ -68,12 +68,33 @@ const Gym_Listing_Details = () => {
       <div className="container pt-5">
         <div className="row">
           <div className="col-12">
-            <h1>{getCentId.center_name}</h1>
-            <p>
-              <b>{getCentId.address}</b>
-            </p>
+            <div className="center-details">
+              <div>
+                <h1>{getCentId.center_name}</h1>
+                <p>
+                  <b>{getCentId.address}</b>
+                </p>
+              </div>
+              <div>
+                <p>
+                  Includes access to: <b>Gym</b>
+                   <i class="fa fa-home" aria-hidden="true"></i>
+                </p>
+                <p>
+                  <span>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half" ></i>
+                  </span>
+                 <span  > <b> 5k Reviews</b></span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+        <hr />
         {/* images section */}
         <div className="row position-relative" style={{ height: 450 }}>
           <div className="col h-100">
@@ -143,12 +164,10 @@ const Gym_Listing_Details = () => {
         </div>
         {/* equiment and amentities */}
         <div className="row justify-content-center align-items-center my-5">
-          
           <GymArtifact
             equipmentdata={getCentId?.equipmentData}
             amenities={getCentId?.amentitiesData}
           />
-          
         </div>
       </div>
 

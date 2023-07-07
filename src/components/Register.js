@@ -60,7 +60,7 @@ const onLoad=async()=>{
         
 
         
-    API.post('v1.0/user/register', {
+    API.post('http://localhost:8000/v1.0/user/register', {
                 first_name: firstname,
                 last_name: lastname,
                 email: email,
