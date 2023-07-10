@@ -4,7 +4,7 @@ import axios from 'axios';
 import "../css/Style.css";
 import * as Images from "../assets";
 import { Header, AllPageBanner, Footer } from ".";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { API, isEmpty } from "../generalfunction";
@@ -183,6 +183,7 @@ const VenderLogin = () => {
                                                 <button type="submit" onClick={() => onSubmit()}>
                                                     Login
                                                 </button>
+                                                <p className="m-0 w-100 py-3">New User? <Link to="/register" > Sign Up</Link></p>
                                             </div>
                                         </div>
                                     </div>

@@ -128,6 +128,7 @@ font-weight: 600;
     align-items: center;
     flex-direction: column;
     font-size:12px;
+   
 }
 .thank-you-item1 div p span{
     font-weight: 800
@@ -187,4 +188,11 @@ font-weight: 600;
     border: none;
     border-radius:5px;
     font-weight: 600;
+}
+.linkbutton a{
+    text-decoration: none !important;
+    color:white;
+}
+.linkbutton:hover a{
+ color: #FD5824;
 }

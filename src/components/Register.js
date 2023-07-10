@@ -72,7 +72,7 @@ const Register = () => {
           toast.success(`Verification email sent on ${email} ` , {
               position: "top-center",
           });
-        //   navigate("/login");
+          navigate("/login");
         } else {
           navigate("/vendor-login");
         }
@@ -320,7 +320,7 @@ const Register = () => {
                             Register
                           </button>
                           <p className="m-0 w-100 py-2">
-                            Do You Have <Link to="/login"> Account ?</Link>
+                          Already a registered User? <Link to="/login"> Login</Link>
                           </p>
                         </div>
                       </div>

@@ -1,11 +1,13 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Scheduler, { Resource, View, Scrolling } from 'devextreme-react/scheduler';
 import { resources, generateAppointments } from '../json/data';
 import Pagination from '@material-ui/lab/Pagination';
 
+import * as Images from '../assets';
+
 // const currentDate = new Date(2023, 6, 21);
 const currentDate = new Date();
-console.log('currentdate',currentDate)
+console.log('currentdate', currentDate)
 var currenthours = currentDate.getHours();
 var currentmin = currentDate.getMinutes();
 const groups = ['userId'];
@@ -15,8 +17,8 @@ var pageSize = 5;
 var totalCount = resources.length;
 const startDay = new Date(2023, 1, 1);
 const endDay = new Date(2023, 1, 28);
-const startDayHour = 9;
-const endDayHour = 22;
+const startDayHour = 10;
+const endDayHour = 19;
 
 
 const chunk = (arr, size) =>
@@ -41,6 +43,8 @@ const AllBooking = () => {
     const [name, setName] = React.useState([]);
     const [number, setNumber] = React.useState();
     const [auto, setAuto] = React.useState([]);
+    const [showdate, setShowdate] = useState(false);
+    const [trainer, setTrainer] = useState(false);
 
     const handleChange = (event, value, e, inputval) => {
 
@@ -71,6 +75,51 @@ const AllBooking = () => {
 
     return (
         <>
+            <h1 className='text-center logo_color py-4'>Schedule</h1>
+            <div className='row mb-3 me-0 align-items-center'>
+                <div className='col-6'>
+                    <div className='border  py-2 rounded' onClick={() => setTrainer(!trainer)}>
+                        <div className='d-flex align-items-center px-3'>
+                            <img src={Images.Team} className='rounded-pill' width="10%" />
+                      
+                                {/* <div className='fs-6 ms-3'>Alexa</div> */}
+                                {/* <i className=''>10:00-11:00 AM</i> */}
+                                <figure className="text-center mb-0 pb-2">
+                                    <blockquote className="blockquote fs-6 mb-2">
+                                        <p>Alexa</p>
+                                    </blockquote>
+                                    <figcaption className="blockquote-footer mb-0">
+                                        <cite title="Source Title">10:00-11:00 AM</cite>
+                                    </figcaption>
+                                </figure>
+                          
+                        </div>
+                        {trainer && <div className='border rounded trainer_list' style={{ width: '30%' }}>
+                            <div className='d-flex align-items-center px-3 py-2 border-bottom'>
+                                <img src={Images.Team} className='rounded-pill' width="5%" />
+                                <div className='fs-6 ms-3'>Alexa</div>
+                            </div>
+                            <div className='d-flex align-items-center px-3 py-2 border-bottom'>
+                                <img src={Images.wface} className='rounded-pill' width="5%" />
+                                <div className='fs-6 ms-3'>Roshani</div>
+                            </div>
+                            <div className='d-flex align-items-center px-3 py-2 border-bottom'>
+                                <img src={Images.Team} className='rounded-pill' width="5%" />
+                                <div className='fs-6 ms-3'>Arjit</div>
+                            </div>
+                            <div className='d-flex align-items-center px-3 py-2 border-bottom'>
+                                <img src={Images.wface} className='rounded-pill' width="5%" />
+                                <div className='fs-6 ms-3'>Chitra</div>
+                            </div>
+                        </div>}
+                    </div>
+
+                </div>
+                
+                <div className='col-6 h-100'>
+                    <input type="date" className="custom-date-input border rounded px-3 py-2 w-100" />
+                </div>
+            </div>
             <Scheduler
                 dataSource={appointments}
                 defaultCurrentView='Timeline'
@@ -78,9 +127,9 @@ const AllBooking = () => {
                 startDayHour={startDayHour}
                 endDayHour={endDayHour}
                 // cellDuration={60}
-                showAllDayPanel={true}
+                // showAllDayPanel={true}
                 groups={groups}
-                className='boxshow'
+                className='boxshow w-100'
             >
 
                 <View
@@ -108,15 +157,14 @@ const AllBooking = () => {
                     mode='virtual' />
             </Scheduler>
 
-            <Pagination
+            {/* <Pagination
                 count={totalPageCount}
                 onChange={handleChange}
                 style={{ marginTop: '15px', fontSize: '20px',width:'fit-content' }}
                 className='mx-auto justify-content-center'
-            />
+            /> */}
         </>
     );
 }
 
 export default AllBooking;
-

@@ -1402,3 +1402,48 @@ z-index: 100;
   color:#fff;
   cursor: pointer;
 }
+
+.logo_color{
+  color:#fe5b27;
+}
+.custom-date-input::-webkit-calendar-picker-indicator {
+  background-image: url(../src/assets/slot-booking\ \(3\).png);
+  background-size: cover;
+  color: #fe5b27;
+  /* color: #fe5b27; */
+  /* width: 16px;
+  height: 16px; */
+  cursor: pointer;
+  opacity: 0.7;
+  /* margin-left: 5px; */
+}
+.trainer_list{
+  position: absolute;
+  z-index: 99;
+  background: white;
+}
+.order-box ul li {
+  position: relative;
+  text-align: right;
+  padding-left: 20px;
+  font-weight: 400;
+}
+.order-box img {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+.order-box ul li {
+  position: relative;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: 400;
+}
+
+.order-box ul li::after {
+  content: "\2713";
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--custom_pink);
+}
