@@ -57,7 +57,7 @@ const Register = () => {
   }, []);
 
   const OnRegister = async () => {
-    API.post("http://localhost:8000/v1.0/user/register", {
+    API.post("https://gym-api-3r8c.onrender.com/v1.0/user/register", {
       first_name: firstname,
       last_name: lastname,
       email: email,

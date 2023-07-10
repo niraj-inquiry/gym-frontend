@@ -316,7 +316,8 @@ const Findgym = () => {
               >
                 <div className="card">
                   <img
-                    src="/assets/gym.jpg"
+                    src={item.centerBanner}
+                    height={250}
                     className="card-img-top"
                     alt="..."
                   />
