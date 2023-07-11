@@ -31,8 +31,8 @@ const VenderLogin = () => {
 
     const onSubmit = async () => {
         try {
-          const response = await axios.post(
-            "https://gym-api-3r8c.onrender.com/v1.0/user/login",
+          const response = await API.post(
+            "/v1.0/user/login",
             {
               email: email,
               password: password,

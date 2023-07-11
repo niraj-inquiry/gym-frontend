@@ -6,16 +6,62 @@ const States=[
     {
       cname:"India",
       sname:[
+        "West Bengal",
+        "Uttar Pradesh",
+        "Uttarakhand",
+        "Tripura",
+        "Telangana",
+        "Tamil Nadu",
+        "Sikkim",
+        "Rajasthan",
+        "Punjab",
+        "Puducherry (UT)",
+        "Odisha",
+        "Nagaland",
+        "Mizoram",
+        "Meghalaya",
+        "Manipur",
+        "Maharashtra",
+        "Madhya Pradesh",
+        "Lakshadweep (UT)",
+        "Kerala",
+        "Karnataka",
+        "Jharkhand",
+        "Jammu and Kashmir",
+        "Himachal Pradesh",
+        "Haryana",
+        "Gujarat",
         "Bihar",
-        "UP",
-        "UK"
+        "New Delhi"
+        
       ]
     },
     {
         cname:"USA",
         sname:[
-          "California",
-          "Texas",
+          "Delaware",
+          "Maine",
+          "Wyoming",
+          "West Virginia",
+          "Vermont",
+          "New Mexico",
+          "Nevada",
+          "Wisconsin",
+          "Oklahoma",
+          "Oregon",
+          "Kentucky",
+          "Maryland",
+          "District of Columbia",
+          "Colorado",
+          "Washington",
+          "Massachusetts",
+          "Tennessee",
+          "Michigan",
+          "Ohio",
+          "Indiana",
+          "Florida",
+          "Arizona",
+          
         ]
       }
 ]

@@ -28,15 +28,18 @@ const Findgym = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [getCateData, setGetCateData] = useState("");
   const [getCateItem, setGetCateItem] = useState([]);
+  const [distance, setDistance]=useState(0)
   const getCenterData = () => {
     axios
       .get(
         "https://gym-api-3r8c.onrender.com/v1.0/gymcenter/get-verify-all-data"
       )
       .then((res) => {
+        setDistance(res.data.data)
         setGetCenter(res.data.data);
       });
   };
+  console.log('distance',distance);
   const getAllPlan = () => {
     axios
       .get("https://gym-api-3r8c.onrender.com/v1.0/plan/get-all-plan")
@@ -305,7 +308,7 @@ const Findgym = () => {
                     itemEquipmentNames.includes(equipment)
                   )
                 );
-                // Check if all selected amenities and equipment are present in the item's amenity and equipment names
+                
               }
             })
             .map((item, index) => (
@@ -323,7 +326,7 @@ const Findgym = () => {
                   />
                   <div className="card-body py-4">
                     <span>
-                      <i className="fa fa-map-marker" aria-hidden="true"></i> 0{" "}
+                      <i className="fa fa-map-marker" aria-hidden="true"></i> {}
                     </span>
                     <h3 className="card-title py-2">{item.center_name}</h3>
                     <p className="card-text pb-2">{item.address}</p>

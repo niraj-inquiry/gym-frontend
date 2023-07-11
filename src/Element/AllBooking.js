@@ -76,14 +76,13 @@ const AllBooking = () => {
     return (
         <>
             <h1 className='text-center logo_color py-4'>Schedule</h1>
-            <div className='row mb-3 me-0 align-items-center'>
+            {/* <div className='row mb-3 me-0 align-items-center'>
                 <div className='col-6'>
                     <div className='border  py-2 rounded' onClick={() => setTrainer(!trainer)}>
                         <div className='d-flex align-items-center px-3'>
                             <img src={Images.Team} className='rounded-pill' width="10%" />
                       
-                                {/* <div className='fs-6 ms-3'>Alexa</div> */}
-                                {/* <i className=''>10:00-11:00 AM</i> */}
+                               
                                 <figure className="text-center mb-0 pb-2">
                                     <blockquote className="blockquote fs-6 mb-2">
                                         <p>Alexa</p>
@@ -119,15 +118,14 @@ const AllBooking = () => {
                 <div className='col-6 h-100'>
                     <input type="date" className="custom-date-input border rounded px-3 py-2 w-100" />
                 </div>
-            </div>
+            </div> */}
             <Scheduler
                 dataSource={appointments}
                 defaultCurrentView='Timeline'
                 defaultCurrentDate={currentDate}
                 startDayHour={startDayHour}
                 endDayHour={endDayHour}
-                // cellDuration={60}
-                // showAllDayPanel={true}
+                
                 groups={groups}
                 className='boxshow w-100'
             >

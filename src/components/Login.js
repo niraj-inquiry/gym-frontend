@@ -34,8 +34,8 @@ const Login = () => {
 
   const onSubmit = async () => {
     try {
-      const response = await axios.post(
-        "https://gym-api-3r8c.onrender.com/v1.0/user/login",
+      const response = await API.post(
+        "/v1.0/user/login",
         {
           email: email,
           password: password,
@@ -46,7 +46,10 @@ const Login = () => {
       const uData={
         Uuser:data.data.email, 
         upass:data.data.password,
-        Uusertype:data.data.user_type
+        Uusertype:data.data.user_type,
+        Uname:data.data.first_name + ' ' + data.data.last_name,
+        Uemail:data.data.email,
+        Upincode:data.data.post_code
       }
       
       if (data.data.email && data.data.password ) {

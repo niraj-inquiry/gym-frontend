@@ -8,6 +8,7 @@ import { themes } from "@mobiscroll/react";
 import { GymPlan } from "../Element/GymPlan";
 import { useNavigate } from "react-router-dom";
 import { GymArtifact } from "../Element/GymArtifact";
+import { API, isEmpty } from "../generalfunction";
 import './style.css'
 const Gym_Listing_Details = () => {
   const navigate = useNavigate();
@@ -26,9 +27,8 @@ const Gym_Listing_Details = () => {
   const cid = localStorage.getItem("selectedId");
   const [getPlan, setGetPlan] = useState([]);
   const getCenterById = () => {
-    axios
-      .get(
-        `https://gym-api-3r8c.onrender.com/v1.0/gymcenter/gymcenter-data/${cid}`
+    API.get(
+        `/v1.0/gymcenter/gymcenter-data/${cid}`
       )
       .then((res) => {
         setGetCentId(res.data.message);
@@ -50,8 +50,7 @@ const Gym_Listing_Details = () => {
   };
 
   const onGetPlan = async () => {
-    axios
-      .get(`https://gym-api-3r8c.onrender.com/v1.0/plan/get-all-plan`)
+    API.get(`https://gym-api-3r8c.onrender.com/v1.0/plan/get-all-plan`)
       .then((res) => {
         setGetPlan(res.data.data);
       });

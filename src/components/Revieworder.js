@@ -19,6 +19,8 @@ const loadScript = (src) => {
 
 const Revieworders = () => {
   const navigate = useNavigate();
+  const UserDetails=JSON.parse(localStorage.getItem('userAuth'))
+  const selectedPData = JSON.parse(localStorage.getItem('selectdat'))
 const handlePayment = () => {
   fetch("https://gym-api-3r8c.onrender.com/order", {
     method: "GET",
@@ -55,7 +57,7 @@ const handlePayment = () => {
       console.log("error : ", err);
     });
 };
-
+console.log('selectedPData',selectedPData);
 useEffect(() => {
   loadScript("https://checkout.razorpay.com/v1/checkout.js");
 }, []);
@@ -70,9 +72,9 @@ useEffect(() => {
             <h3 className="logo_color">Gym Details</h3>
           </div>
           <div className="col-6 text-end col-md-6 col-sm-6">
-            <h3 className="fw-bold">Fitness Center</h3>
+            <h3 className="fw-bold">{selectedPData.center_name}</h3>
             {/* <h3>All Features included with plan</h3> */}
-            <h3>C-25 Sector 58 Noida</h3>
+            <h3>{selectedPData.address}</h3>
           </div>
         </div>
         <hr className="my-5" />
@@ -83,12 +85,12 @@ useEffect(() => {
               <h3 className="logo_color mb-3">Selected Plan Details</h3>
               <div className="d-flex mb-3">
                 <img src={Images.booking_pass_name} width={35} height={30} />
-                <h4 className="fw-500 ms-2 mb-0 fw-bold">Day Pass</h4>
+                <h4 className="fw-500 ms-2 mb-0 fw-bold">{selectedPData.planname}</h4>
               </div>
               <div className="d-flex align-items-center text-center mb-3">
                 <h4 className="fw-medium mb-0">
                   {" "}
-                  <b> ₹ 120/day</b>
+                  <b> ₹ {selectedPData.rate}/{selectedPData.planname}</b>
                 </h4>
               </div>
               <button type="button" className="btn btn-outline-success w-50">
@@ -164,11 +166,11 @@ useEffect(() => {
             <h3 className="logo_color">Billing Details </h3>
           </div>
           <div className="col-lg-6 col-md-6 text-end col-sm-6">
-            <h3>C-25 Sector 58 Noida</h3>
+            <h3>{selectedPData.address}</h3>
             <div className="d-flex align-items-center justify-content-end">
               <h4 className="fs-5 mb-0 ms-2">
                 {" "}
-                <b>₹ 200</b>{" "}
+                <b>₹ {selectedPData.rate}</b>{" "}
               </h4>
             </div>
           </div>
@@ -196,7 +198,7 @@ useEffect(() => {
             <div className="d-flex align-items-center justify-content-end">
               <h4 className="fw-bold mb-0 ms-2">
                 {" "}
-                <b>₹ 900</b>{" "}
+                <b>₹ {selectedPData.rate}</b>{" "}
               </h4>
             </div>
           </div>
