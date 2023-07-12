@@ -15,7 +15,7 @@ const Equipment = ({centerdetails}) => {
         e.preventDefault();
         axios
           .patch(
-            `https://gym-api-3r8c.onrender.com/v1.0/gymcenter/update-gym-by-id/${centerdetails}`,
+            `https://gym-api-3r8c.onrender.com/v1.0/gymcenter/add-equipment/${centerdetails}`,
             {
               equipmentData: [
                 {

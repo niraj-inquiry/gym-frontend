@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "../Element/Header";
 import * as Images from "../assets";
 import Calendar from "../Element/Calendar";
@@ -14,6 +14,7 @@ import Scheduler, {
   View,
   Scrolling,
 } from "devextreme-react/scheduler";
+import axios from "axios";
 
 const BookingAppointment = () => {
   const [countryindex, setCountryindex] = useState();
@@ -38,7 +39,16 @@ const BookingAppointment = () => {
     phone: "",
     email: UserDetails.Uemail,
   });
-
+ const [getTrainer, setGetTrainer]=useState([])
+ const getTrainerList=()=>{
+   axios.get('https://gym-api-3r8c.onrender.com/v1.0/gymcenter/get-verify-all-data')
+   .then((res)=>{
+    const filterTrainer=res.data.data.find((item)=>item.center_name===selectedPData.center_name)
+    setGetTrainer(filterTrainer)
+    console.log('fitmind',res.data.data);
+   })
+ }
+ console.log('getTrainer',getTrainer);
   const location = useLocation();
   const handleInput = (e) => {
     setGetData({ ...getData, [e.target.name]: e.target.value });
@@ -150,7 +160,9 @@ const BookingAppointment = () => {
       return null; // Render nothing if the viewType doesn't match any condition
     }
   };
-
+useEffect(()=>{
+  getTrainerList()
+},[])
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -202,14 +214,7 @@ const BookingAppointment = () => {
           </div>
         </div>
         <div className="row mx-0 align-items-center justify-content-center w-100">
-          <div className="col-lg-8 ">
-            {/* <Calendar/> */}
-            <h1 className="text-center logo_color py-4">Schedule</h1>
-            {renderScheduler()}
-            {/* <AllBooking /> */}
-            {/* <DayCalendar /> */}
-          </div>
-          <div className="col-lg-4 border rounded billing py-3 border h-100">
+        <div className="col-lg-4 border rounded billing py-3 border h-100">
             <div className="">
               <h1 className="text-center pb-3 logo_color">
                 Billing Information
@@ -305,6 +310,19 @@ const BookingAppointment = () => {
               </div>
             </div>
           </div>
+          <div className="col-lg-8 ">
+            <h2 className=" logo_color py-4">Check Trainer Availablity</h2>
+                <select >
+                  <option>Choose Trainer</option>
+                  {getTrainer.newTrainerData?.map((item, index)=>{
+                    return(
+                      <option key={index} >{item.tName}</option>
+                    )
+                  })}
+                </select>
+           
+          </div>
+          
 
           {/* <div className=''>Book Appointment</div> */}
         </div>
