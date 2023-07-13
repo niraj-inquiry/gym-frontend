@@ -8,8 +8,9 @@ import AllBooking from "../Element/AllBooking";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isEmpty } from "../generalfunction";
 import "../css/Style.css";
+import {resources} from '../json/data';
 
-import Scheduler, { View, Scrolling } from "devextreme-react/scheduler";
+import Scheduler, { View, Scrolling, Resource } from "devextreme-react/scheduler";
 import axios from "axios";
 
 const BookingAppointment = () => {
@@ -116,11 +117,17 @@ const BookingAppointment = () => {
 
     setEndDate(calculatedEndDate);
   }, [startDate, getPlan]);
-  
+
 
   useEffect(() => {
     getTrainerList();
   }, []);
+  // const customizeDateNavigatorText = (args) => {
+  //   if (args.view === 'week') {
+     
+  //     args.text = 'My Custom Week Name';
+  //   }
+  // };
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -171,100 +178,243 @@ const BookingAppointment = () => {
             </div>
           </div>
         </div>
-        <div className="row mx-0  w-100">
-          <div className="col-lg-8 ">
+        <div className="row mx-0 w-100">
+          <div className="col-lg-10">
             <h2 className=" logo_color py-4">Trainer Schedule</h2>
-            <div className="row border p-3 rounded">
-              <div className="col-lg-5 border-end border-dark">
-                <label>Choose Trainer</label>
-                <select
-                  value={strainer}
-                  onChange={(e) => setStrainer(e.target.value)}
-                  className="form-select"
-                >
-                  <option>Choose Trainer</option>
-                  {getTrainer.newTrainerData?.map((item, index) => {
-                    return <option key={index}>{item.tName}</option>;
-                  })}
-                </select>
-              </div>
-              <div className="col-lg-7">
-                {!filtTrainerData ? (
-                  <>
-                    <div className="col-lg-8">
-                      <h2>Data Not Found Choose Any Trainer</h2>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="d-flex justify-content-between " >
-                      <div >
-                      <h2 className="ms-2">
-                        {filtTrainerData.tName}
-                       
-                      </h2>
-                      <img src="/assets/5stars.png" className="pt-2" alt="" />
+            <div className="border p-3 rounded">
+              <div className="row align-items-center">
+                <div className="col-lg-5 border-dark mb-3">
+                  <label>Choose Trainer</label>
+                  <select
+                    value={strainer}
+                    onChange={(e) => setStrainer(e.target.value)}
+                    className="form-select"
+                  >
+                    <option>Choose Trainer</option>
+                    {getTrainer.newTrainerData?.map((item, index) => {
+                      return <option key={index}>{item.tName}</option>;
+                    })}
+                  </select>
+                </div>
+                
+                <div className="border-start col-lg-7">
+                  {!filtTrainerData ? (
+                    <>
+                      <div className="text-center fs-6 fw-bold">
+                        Data Not Found Choose Any Trainer
                       </div>
-                      <div>
-                      <img
-                        src="/assets/trainer.png"
-                        height={100}
-                        width={90}
-                        alt=""
-                      />
+                    </>
+                  ) : (
+                    <>
+                      <div className="d-flex justify-content-between align-items-center" >
+                        <div >
+                          <h2 className="ms-2">
+                            {filtTrainerData.tName}
+
+                          </h2>
+                          <img src="/assets/5stars.png" className="pt-2" alt="" width={80} />
+                        </div>
+                        <div>
+                          <img
+                            src="/assets/trainer.png"
+                            height={70}
+                            width={70}
+                            alt=""
+                          />
+                        </div>
                       </div>
-                    </div>
-                   
-                  </>
-                )}
+
+                    </>
+                  )}
+                </div>
               </div>
               <hr />
-              <div className="col-lg-12">
-                {!filtTrainerData? 
-                <>
-                  <div className="col-lg-8">
-                      <h2>Data Not Found Choose Any Trainer</h2>
-                    </div>
-                </>:
-                <>
-                 
-                        <table className="table table-striped table-responsive">
-                          <thead>
-                            <tr>
-                              <th>Day</th>
-                              <th>Start Time</th>
-                              <th>End Time</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {filtTrainerData.tDay.map((item, index) => {
-                              return (
-                                <tr key={index}>
-                                  <td>{item.day}</td>
-                                  <td>{item.startTime} AM</td>
-                                  <td>{item.endTime}PM</td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      
-                </>}
+              <div className="row">
+                <div className="col">
+                  {!filtTrainerData ?
+                    <>
+                      <div className="fs-6 text-center">
+                        Data Not Found Choose Any Trainer
+                      </div>
+                    </> :
+                    <>
+
+                      <table className="table table-striped table-responsive">
+                        <thead>
+                          <tr>
+                            <th>Day</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filtTrainerData.tDay.map((item, index) => {
+                            return (
+                              <tr key={index}>
+                                <td>{item.day}</td>
+                                <td>{item.startTime} AM</td>
+                                <td>{item.endTime}PM</td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+
+                    </>}
+                </div>
               </div>
             </div>
 
-            <hr />
-            <div className="col-12">
-              <h2>Schedule Your Flexible Timing</h2>
-              <div className="row">
+
+
+           
+            {/* <div className="row">
+              <div className="col-lg-6">
+                <h2>Schedule Your Flexible Timing</h2>
+                <div className="row">
+                  <div className="col-lg-5">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">
+                        @
+                      </span>
+                      <input
+                        type="date"
+                        class="form-control"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-5">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">
+                        @
+                      </span>
+                      <input
+                        type="date"
+                        value={endDate}
+                        class="form-control"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <Scheduler currentView="week">
+                      <View type="week" startDayHour={10} endDayHour={19} />
+                    </Scheduler>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6 border rounded billing py-3 border h-100">
+                <div className="">
+                  <h1 className="text-center pb-3 logo_color">
+                    Billing Information
+                  </h1>
+                  <div className=" row mx-auto px-3">
+                    <div className="col-lg-12 mb-4 ">
+                      <input
+                        type="text"
+                        id="name"
+                        value={UserDetails.Uname}
+                        name="name"
+                        className="form-control  fs-6 py-2"
+                        placeholder="Enter Your Full Name"
+                      />
+                    </div>
+                    <div className="col-lg-12 mb-4 ">
+                      <input
+                        type="email"
+                        value={UserDetails.Uemail}
+                        id="email"
+                        name="email"
+                        placeholder="Enter Your Email Id"
+                        className="form-control  fs-6 py-2"
+                        onChange={(e) => handleInput(e)}
+                        required
+                      />
+                    </div>
+                    <div className="col-lg-12 mb-4 ">
+                      <input
+                        type="text"
+                        className="form-control  fs-6 py-2"
+                        placeholder="Phone Number"
+                      />
+                    </div>
+                    <div className="col-lg-12 mb-4 ">
+                      <select
+                        id="country"
+                        name="country"
+                        className="form-control  fs-6 py-2"
+                        onChange={(e) => onSelectCountry(e)}
+                        required
+                      >
+                        <option>Choose Country</option>
+                        {Countries?.map((item) => (
+                          <option value={item.country_name}>
+                            {item?.country_name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-lg-12 mb-4 ">
+                      <select
+                        id="state"
+                        name="state"
+                        className="form-control  fs-6 py-2"
+                        onChange={(e) => onSelectstate(e)}
+                        required
+                      >
+                        <option>Choose State</option>
+                        {statelist?.map((item) => (
+                          <option
+                            value={item.state}
+                            T={console.log("item state", item?.state)}
+                          >
+                            {item?.state}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-lg-12 mb-4 ">
+                      <select
+                        id="city"
+                        name="city"
+                        className="form-control  fs-6 py-2"
+                        onChange={(e) => setDistrict(e.target.value)}
+                        required
+                      >
+                        <option>Choose City</option>
+                        {districtslist?.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="mb-4 ">
+                      <textarea
+                        className="form-control  fs-6 py-2"
+                        id="exampleFormControlTextarea1"
+                        placeholder="Enter Your Address"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+          </div>
+          <hr className="my-5" />
+          <div className="row">
+            <div className="col-lg-8">
+              <h2 className="mb-3 logo_color">Schedule Your Flexible Timing</h2>
+              <div className="row justify-content-between mx-0">
                 <div className="col-lg-5">
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
+                  <div className="input-group mb-3 ">
+                    <span className="input-group-text border-0" id="basic-addon1">
                       @
                     </span>
                     <input
                       type="date"
-                      class="form-control"
+                      className="form-control border-0 border-bottom"
                       value={startDate}
                       onChange={(e) => setStartDate(e.target.value)}
                     />
@@ -272,26 +422,127 @@ const BookingAppointment = () => {
                 </div>
                 <div className="col-lg-5">
                   <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">
+                    <span class="input-group-text border-0" id="basic-addon1">
                       @
                     </span>
                     <input
                       type="date"
                       value={endDate}
-                      class="form-control"
+                      class="form-control border-0 border-bottom"
                       disabled
                     />
                   </div>
                 </div>
                 <div className="col-lg-12">
-                  <Scheduler currentView="week">
+                  <Scheduler 
+                  currentView="week"
+                 
+                 
+                  >
                     <View type="week" startDayHour={10} endDayHour={19} />
+                    
                   </Scheduler>
+                  
+                </div>
+              </div>
+            </div>
+            <div className="col border rounded billing py-3 border h-100">
+              <div className="">
+                <h1 className="text-center pb-3 logo_color">
+                  Billing Information
+                </h1>
+                <div className=" row mx-auto px-3">
+                  <div className="col-lg-12 mb-4 ">
+                    <input
+                      type="text"
+                      id="name"
+                      value={UserDetails.Uname}
+                      name="name"
+                      className="form-control  fs-6 py-2"
+                      placeholder="Enter Your Full Name"
+                    />
+                  </div>
+                  <div className="col-lg-12 mb-4 ">
+                    <input
+                      type="email"
+                      value={UserDetails.Uemail}
+                      id="email"
+                      name="email"
+                      placeholder="Enter Your Email Id"
+                      className="form-control  fs-6 py-2"
+                      onChange={(e) => handleInput(e)}
+                      required
+                    />
+                  </div>
+                  <div className="col-lg-12 mb-4 ">
+                    <input
+                      type="text"
+                      className="form-control  fs-6 py-2"
+                      placeholder="Phone Number"
+                    />
+                  </div>
+                  <div className="col-lg-12 mb-4 ">
+                    <select
+                      id="country"
+                      name="country"
+                      className="form-control  fs-6 py-2"
+                      onChange={(e) => onSelectCountry(e)}
+                      required
+                    >
+                      <option>Choose Country</option>
+                      {Countries?.map((item) => (
+                        <option value={item.country_name}>
+                          {item?.country_name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="col-lg-12 mb-4 ">
+                    <select
+                      id="state"
+                      name="state"
+                      className="form-control  fs-6 py-2"
+                      onChange={(e) => onSelectstate(e)}
+                      required
+                    >
+                      <option>Choose State</option>
+                      {statelist?.map((item) => (
+                        <option
+                          value={item.state}
+                          T={console.log("item state", item?.state)}
+                        >
+                          {item?.state}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="col-lg-12 mb-4 ">
+                    <select
+                      id="city"
+                      name="city"
+                      className="form-control  fs-6 py-2"
+                      onChange={(e) => setDistrict(e.target.value)}
+                      required
+                    >
+                      <option>Choose City</option>
+                      {districtslist?.map((item) => (
+                        <option value={item}>{item}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="mb-4 ">
+                    <textarea
+                      className="form-control  fs-6 py-2"
+                      id="exampleFormControlTextarea1"
+                      placeholder="Enter Your Address"
+                      rows="3"
+                    ></textarea>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-lg-4 border rounded billing py-3 border h-100">
+          {/* <div className="col-lg-4 border rounded billing py-3 border h-100">
             <div className="">
               <h1 className="text-center pb-3 logo_color">
                 Billing Information
@@ -385,15 +636,14 @@ const BookingAppointment = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* <div className=''>Book Appointment</div> */}
-        </div>
-        <div className="row">
-          <div className="col-12">
+          <div className="row my-3 ">
+          <div className="col-12 pe-0">
             <button
               type="submit"
-              className="w-auto search border-0 rounded ms-auto  me-5"
+              className="w-auto search border-0 rounded ms-auto"
               onClick={() => navigation("/revieworder")}
             >
               <span className="position-relative py-2 px-3 ">
@@ -402,6 +652,8 @@ const BookingAppointment = () => {
             </button>
           </div>
         </div>
+        </div>
+        
       </div>
     </div>
   );

@@ -1447,3 +1447,11 @@ z-index: 100;
   left: 0;
   color: var(--custom_pink);
 }
+
+.border_color{
+  border-bottom:1px solid #fe5b27;
+  
+}
+.dx-toolbar-before{
+  display: none;
+}
