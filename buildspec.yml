@@ -6,8 +6,10 @@ phases:
       nodejs: 18
   pre_build:
     commands:
-      - echo Installing source NPM dependencies...
-      - npm install
+      - echo Clearing npm cache...
+    - npm cache clean --force
+    - echo Installing source NPM dependencies...
+    - npm install --force
   build:
     commands:
       - echo Build started on 'date'
