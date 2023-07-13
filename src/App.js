@@ -72,7 +72,9 @@ function App() {
       {/* <AuthContextProvider> */}
       <Routes>
         <Route path="/review" element={<Revieworders/>} />
-        <Route path="/verify-user/:verificationToken" element={<AccountVerify/>} />
+        <Route>
+          <Route path="/verify-user/:verificationToken" element={<AccountVerify />} />
+        </Route>
         <Route path="/" element={<Home />} />
         <Route path="/thank-you" element={<ThankYou/>} />
         <Route path="/about" element={<About />} />
