@@ -16,7 +16,7 @@ const Trainer = ({ centerdetails, Days }) => {
 
     axios
       .patch(
-        `http://localhost:8000/v1.0/gymcenter/add-new-trainer/${centerdetails}`,
+        `https://gym-api-3r8c.onrender.com/v1.0/gymcenter/add-new-trainer/${centerdetails}`,
         {
             newTrainerData:[
                 {
