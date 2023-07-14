@@ -3,13 +3,14 @@ import "../css/Style.css";
 import * as Images from "../assets";
 import { Header, AllPageBanner, Footer } from "../components";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useHistory } from "react-router-dom";
 import { API, isEmpty } from "../generalfunction";
 import { IsEmail, name, validatePIN } from "../validation";
 import SocialWithFirebase from "../Element/SocialWithFirebase";
 import MessageBox from "../Element/Modals/MessageBox";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const Register = () => {
   const [firstname, setFirstname] = useState(null);
   const [firstnamevalid, setFirstnamevalid] = useState();
@@ -55,7 +56,7 @@ const Register = () => {
     }
     onLoad();
   }, []);
-
+  const history = useHistory();
   const OnRegister = async () => {
     API.post("/v1.0/user/register", {
       first_name: firstname,
@@ -70,8 +71,10 @@ const Register = () => {
         console.log("res", res);
         toast.success(`Registration Successfull and Verification email sent on ${email}`, {
           position: "top-center",
+          onClose: () => {
+            history.push("/login");
+          },
         });
-      
       })
       .catch((err) => {
         console.log(err);

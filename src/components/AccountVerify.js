@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "../Element/Header";
 import { Footer } from "../Element/Footer";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./style.css";
@@ -10,9 +10,10 @@ import axios from "axios";
 const AccountVerify = () => {
   const { verificationToken } = useParams();
   const navigate=useNavigate()
-  // const [token, setToken] = useState(verificationToken);
-  console.log("verificationToken", verificationToken);
+  const [verify, setVerify]=useState(false)
+  const history = useHistory();
   const verifyAccount = async () => {
+    setVerify(true)
     try {
       await axios
         .patch(
@@ -21,9 +22,7 @@ const AccountVerify = () => {
         .then((res) => {
           console.log("patch", res);
           toast.success("Account verified successfully");
-          
-        }).then((res)=>{
-          navigate('/login')
+          setVerify(false)
         })
         .catch((error) => {
           console.log(error);
@@ -42,7 +41,7 @@ const AccountVerify = () => {
           <div className="col-lg-5 mx-auto">
             <div className="verify-container">
               <h1 className="text-center mb-5">Verify Your Account</h1>
-              <button onClick={verifyAccount}>Verify Your Account</button>
+              <button onClick={verifyAccount}>{ verify ? 'Verifying Account...':"Verify Your Account"}</button>
             </div>
           </div>
         </div>
