@@ -28,58 +28,53 @@ const Login = () => {
   const [passvalid, setPassvalid] = useState();
   const [showmodal, setShowmodal] = useState();
   const [message, setMessage] = useState();
-
- 
-  
+  const [isLogin, setIsLogin] = useState(false);
 
   const onSubmit = async () => {
+    setIsLogin(true);
     try {
-      const response = await API.post(
-        "/v1.0/user/login",
-        {
-          email: email,
-          password: password,
-        }
-      )
-  
-      const { data } = response;
-      const uData={
-        Uuser:data.data.email, 
-        upass:data.data.password,
-        Uusertype:data.data.user_type,
-        Uname:data.data.first_name + ' ' + data.data.last_name,
-        Uemail:data.data.email,
-        Upincode:data.data.post_code
-      }
-      
-      if (data.data.email && data.data.password ) {
-       if (data.data.verify_status===true) {
-        if (data.data.user_type==="User") {
-          const getSelectData=JSON.parse(localStorage.getItem('selectdat'))
-          // console.log('getSelectData',getSelectData);
-          if (getSelectData) {
-            navigate('/booking_appointment')
-          } else {
-            navigate('/account')
+      await API.post("/v1.0/user/login", {
+        email: email,
+        password: password,
+      }).then((response)=>{
+        const { data } = response;
+        const uData={
+            Uuser:data.data.email,
+            upass:data.data.password,
+            Uusertype:data.data.user_type,
+            Uname:data.data.first_name + ' ' + data.data.last_name,
+            Uemail:data.data.email,
+            Upincode:data.data.post_code
           }
-         
-          localStorage.setItem('userAuth', JSON.stringify(uData) )
-        } else {
-          alert('Your Authentication is Vender Type! Do you want to Login as a Vendor')
-          navigate('/vendor-login')
-        }
-       }else{
-        alert('Account is Not Veryfied. We sent an Email that you Provide at the time of registration')
-       }
-      }
+          if (data.data.email && data.data.password ) {
+             if (data.data.verify_status===true) {
+              if (data.data.user_type==="User") {
+                const getSelectData=JSON.parse(localStorage.getItem('selectdat'))
+      
+                if (getSelectData) {
+                  navigate('/booking_appointment')
+                } else {
+                  navigate('/account')
+                }
+      
+                localStorage.setItem('userAuth', JSON.stringify(uData) )
+              } else {
+                alert('Your Authentication is Vender Type! Do you want to Login as a Vendor')
+                navigate('/vendor-login')
+              }
+             }else{
+              alert('Account is Not Veryfied. We sent an Email that you Provide at the time of registration')
+             }
+            }
+      setIsLogin(false)
+        
+      })
       
     } catch (err) {
       alert(`Incorrect Authentications`);
-      
     }
   };
-  
-  
+
   const handleGoogleSignIn = async () => {
     try {
       const res = await signInWithGoogle();
@@ -109,9 +104,9 @@ const Login = () => {
       });
   };
   useEffect(() => {
-   if (localStorage.getItem('userAuth')) {
-            navigate('/account')
-        }
+    if (localStorage.getItem("userAuth")) {
+      navigate("/account");
+    }
   }, []);
 
   return (
@@ -209,10 +204,11 @@ const Login = () => {
 
                       <div className="col-lg-12 position-relative mt-3">
                         <button type="submit" onClick={() => onSubmit()}>
-                          Login
+                          {isLogin === true ? "Processig.." : "Login"}
                         </button>
-                        <p className="m-0 w-100 py-3">New User? <Link to="/register" > Sign Up</Link></p>
-                        
+                        <p className="m-0 w-100 py-3">
+                          New User? <Link to="/register"> Sign Up</Link>
+                        </p>
                       </div>
                     </div>
                   </div>
