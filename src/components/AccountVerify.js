@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "../Element/Header";
 import { Footer } from "../Element/Footer";
-import { useNavigate, useParams,useHistory } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./style.css";
@@ -11,7 +11,7 @@ const AccountVerify = () => {
   const { verificationToken } = useParams();
   const navigate=useNavigate()
   const [verify, setVerify]=useState(false)
-  const history = useHistory();
+  
   const verifyAccount = async () => {
     setVerify(true)
     try {

@@ -56,7 +56,7 @@ const Register = () => {
     }
     onLoad();
   }, []);
-  const history = useHistory();
+  
   const OnRegister = async () => {
     API.post("/v1.0/user/register", {
       first_name: firstname,
@@ -72,7 +72,7 @@ const Register = () => {
         toast.success(`Registration Successfull and Verification email sent on ${email}`, {
           position: "top-center",
           onClose: () => {
-            history.push("/login");
+            navigate("/login");
           },
         });
       })
