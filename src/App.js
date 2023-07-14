@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Link, Outlet, useParams,Navigate, useNavigate } from "react-router-dom";
+import {
+  HashRouter ,Router,
+  Route,
+  Routes,
+  Link,
+  Outlet,
+  useParams,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import Team from "./components/Team";
@@ -65,19 +74,22 @@ function App() {
   //   if (isVendorAuthenticated) {
   //       navigate('/dashboard')
   //   }
-    
+
   // }, []);
   return (
     <div className="App">
       {/* <AuthContextProvider> */}
-      
+
       <Routes>
-        <Route path="/review" element={<Revieworders/>} />
-        
-          <Route path="/verify-user/:verificationToken" element={<AccountVerify />} />
-        
+        <Route path="/review" element={<Revieworders />} />
+
+        <Route
+          path="/verify-user/:verificationToken"
+          element={<AccountVerify />}
+        />
+
         <Route path="/" element={<Home />} />
-        <Route path="/thank-you" element={<ThankYou/>} />
+        <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
         <Route path="/privacy_policy" element={<Privacy_Policy />} />
@@ -88,7 +100,7 @@ function App() {
         <Route path="/contact_us" element={<ContactUs />} />
         <Route path="/career" element={<Career />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={  <Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/vendor-login" element={<VenderLogin />} />
         <Route path="/gym_listing" element={<Gym_Listing />} />
         <Route path="/page_not_found" element={<PageNotFound />} />
@@ -115,12 +127,15 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/user-history" element={<UserHistory />} />
         <Route path="/revieworder" element={<Revieworder />} />
-    
+
         <Route
           path="/dashboard/*"
           element={
-            isVendorAuthenticated ?<Dashboard />: <Navigate to="/vendor-login" />
-           
+            isVendorAuthenticated ? (
+              <Dashboard />
+            ) : (
+              <Navigate to="/vendor-login" />
+            )
           }
         />
 
@@ -146,7 +161,7 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/booking_appointment" element={<BookingAppointment />} />
       </Routes>
-      
+
       {/* </AuthContextProvider> */}
 
       {/* <Outlet /> */}
