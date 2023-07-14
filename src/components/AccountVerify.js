@@ -9,11 +9,11 @@ import axios from "axios";
 
 const AccountVerify = () => {
   const { verificationToken } = useParams();
-  const navigate=useNavigate()
-  const [verify, setVerify]=useState(false)
-  
+  const navigate = useNavigate();
+  const [verify, setVerify] = useState(false);
+
   const verifyAccount = async () => {
-    setVerify(true)
+    setVerify(true);
     try {
       await axios
         .patch(
@@ -21,8 +21,13 @@ const AccountVerify = () => {
         )
         .then((res) => {
           console.log("patch", res);
-          toast.success("Account verified successfully");
-          setVerify(false)
+          toast.success("Account verified successfully", {
+            position: "top-center",
+            onClose: () => {
+              navigate("/login");
+            },
+          });
+          setVerify(false);
         })
         .catch((error) => {
           console.log(error);
@@ -41,7 +46,9 @@ const AccountVerify = () => {
           <div className="col-lg-5 mx-auto">
             <div className="verify-container">
               <h1 className="text-center mb-5">Verify Your Account</h1>
-              <button onClick={verifyAccount}>{ verify ? 'Verifying Account...':"Verify Your Account"}</button>
+              <button onClick={verifyAccount}>
+                {verify ? "Verifying Account..." : "Verify Your Account"}
+              </button>
             </div>
           </div>
         </div>
