@@ -28,17 +28,17 @@ const BookingAppointment = () => {
   const UserDetails = JSON.parse(localStorage.getItem("userAuth"));
   const selectedPData = JSON.parse(localStorage.getItem("selectdat"));
   const [getData, setGetData] = useState({
-    name: UserDetails.Uname,
+    name: UserDetails?.Uname,
     address: "",
     city: "",
     state: "",
     country: "",
     phone: "",
-    email: UserDetails.Uemail,
+    email: UserDetails?.Uemail,
   });
   const [getTrainer, setGetTrainer] = useState([]);
   const [strainer, setStrainer] = useState("");
-  console.log("selectedPData", selectedPData.planname);
+  console.log("selectedPData", selectedPData?.planname);
   const getTrainerList = () => {
     axios
       .get(
@@ -46,13 +46,13 @@ const BookingAppointment = () => {
       )
       .then((res) => {
         const filterTrainer = res.data.data.find(
-          (item) => item.center_name === selectedPData.center_name
+          (item) => item.center_name === selectedPData?.center_name
         );
         setGetTrainer(filterTrainer);
       });
   };
-  console.log("getTrainer", getTrainer.newTrainerData);
-  const filtTrainerData = Array.isArray(getTrainer.newTrainerData)
+  console.log("getTrainer", getTrainer?.newTrainerData);
+  const filtTrainerData = Array.isArray(getTrainer?.newTrainerData)
     ? getTrainer.newTrainerData.find((item) => item.tName === strainer)
     : "";
   console.log("filtTrainerData", filtTrainerData);
@@ -89,7 +89,7 @@ const BookingAppointment = () => {
     console.log("find-gym-item", localStorage.getItem("usertype"));
     navigation("/revieworder");
   };
-  const getPlan = selectedPData.planname;
+  const getPlan = selectedPData?.planname;
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   console.log("startDate", startDate);
@@ -136,19 +136,19 @@ const BookingAppointment = () => {
           <div className="row">
             <div className="col-lg-6 col-6">
               <h3 className="logo_color">GYM Details</h3>
-              <h3 className="fw-bold">{selectedPData.center_name}</h3>
-              <h5>{selectedPData.address}</h5>
+              <h3 className="fw-bold">{selectedPData?.center_name}</h3>
+              <h5>{selectedPData?.address}</h5>
             </div>
             <div className="col-lg-6 col-6 text-end">
               <p className=" logo_color">
                 ₹
                 <span className="fw-bold">
-                  {selectedPData.rate}/{selectedPData.planname}
+                  {selectedPData?.rate}/{selectedPData?.planname}
                 </span>
               </p>
               <p>
                 {" "}
-                <b> ({selectedPData.planname})</b>
+                <b> ({selectedPData?.planname})</b>
               </p>
             </div>
           </div>
@@ -191,7 +191,7 @@ const BookingAppointment = () => {
                     className="form-select"
                   >
                     <option>Choose Trainer</option>
-                    {getTrainer.newTrainerData?.map((item, index) => {
+                    {getTrainer?.newTrainerData?.map((item, index) => {
                       return <option key={index}>{item.tName}</option>;
                     })}
                   </select>
@@ -458,7 +458,7 @@ const BookingAppointment = () => {
                     <input
                       type="text"
                       id="name"
-                      value={UserDetails.Uname}
+                      value={UserDetails?.Uname}
                       name="name"
                       className="form-control  fs-6 py-2"
                       placeholder="Enter Your Full Name"
@@ -467,7 +467,7 @@ const BookingAppointment = () => {
                   <div className="col-lg-12 mb-4 ">
                     <input
                       type="email"
-                      value={UserDetails.Uemail}
+                      value={UserDetails?.Uemail}
                       id="email"
                       name="email"
                       placeholder="Enter Your Email Id"
