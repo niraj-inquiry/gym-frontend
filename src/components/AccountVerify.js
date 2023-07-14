@@ -47,7 +47,7 @@ const AccountVerify = () => {
             <div className="verify-container">
               <h1 className="text-center mb-5">Verify Your Account</h1>
               <button onClick={verifyAccount}>
-                {verify ? "Verifying Account..." : "Verify Your Account"}
+                {verify===true ? "Verifying Account..." : "Verify Your Account"}
               </button>
             </div>
           </div>
