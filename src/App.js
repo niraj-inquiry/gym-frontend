@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Routes, Navigate, useNavigate, json } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, Outlet, useParams,Navigate, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import Team from "./components/Team";
@@ -70,11 +70,12 @@ function App() {
   return (
     <div className="App">
       {/* <AuthContextProvider> */}
+      
       <Routes>
         <Route path="/review" element={<Revieworders/>} />
-        <Route>
+        
           <Route path="/verify-user/:verificationToken" element={<AccountVerify />} />
-        </Route>
+        
         <Route path="/" element={<Home />} />
         <Route path="/thank-you" element={<ThankYou/>} />
         <Route path="/about" element={<About />} />
@@ -145,6 +146,7 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/booking_appointment" element={<BookingAppointment />} />
       </Routes>
+      
       {/* </AuthContextProvider> */}
 
       {/* <Outlet /> */}

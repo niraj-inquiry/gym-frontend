@@ -68,19 +68,15 @@ const Register = () => {
     })
       .then((res) => {
         console.log("res", res);
-        if (res.data.data.user_type === "User") {
-          toast.success(`Verification email sent on ${email} ` , {
-              position: "top-center",
-          });
-          navigate("/login");
-        } else {
-          navigate("/vendor-login");
-        }
+        toast.success(`Registration Successfull and Verification email sent on ${email}`, {
+          position: "top-center",
+        });
+      
       })
       .catch((err) => {
         console.log(err);
-        toast.success(`Failed to registration` , {
-            position: "top-center",
+        toast.success(`Failed to registration`, {
+          position: "top-center",
         });
       });
   };
@@ -320,7 +316,8 @@ const Register = () => {
                             Register
                           </button>
                           <p className="m-0 w-100 py-2">
-                          Already a registered User? <Link to="/login"> Login</Link>
+                            Already a registered User?{" "}
+                            <Link to="/login"> Login</Link>
                           </p>
                         </div>
                       </div>
@@ -361,7 +358,6 @@ const Register = () => {
             </div>
           </div>
         </div>
-        
       </section>
       <Footer />
     </>

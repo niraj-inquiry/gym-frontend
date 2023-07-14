@@ -8,7 +8,7 @@ import AllBooking from "../Element/AllBooking";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isEmpty } from "../generalfunction";
 import "../css/Style.css";
-import {resources} from '../json/data';
+import { resources, generateAppointments } from '../json/data';
 
 import Scheduler, { View, Scrolling, Resource } from "devextreme-react/scheduler";
 import axios from "axios";
@@ -117,17 +117,17 @@ const BookingAppointment = () => {
 
     setEndDate(calculatedEndDate);
   }, [startDate, getPlan]);
-
-
+  // Scheduler
+  const startDay = new Date(startDate);
+  const endDay = new Date(endDate);
+  const startDayHour = 10;
+  const endDayHour = 19;
+  const appointments = generateAppointments(startDay, endDay, startDayHour, endDayHour);
+  const groups = ['userId'];
   useEffect(() => {
     getTrainerList();
   }, []);
-  // const customizeDateNavigatorText = (args) => {
-  //   if (args.view === 'week') {
-     
-  //     args.text = 'My Custom Week Name';
-  //   }
-  // };
+  console.log('appointments', appointments);
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -196,7 +196,7 @@ const BookingAppointment = () => {
                     })}
                   </select>
                 </div>
-                
+
                 <div className="border-start col-lg-7">
                   {!filtTrainerData ? (
                     <>
@@ -267,7 +267,7 @@ const BookingAppointment = () => {
 
 
 
-           
+
             {/* <div className="row">
               <div className="col-lg-6">
                 <h2>Schedule Your Flexible Timing</h2>
@@ -410,7 +410,7 @@ const BookingAppointment = () => {
                 <div className="col-lg-5">
                   <div className="input-group mb-3 ">
                     <span className="input-group-text border-0" id="basic-addon1">
-                      @
+                     Start Date
                     </span>
                     <input
                       type="date"
@@ -423,7 +423,7 @@ const BookingAppointment = () => {
                 <div className="col-lg-5">
                   <div class="input-group mb-3">
                     <span class="input-group-text border-0" id="basic-addon1">
-                      @
+                      End Date
                     </span>
                     <input
                       type="date"
@@ -434,15 +434,17 @@ const BookingAppointment = () => {
                   </div>
                 </div>
                 <div className="col-lg-12">
-                  <Scheduler 
-                  currentView="week"
-                 
-                 
+                  <Scheduler
+                    currentView="week"
+                    dataSource={appointments}
+                   
+                    className='boxshow w-100'
                   >
-                    <View type="week" startDayHour={10} endDayHour={19} />
                     
+                    <View type="week" startDayHour={10} endDayHour={19} />
+                   
                   </Scheduler>
-                  
+
                 </div>
               </div>
             </div>
@@ -640,20 +642,20 @@ const BookingAppointment = () => {
 
           {/* <div className=''>Book Appointment</div> */}
           <div className="row my-3 ">
-          <div className="col-12 pe-0">
-            <button
-              type="submit"
-              className="w-auto search border-0 rounded ms-auto"
-              onClick={() => navigation("/revieworder")}
-            >
-              <span className="position-relative py-2 px-3 ">
-                Booking Appointment
-              </span>
-            </button>
+            <div className="col-12 pe-0">
+              <button
+                type="submit"
+                className="w-auto search border-0 rounded ms-auto"
+                onClick={() => navigation("/revieworder")}
+              >
+                <span className="position-relative py-2 px-3 ">
+                  Booking Appointment
+                </span>
+              </button>
+            </div>
           </div>
         </div>
-        </div>
-        
+
       </div>
     </div>
   );
