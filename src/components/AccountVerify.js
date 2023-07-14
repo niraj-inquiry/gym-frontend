@@ -21,6 +21,8 @@ const AccountVerify = () => {
         .then((res) => {
           console.log("patch", res);
           toast.success("Account verified successfully");
+          
+        }).then((res)=>{
           navigate('/login')
         })
         .catch((error) => {
