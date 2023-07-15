@@ -3,6 +3,7 @@ import { Header } from "../Element/Header";
 import * as Images from "../assets";
 import { Link, useNavigate } from "react-router-dom";
 import './style.css'
+import axios from "axios";
 const loadScript = (src) => {
   return new Promise((resolve) => {
     const script = document.createElement("script");
@@ -21,13 +22,58 @@ const Revieworders = () => {
   const navigate = useNavigate();
   const UserDetails=JSON.parse(localStorage.getItem('userAuth'))
   const selectedPData = JSON.parse(localStorage.getItem('selectdat'))
+  
+  const orderData=()=>{
+    axios.post('https://gym-api-3r8c.onrender.com/orderapi/create-order',{
+      centerId:selectedPData?.center_name,
+      passtype:selectedPData?.planname,
+      amount:selectedPData?.rate,
+      userId:UserDetails?.userId,
+      vendorId:selectedPData?.created_by_userid
+    }).then((res)=>{
+      const orderId = res.data.data._id; 
+      localStorage.setItem('orderIds', orderId);
+      
+    })
+  }
+
+  const updateOrder = (response) => {
+    const orderId = localStorage.getItem("orderIds"); // Retrieve the order ID from local storage or use the appropriate source
+
+    // Make the update API call using the appropriate method (e.g., fetch, axios, etc.)
+    axios.patch(`https://gym-api-3r8c.onrender.com/orderapi/update-order/${orderId}`, {
+      transactionId: response.razorpay_payment_id,
+      orderId:response.razorpay_order_id,
+      passtype:selectedPData?.planname,
+      amount:selectedPData?.rate,
+      payment_status:"1",
+      
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // Handle the response if needed
+        console.log("Order update successful:", data);
+      })
+      .catch((error) => {
+        // Handle any errors during the update API call
+        console.error("Error updating order:", error);
+      });
+  };
+  
+
 const handlePayment = () => {
+  const orderIds = localStorage.getItem("orderIds")
+  if (!orderIds) {
+    orderData()
+  } 
+ 
   fetch("https://gym-api-3r8c.onrender.com/order", {
     method: "GET",
     mode: "cors",
     headers: {},
   })
     .then((res) => res.json())
+    
     .then((res) => {
       const options = {
         key: "rzp_test_VYQEOXFEnP5Ni5",
@@ -39,6 +85,7 @@ const handlePayment = () => {
         order_id: res?.id,
         handler: function (response) {
           console.log("response : ", response);
+          updateOrder(response);
           navigate("/thank-you");
         },
 
@@ -48,7 +95,7 @@ const handlePayment = () => {
           contact: "9999999999",
         },
       };
-
+       console.log('resp',res);
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     })
@@ -72,9 +119,9 @@ useEffect(() => {
             <h3 className="logo_color">Gym Details</h3>
           </div>
           <div className="col-6 text-end col-md-6 col-sm-6">
-            <h3 className="fw-bold">{selectedPData.center_name}</h3>
+            <h3 className="fw-bold">{selectedPData?.center_name}</h3>
             {/* <h3>All Features included with plan</h3> */}
-            <h3>{selectedPData.address}</h3>
+            <h3>{selectedPData?.address}</h3>
           </div>
         </div>
         <hr className="my-5" />
@@ -85,12 +132,12 @@ useEffect(() => {
               <h3 className="logo_color mb-3">Selected Plan Details</h3>
               <div className="d-flex mb-3">
                 <img src={Images.booking_pass_name} width={35} height={30} />
-                <h4 className="fw-500 ms-2 mb-0 fw-bold">{selectedPData.planname}</h4>
+                <h4 className="fw-500 ms-2 mb-0 fw-bold">{selectedPData?.planname}</h4>
               </div>
               <div className="d-flex align-items-center text-center mb-3">
                 <h4 className="fw-medium mb-0">
                   {" "}
-                  <b> ₹ {selectedPData.rate}/{selectedPData.planname}</b>
+                  <b> ₹ {selectedPData?.rate}/{selectedPData?.planname}</b>
                 </h4>
               </div>
               <button type="button" className="btn btn-outline-success w-50">
@@ -166,11 +213,11 @@ useEffect(() => {
             <h3 className="logo_color">Billing Details </h3>
           </div>
           <div className="col-lg-6 col-md-6 text-end col-sm-6">
-            <h3>{selectedPData.address}</h3>
+            <h3>{selectedPData?.address}</h3>
             <div className="d-flex align-items-center justify-content-end">
               <h4 className="fs-5 mb-0 ms-2">
                 {" "}
-                <b>₹ {selectedPData.rate}</b>{" "}
+                <b>₹ {selectedPData?.rate}</b>{" "}
               </h4>
             </div>
           </div>
@@ -198,7 +245,7 @@ useEffect(() => {
             <div className="d-flex align-items-center justify-content-end">
               <h4 className="fw-bold mb-0 ms-2">
                 {" "}
-                <b>₹ {selectedPData.rate}</b>{" "}
+                <b>₹ {selectedPData?.rate}</b>{" "}
               </h4>
             </div>
           </div>

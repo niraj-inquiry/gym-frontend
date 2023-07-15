@@ -37,6 +37,7 @@ const Login = () => {
         email: email,
         password: password,
       }).then((response)=>{
+        console.log('resp',response);
         const { data } = response;
         const uData={
             Uuser:data.data.email,
@@ -44,7 +45,8 @@ const Login = () => {
             Uusertype:data.data.user_type,
             Uname:data.data.first_name + ' ' + data.data.last_name,
             Uemail:data.data.email,
-            Upincode:data.data.post_code
+            Upincode:data.data.post_code,
+            userId:data.data._id
           }
           if (data.data.email && data.data.password ) {
              if (data.data.verify_status===true) {

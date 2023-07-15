@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "../Element/Header";
 
 import "./style.css";
 import { Footer } from "../Element/Footer";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const ThankYou = () => {
+  const navigate=useNavigate()
+  const orderId = localStorage.getItem("orderIds")
+  const [getOrder, setOrder]=useState()
+  const getOrderData=()=>{
+   axios.get(`https://gym-api-3r8c.onrender.com/orderapi/get-order/${orderId}`)
+   .then((res)=>{
+    setOrder(res.data.data)
+   })
+  }
+  const handleNavigate=()=>{
+    navigate('/account')
+  }
+  console.log('getOrder',getOrder);
+  useEffect(()=>{
+    getOrderData()
+  },[])
   return (
     <>
       <Header />
@@ -14,7 +32,7 @@ const ThankYou = () => {
               <h1 className="mb-4">Thank you for the payment</h1>
               <div className="thank-you-item">
                 <span>Order ID</span>
-                <span>#12346fthfjgmkggn</span>
+                <span>{getOrder?.orderId}</span>
               </div>
               <div className="thank-you-item1">
                 <div>
@@ -33,15 +51,15 @@ const ThankYou = () => {
               <div className="thank-you-item">
                 <span>Status</span>
                 <span className="text-success border border-success">
-                  Successful
+                  {getOrder?.payment_status==="1"?"Successfull":""}
                 </span>
               </div>
               <hr />
               <div className="total-price" >
                 <p>Total Amount</p>
-                <p><b>$ 222</b></p>
+                <p><b>₹ {getOrder?.amount}</b></p>
               </div>
-              <button className="done-btn" >DONE</button>
+              <button className="done-btn" onClick={handleNavigate} >DONE</button>
             </div>
           </div>
         </div>
