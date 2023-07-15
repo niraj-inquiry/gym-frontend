@@ -1,3 +1,5 @@
+import 'devextreme/dist/css/dx.common.css';
+import 'devextreme/dist/css/dx.light.css';
 import React, { useEffect } from "react";
 import { Route, Routes, Navigate, useNavigate, json } from "react-router-dom";
 import Home from "./components/Home";
@@ -50,6 +52,7 @@ import VenderLogin from "./components/VenderLogin";
 import ThankYou from "./components/ThankYou";
 import Revieworders from "./components/Reviewordercopy";
 import AccountVerify from "./components/AccountVerify";
+import Plan from './components/vendor/Plan';
 function App() {
   const navigate = useNavigate();
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
@@ -112,7 +115,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/user-history" element={<UserHistory />} />
         <Route path="/revieworder" element={<Revieworder />} />
-    
+       
         <Route
           path="/dashboard/*"
           element={

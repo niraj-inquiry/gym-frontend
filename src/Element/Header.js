@@ -80,7 +80,7 @@ export const Menus = ({ onClick }) => {
             {hideshowemenu && (
                 <ul className="custommenu">
                     <li><NavLink className="dropdown-item" to={'/account'}>My Passes</NavLink></li>
-                    <li><NavLink className="dropdown-item" to={'/Payment_Details'}>Payment Details</NavLink></li>
+                    {/* <li><NavLink className="dropdown-item" to={'/Payment_Details'}>Payment Details</NavLink></li> */}
                     <li><NavLink className="dropdown-item" to={'/user-settings'}>Settings</NavLink></li>
                     <li><NavLink className="dropdown-item" to={'/user-history'}>History</NavLink></li>
                     <li><NavLink className="dropdown-item" to={'/user-feedback'}>Feedback</NavLink></li>

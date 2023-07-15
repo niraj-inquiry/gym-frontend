@@ -30,14 +30,20 @@ export const GymCenter = ({
     useEffect(() => {
         onLoad()
         fetchImage(imageUrl).then(res => setImg(res));
-    // }, [rating]);
-}, []);
-console.log('PopularCenterText', data,rating)
+        // }, [rating]);
+    }, []);
+    console.log('PopularCenterText', data, rating)
     console.log("rating", data?._id)
-    console.log('home center img',img)
+    console.log('home center img', img)
+    const handleNavigate = (id) => {
+        localStorage.setItem("selectedId", id);
+        navigate("/gym_listing_details");
+    };
     return (
 
-        <div className="col-lg-3 col-md-6 ">
+        <div className="col-lg-3 col-md-6  center-card"
+            onClick={() => handleNavigate(data?._id)}
+        >
             <div className="">
                 <div className="center-box" style={{ height: '-webkit-fill-available' }}>
                     {PopularCenterText && (
@@ -45,14 +51,13 @@ console.log('PopularCenterText', data,rating)
                     )}
                     <div style={{ width: '100%', height: 'auto' }}>
                         {/* <img className="w-100" src={img?img:Images.app_store} height={250} />  */}
-                        <img className="w-100" src={Images.Aboutus} height={250} /> 
+                        <img className="w-100" src={Images.Aboutus} height={250} />
                     </div>
 
                     <div className="py-4 center-location-box-content" style={{ height: 'fit-content' }}>
                         <div className="d-flex justify-content-between align-items-center">
                             <h5>
-                                {/* <NavLink to={link}> */}
-                                {/* <div onClick={() => navigate(link, { state: { centerid: data?._id, rating: rating, email: data?.email } })} style={{ textTransform: 'capitalize', textAlign: 'left' }}></div> */}
+
                                 <div onClick={() => navigate(link, { state: { centerid: data?._id, rating: rating, email: data?.email } })} style={{ textTransform: 'capitalize', textAlign: 'left' }}>
                                     <h5 className="fw-bold">{convertfirstletter(CenterName?.substr(0, 19))}</h5>
                                 </div>
@@ -60,7 +65,7 @@ console.log('PopularCenterText', data,rating)
                             </h5>
                             <div style={{ paddingBottom: 13 }}>
                                 <div className="rating rounded">
-                                    <img src={StarImage}  />
+                                    <img src={StarImage} />
                                     <span className="text-white" style={{ fontSize: 13 }}>{rating}</span>
                                 </div>
                             </div>

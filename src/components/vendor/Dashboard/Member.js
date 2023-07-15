@@ -3,6 +3,7 @@ import "./style.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { API } from "../../../generalfunction";
 
 const Member = () => {
   const { CenterType, Country, States, Cities } = require("./LocationData");
@@ -29,7 +30,8 @@ const Member = () => {
     e.preventDefault();
     centerMember();
 
-    axios.post("https://gymbackend-y3cb.onrender.com/vendor/create-member", getData)
+    // axios.post("https://gymbackend-y3cb.onrender.com/vendor/create-member", getData)
+    API.post(`/vendor/create-member`, getData)
       .then((res) => {
         console.log('member post api',res);
         centerMember();
@@ -43,14 +45,18 @@ const Member = () => {
           position: "top-center",
         });
       });
-  };
+  }
   const centerGet = () => {
-    axios.get("https://gymbackend-y3cb.onrender.com/v1.0/gymcenter/gym-all-data").then((res) => {
+    // axios.get("https://gymbackend-y3cb.onrender.com/v1.0/gymcenter/gym-all-data")
+    API.get(`v1.0/gymcenter/gym-all-data`)
+    .then((res) => {
       setGetCent(res.data.data);
     });
   };
   const centerMember = () => {
-    axios.get("https://gymbackend-y3cb.onrender.com/vendor/get-member").then((res) => {
+    // axios.get("https://gymbackend-y3cb.onrender.com/vendor/get-member")
+    API.get(`vendor/get-member`)
+    .then((res) => {
       setGetCenter(res.data.data);
     });
   };
@@ -271,7 +277,7 @@ const Member = () => {
                   <thead>
                     <tr>
 
-                      <th>Member No.</th>
+                      <th>S.No.</th>
                       <th>Name</th>
                       <th>Email</th>
                       <th>Phone</th>

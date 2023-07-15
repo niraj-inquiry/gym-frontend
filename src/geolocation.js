@@ -11,11 +11,11 @@ const useGeoLocation = () => {
   const [country, setCountry] = useState();
 
   useEffect(() => {
-    navigator.permissions
+    navigator?.permissions
       .query({ name: "geolocation" })
       .then(function (result) {
         if (result.state === "granted") {
-          navigator.geolocation.getCurrentPosition(
+          navigator?.geolocation?.getCurrentPosition(
             (position) => {
               console.log("current post", position);
 
@@ -28,12 +28,12 @@ const useGeoLocation = () => {
               });
               axios
                 .get(
-                  `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyBb4tKYYFZpXBdaaKbVvEIFfEFy4SdjcRg`
+                  `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position?.coords?.latitude},${position.coords.longitude}&key=AIzaSyBb4tKYYFZpXBdaaKbVvEIFfEFy4SdjcRg`
                 )
                 .then((resdata) => {
-                  console.log("Res", resdata.data);
+                  console.log("Res", resdata?.data);
                   setCountry(
-                    resdata.data?.results[resdata.data?.results.length - 1]
+                    resdata?.data?.results[resdata?.data?.results?.length - 1]
                       ?.formatted_address
                   );
                 });
@@ -42,8 +42,8 @@ const useGeoLocation = () => {
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
           );
         } else {
-          navigator.permissions
-            .revoke({ name: "geolocation" })
+          navigator?.permissions
+            ?.revoke({ name: "geolocation" })
             .then((result) => {
               console.log("ver", result);
             });
