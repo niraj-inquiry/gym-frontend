@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Header } from "../Element/Header";
 import * as Images from "../assets";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,21 +20,24 @@ const loadScript = (src) => {
 
 const Revieworders = () => {
   const navigate = useNavigate();
-  const UserDetails=JSON.parse(localStorage.getItem('userAuth'))
+  const UserDetails = JSON.parse(localStorage.getItem('userAuth'))
   const selectedPData = JSON.parse(localStorage.getItem('selectdat'))
-  
-  const orderData=()=>{
-    axios.post('https://gym-api-3r8c.onrender.com/orderapi/create-order',{
-      centerId:selectedPData?.center_name,
-      passtype:selectedPData?.planname,
-      amount:selectedPData?.rate,
-      userId:UserDetails?.userId,
-      vendorId:selectedPData?.created_by_userid,
-      centerBanner:selectedPData?.centerBanner
-    }).then((res)=>{
-      const orderId = res.data.data._id; 
+
+  const orderData = () => {
+    axios.post('https://gym-api-3r8c.onrender.com/orderapi/create-order', {
+      centerId: selectedPData?.center_name,
+      passtype: selectedPData?.planname,
+      amount: selectedPData?.rate,
+      userId: UserDetails?.userId,
+      vendorId: selectedPData?.created_by_userid,
+      centerBanner: selectedPData?.centerBanner,
+      userAddress:selectedPData?.address,
+      userName:UserDetails?.Uname
+
+    }).then((res) => {
+      const orderId = res.data.data._id;
       localStorage.setItem('orderIds', orderId);
-      
+
     })
   }
 
@@ -44,11 +47,11 @@ const Revieworders = () => {
     // Make the update API call using the appropriate method (e.g., fetch, axios, etc.)
     axios.patch(`https://gym-api-3r8c.onrender.com/orderapi/update-order/${orderId}`, {
       transactionId: response.razorpay_payment_id,
-      orderId:response.razorpay_order_id,
-      passtype:selectedPData?.planname,
-      amount:selectedPData?.rate,
-      payment_status:"1",
-      
+      orderId: response.razorpay_order_id,
+      passtype: selectedPData?.planname,
+      amount: selectedPData?.rate,
+      payment_status: "1",
+
     })
       .then((res) => res.json())
       .then((data) => {
@@ -60,55 +63,55 @@ const Revieworders = () => {
         console.error("Error updating order:", error);
       });
   };
-  
 
-const handlePayment = () => {
-  const orderIds = localStorage.getItem("orderIds")
-  if (!orderIds) {
-    orderData()
-  } 
- 
-  fetch("https://gym-api-3r8c.onrender.com/order", {
-    method: "GET",
-    mode: "cors",
-    headers: {},
-  })
-    .then((res) => res.json())
-    
-    .then((res) => {
-      const options = {
-        key: "rzp_test_VYQEOXFEnP5Ni5",
-        currency: res?.currency,
-        amount: res?.amount,
-        name: "SuperActive",
-        description: "Test Wallet Transaction",
-        image: "/favicon.png",
-        order_id: res?.id,
-        handler: function (response) {
-          console.log("response : ", response);
-          updateOrder(response);
-          navigate("/thank-you");
-        },
 
-        prefill: {
-          name: "Rahul",
-          email: "rahul@gmail.com",
-          contact: "9999999999",
-        },
-      };
-       console.log('resp',res);
-      const paymentObject = new window.Razorpay(options);
-      paymentObject.open();
+  const handlePayment = () => {
+    const orderIds = localStorage.getItem("orderIds")
+    if (!orderIds) {
+      orderData()
+    }
+
+    fetch("https://gym-api-3r8c.onrender.com/order", {
+      method: "GET",
+      mode: "cors",
+      headers: {},
     })
+      .then((res) => res.json())
 
-    .catch((err) => {
-      console.log("error : ", err);
-    });
-};
-console.log('selectedPData',selectedPData);
-useEffect(() => {
-  loadScript("https://checkout.razorpay.com/v1/checkout.js");
-}, []);
+      .then((res) => {
+        const options = {
+          key: "rzp_test_VYQEOXFEnP5Ni5",
+          currency: res?.currency,
+          amount: res?.amount,
+          name: "SuperActive",
+          description: "Test Wallet Transaction",
+          image: "/favicon.png",
+          order_id: res?.id,
+          handler: function (response) {
+            console.log("response : ", response);
+            updateOrder(response);
+            navigate("/thank-you");
+          },
+
+          prefill: {
+            name: "Rahul",
+            email: "rahul@gmail.com",
+            contact: "9999999999",
+          },
+        };
+        console.log('resp', res);
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      })
+
+      .catch((err) => {
+        console.log("error : ", err);
+      });
+  };
+  console.log('selectedPData', selectedPData);
+  useEffect(() => {
+    loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  }, []);
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -255,11 +258,11 @@ useEffect(() => {
         <div className="d-flex align-items-end justify-content-end">
           <div className="linkbutton fs-6 rounded w-auto px-5 me-2">
             <Link to="/booking_appointment"  >
-            {"Go Back"}
+              {"Go Back"}
             </Link>
           </div>
           <div className="linkbutton fs-6 rounded w-auto px-5 border me-3"
-          onClick={handlePayment}
+            onClick={handlePayment}
           >
             {"Proceed"}
           </div>

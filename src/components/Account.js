@@ -20,7 +20,7 @@ const Account = () => {
       setPassData(res.data.data)
      })
   }
-  const filtPassData=passData.filter((item)=>item.userId===loggedData.userId)
+  const filtPassData=passData.filter((item)=>item.userId===loggedData.userId && item.payment_status==="1")
   console.log('passData',filtPassData);
 useEffect(()=>{
   orderData()
