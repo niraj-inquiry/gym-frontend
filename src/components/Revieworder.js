@@ -22,17 +22,20 @@ const Revieworders = () => {
   const navigate = useNavigate();
   const UserDetails = JSON.parse(localStorage.getItem('userAuth'))
   const selectedPData = JSON.parse(localStorage.getItem('selectdat'))
-
+  const getTrn=localStorage.getItem('trainername')
+  const getBillingData=JSON.parse(localStorage.getItem('billingData'))
+  console.log('getTrn',getTrn);
   const orderData = () => {
-    axios.post('https://gym-api-3r8c.onrender.com/orderapi/create-order', {
+    axios.post('https://gym-api-3r8c.onrender.comorderapi/create-order', {
       centerId: selectedPData?.center_name,
       passtype: selectedPData?.planname,
       amount: selectedPData?.rate,
       userId: UserDetails?.userId,
       vendorId: selectedPData?.created_by_userid,
       centerBanner: selectedPData?.centerBanner,
-      userAddress:selectedPData?.address,
-      userName:UserDetails?.Uname
+      userAddress:getBillingData?.address+'' +getBillingData?.city+'-'+getBillingData?.state+','+getBillingData?.country ,
+      userName:UserDetails?.Uname,
+      phone:getBillingData?.phone
 
     }).then((res) => {
       const orderId = res.data.data._id;
@@ -45,7 +48,7 @@ const Revieworders = () => {
     const orderId = localStorage.getItem("orderIds"); // Retrieve the order ID from local storage or use the appropriate source
 
     // Make the update API call using the appropriate method (e.g., fetch, axios, etc.)
-    axios.patch(`https://gym-api-3r8c.onrender.com/orderapi/update-order/${orderId}`, {
+    axios.patch(`https://gym-api-3r8c.onrender.comorderapi/update-order/${orderId}`, {
       transactionId: response.razorpay_payment_id,
       orderId: response.razorpay_order_id,
       passtype: selectedPData?.planname,
@@ -71,7 +74,7 @@ const Revieworders = () => {
       orderData()
     }
 
-    fetch("https://gym-api-3r8c.onrender.com/order", {
+    fetch("https://gym-api-3r8c.onrender.comorder", {
       method: "GET",
       mode: "cors",
       headers: {},
@@ -202,9 +205,9 @@ const Revieworders = () => {
               <div className="ms-3">
                 <h3 className="mb-0">
                   {" "}
-                  <b> Instructor John</b>
+                  <b> Instructor {getTrn}</b>
                 </h3>
-                <div>Gym Fitness.</div>
+                <div>{selectedPData?.center_name}</div>
                 <img src={Images.five_stars} width={70} />
               </div>
             </div>
@@ -217,11 +220,18 @@ const Revieworders = () => {
             <h3 className="logo_color">Billing Details </h3>
           </div>
           <div className="col-lg-6 col-md-6 text-end col-sm-6">
-            <h3>{selectedPData?.address}</h3>
+            <p> <b> Customer Name:- </b> <b> {getBillingData?.name}</b> </p>
+            <p><b>Phone Number : {getBillingData?.phone}</b></p>
+            <p> <b>Billing Address:-</b>
+             <b>
+             {getBillingData?.address}, {getBillingData?.city}-{getBillingData?.state},
+              {getBillingData?.country} 
+              </b>
+              </p>
+            
             <div className="d-flex align-items-center justify-content-end">
               <h4 className="fs-5 mb-0 ms-2">
-                {" "}
-                <b>₹ {selectedPData?.rate}</b>{" "}
+                Amount :- <b>₹ {selectedPData?.rate}</b>{" "}
               </h4>
             </div>
           </div>

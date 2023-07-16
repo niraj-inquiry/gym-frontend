@@ -62,6 +62,7 @@ import ThankYou from "./components/ThankYou";
 import Revieworders from "./components/Reviewordercopy";
 import AccountVerify from "./components/AccountVerify";
 import Plan from './components/vendor/Plan';
+import FailedPayment from './components/FailedPayment';
 function App() {
   const navigate = useNavigate();
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
@@ -93,6 +94,7 @@ function App() {
 
         <Route path="/" element={<Home />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path='/failed-payment' element={<FailedPayment/>} />
         <Route path="/about" element={<About />} />
         <Route path="/team" element={<Team />} />
         <Route path="/privacy_policy" element={<Privacy_Policy />} />

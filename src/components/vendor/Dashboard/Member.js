@@ -6,80 +6,30 @@ import "react-toastify/dist/ReactToastify.css";
 import { API } from "../../../generalfunction";
 
 const Member = () => {
-  const { CenterType, Country, States, Cities } = require("./LocationData");
-  const [showForm, setShowForm] = useState(false);
-  const [getData, setGetData] = useState({
-    profile: "",
-    name: "",
-    pin: "",
-    city: "",
-    state: "",
-    country: "",
-    phone: "",
-    email: "",
-    center_type: "",
-  });
-  const [getCenter, setGetCenter] = useState([]);
-  const [getCent, setGetCent] = useState([])
-  console.log(getData.country);
-  const handleInput = (e) => {
-    setGetData({ ...getData, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    centerMember();
+  const [data,setData] = useState([]);
 
-    // axios.post("https://gymbackend-y3cb.onrender.com/vendor/create-member", getData)
-    API.post(`/vendor/create-member`, getData)
-      .then((res) => {
-        console.log('member post api',res);
-        centerMember();
-        toast.success("Member successfully created!", {
-          position: "top-center",
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.success("Center Creation Failed!", {
-          position: "top-center",
-        });
-      });
-  }
-  const centerGet = () => {
-    // axios.get("https://gymbackend-y3cb.onrender.com/v1.0/gymcenter/gym-all-data")
-    API.get(`v1.0/gymcenter/gym-all-data`)
-    .then((res) => {
-      setGetCent(res.data.data);
+
+  const onLoad = async() => {
+   
+    API.get(`orderapi/get-order`).then((res) => {
+      setData(res?.data?.data);
     });
-  };
-  const centerMember = () => {
-    // axios.get("https://gymbackend-y3cb.onrender.com/vendor/get-member")
-    API.get(`vendor/get-member`)
-    .then((res) => {
-      setGetCenter(res.data.data);
-    });
-  };
-  const onRemoveItem = (index, item) => {
-    console.log('onRemoveItem', index, item)
-    let temp = [...item];
-    // let res = temp.filter((v, i) => i !== index);
-    // setAddnewequip(res);
   };
   useEffect(() => {
-    centerMember();
-    centerGet();
+    onLoad();
   }, []);
 
 
-  console.log(getCent);
+console.log('onData',data);
+
   return (
     <>
       <div className="center-list-main">
         <div className="container py-4">
           <div className="row">
             <div className="col-12">
-              <div className="add-center-list-container">
+              {/* <div className="add-center-list-container">
                 <button className="mb-3" onClick={() => setShowForm(!showForm)}>
                   Add Trainer
                 </button>
@@ -269,7 +219,7 @@ const Member = () => {
                   </form>
                   <ToastContainer />
                 </div>
-              </div>
+              </div> */}
 
               <hr />
               <div className="center-list-table text-center">
@@ -278,49 +228,29 @@ const Member = () => {
                     <tr>
 
                       <th>S.No.</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Country</th>
-                      <th>Actions</th>
+                      <th>Mem. Name</th>
+                      <th>Location</th>
+                      <th>Mobile No.</th>
+                      <th>Pass Status</th>
+                      
+
+
+                     
                     </tr>
                   </thead>
                   <tbody>
-                    {getCenter.map((item, index) => {
-                      return (
-                        <tr key={index} style={{ verticalAlign: 'middle' }}>
-                          <td>{index + 1}</td>
-                          <td>{item?.center_type}</td>
-                          <td>{item?.email}</td>
-                          <td>{item?.phone}</td>
-                          <td>{item?.country}</td>
-
-
-                          {/* <td>
-                            <span onClick={() => onRemoveItem(index,item)}>
-                              Edit
-                            </span>
-                            |
-                            <span>Delete</span> | <span>Add Feature</span></td>
-                        </tr> */}
-                          <td>
-                            <button style={{ verticalAlign: 'middle' }}>
-
-                              <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                            </button>
-                            |
-                            <button style={{ verticalAlign: 'middle' }}>
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                            {/* | */}
-                            {/* <button style={{ verticalAlign: 'middle' }}>
-                              <i class="fa fa-plus-square" aria-hidden="true"></i>
-                            </button> */}
-
-                          </td>
-                        </tr>
-                      );
-                    })}
+                   {data?.map((item,index) => {
+                    return(
+                      <tr key={index}>
+                        <th>{index +1 }</th>
+                        <th>{item?.userName}</th>
+                        <th>{item?.userAddress}</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    )
+                   })}
+                    
                   </tbody>
                 </table>
               </div>

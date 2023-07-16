@@ -1596,3 +1596,9 @@ display: none;
   color: var(--custom_pink);
   border:1px solid var(--custom_pink);
 }
+.rbc-month-view{
+  margin-top: 15px;
+}
+.rbc-row rbc-month-header{
+  padding: 15px;
+}
