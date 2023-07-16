@@ -16,6 +16,8 @@ const ThankYou = () => {
    })
   }
   const handleNavigate=()=>{
+    localStorage.removeItem('orderIds');
+
     navigate('/account')
   }
   console.log('getOrder',getOrder);
