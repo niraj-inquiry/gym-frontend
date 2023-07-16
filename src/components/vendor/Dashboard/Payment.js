@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
-const Payment = () => {
+const Orders = () => {
   const [getCenter, setGetCenter] = useState([]);
 
   const centerMember = () => {
@@ -21,12 +21,14 @@ const Payment = () => {
               <table class="table table-striped table-responsive">
                 <thead>
                   <tr>
+                    <th>Sr. No.</th>
                     <th>Center Name</th>
-                    <th>Center Type</th>
-                    <th>Payment Status</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th>Mem. Name</th>
+                    <th>Ord. Date</th>
+                    <th>Plan</th>
+                    <th>Amount</th>
+                    <th>Trnx. ID</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -63,4 +65,4 @@ const Payment = () => {
   )
 }
 
-export default Payment
+export default Orders

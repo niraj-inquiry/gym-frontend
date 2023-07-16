@@ -15,25 +15,35 @@ const Plan = () => {
     var userdata = JSON.parse(localStorage.getItem('userdata'))
     const location = useGeoLocation();
     // console.log("location?.country",location?.country)
-    const onLoad = () => {
-        API.get(`v1.0/plan/get-vendor-plan/${location?.country}/${userdata?._id}`).then(res => {
+    // const onLoad = () => {
+    //     API.get(`v1.0/plan/get-vendor-plan/${location?.country}/${userdata?._id}`).then(res => {
 
-            if (res.data.status) {
-                setCard(res.data.data);
-            }
-            else {
-                // alert(res);
-            }
-        })
-        API.get(`v1.0/plan/get-vendor-all-plan-by-user/${userdata?._id}`).then(res => {
-            if (res.data.status) {
-                setVendorplan(res.data.data);
-            }
-            else {
-                // alert(res);
-            }
-        })
-    };
+    //         if (res.data.status) {
+    //             setCard(res.data.data);
+    //         }
+    //         else {
+    //             // alert(res);
+    //         }
+    //     })
+    //     API.get(`v1.0/plan/get-vendor-all-plan-by-user/${userdata?._id}`).then(res => {
+    //         if (res.data.status) {
+    //             setVendorplan(res.data.data);
+    //         }
+    //         else {
+    //             // alert(res);
+    //         }
+    //     })
+    // };
+    const onLoad = async () => {
+        API.get(`v1.0/plan/get-all-plan`)
+            .then(res => {
+
+                if (res?.data?.status) {
+                    setCard(res?.data?.data);
+                }
+
+            })
+    }
     const OnEditPlan = (item) => {
 
         setShowhidemodal(!showhidemodal)
@@ -50,6 +60,7 @@ const Plan = () => {
         <>
             <>
                 <div className="container-fluid px-0">
+                    
                     <div className="">
                         {/* <div className="row mx-0 element"></div> */}
                         {/* <div className="col-lg-2 px-0 side-nav-bar">
@@ -82,7 +93,7 @@ const Plan = () => {
                                 <i className="bi bi-plus-lg me-2"></i>
                                 Create Plan
                             </button> */}
-                            <PlanModal data={onselectplan} modalstate={showhidemodal} onClose={() => setShowhidemodal(!showhidemodal)} />
+                            {/* <PlanModal data={onselectplan} modalstate={showhidemodal} onClose={() => setShowhidemodal(!showhidemodal)} /> */}
                         </div>
                     </div>
                 </div>

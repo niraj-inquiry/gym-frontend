@@ -398,6 +398,7 @@ input:checked+.slider:before {
   height: 28px;
   width: auto !important;
 }
+
 .voucher-btn {
   color: #212529 !important;
   border: 1px solid black;
@@ -518,10 +519,11 @@ input:checked+.slider:before {
 } */
 /* /Responsive code start/ */
 @media screen and (max-width: 1920px) and (min-width: 1401px) {
-  .not-found-layout{
-    top:30%;
+  .not-found-layout {
+    top: 30%;
     left: 30%;
   }
+
   .heading {
     font-size: 40px;
     margin: 35px 0;
@@ -531,6 +533,7 @@ input:checked+.slider:before {
     font-size: 30px;
     margin: 35px 0;
   }
+
   /* .gym-work-box p {
       width: 100%;
   }
@@ -545,10 +548,11 @@ input:checked+.slider:before {
 }
 
 @media screen and (max-width: 1200px) {
-  .not-found-layout{
-    top:20%;
+  .not-found-layout {
+    top: 20%;
     left: 20%;
   }
+
   .heading {
     font-size: 30px;
     margin: 25px 0 25px 0;
@@ -558,6 +562,7 @@ input:checked+.slider:before {
     font-size: 25px;
     margin: 25px 0 25px 0;
   }
+
   /* .gym-work-box {
       min-height: 460px;
   } */
@@ -565,7 +570,7 @@ input:checked+.slider:before {
 
 @media screen and (max-width: 991px) {
 
-/* 
+  /* 
   .banner-sec h1,
   .banner-sec p {
       text-align: center !important;
@@ -747,10 +752,11 @@ input:checked+.slider:before {
 }
 
 @media screen and (max-width: 767px) {
-  .not-found-layout{
-    top:25%;
+  .not-found-layout {
+    top: 25%;
     left: 15%;
   }
+
   .heading {
     font-size: 25px;
     margin: 15px 0 15px 0;
@@ -758,11 +764,13 @@ input:checked+.slider:before {
 
   .subtitle {
     font-size: 15px;
-    margin: 15px 0 ;
+    margin: 15px 0;
   }
-  .not-found-image{
-    width:30%;
+
+  .not-found-image {
+    width: 30%;
   }
+
   /* .c-border {
       border-left: 1px solid #afafaf;
       padding-top: 0;
@@ -791,7 +799,7 @@ input:checked+.slider:before {
 }
 
 @media screen and (max-width: 700px) {
-   /* .small-screen {
+  /* .small-screen {
       display: block;
       position: absolute;
       background: white;
@@ -832,10 +840,11 @@ input:checked+.slider:before {
 }
 
 @media screen and (max-width: 575px) {
-  .not-found-layout{
-    top:15%;
+  .not-found-layout {
+    top: 15%;
     left: 15%;
   }
+
   .heading {
     font-size: 20px;
     margin: 15px 0 15px 0;
@@ -843,11 +852,13 @@ input:checked+.slider:before {
 
   .subtitle {
     font-size: 10px;
-    margin: 15px 0 ;
+    margin: 15px 0;
   }
-  .not-found-image{
-    width:30%;
+
+  .not-found-image {
+    width: 30%;
   }
+
   /* .small-screen {
       margin-top: 10px;
   }
@@ -875,10 +886,11 @@ input:checked+.slider:before {
 }
 
 @media screen and (max-width: 480px) {
-  .not-found-layout{
-    top:12%;
+  .not-found-layout {
+    top: 12%;
     left: 5%;
   }
+
   .heading {
     font-size: 15px;
     margin: 15px 0 15px 0;
@@ -886,12 +898,13 @@ input:checked+.slider:before {
 
   .subtitle {
     font-size: 13px;
-    margin: 15px 0 ;
+    margin: 15px 0;
   }
-  .not-found-image{
-    width:90% !important;
+
+  .not-found-image {
+    width: 90% !important;
   }
-  
+
   /* .section_heading h2 {
       font-size: 30px;
   }
@@ -960,10 +973,11 @@ input:checked+.slider:before {
 }
 
 @media screen and (max-width: 360px) {
-  .not-found-layout{
-    top:12%;
+  .not-found-layout {
+    top: 12%;
     left: 5%;
   }
+
   .heading {
     font-size: 13px;
     margin: 10px 0;
@@ -971,11 +985,13 @@ input:checked+.slider:before {
 
   .subtitle {
     font-size: 10px;
-    margin: 5px 0 ;
+    margin: 5px 0;
   }
-  .not-found-image{
-    width:30% !important;
+
+  .not-found-image {
+    width: 30% !important;
   }
+
   /* .search {
       width: 100%;
       margin: 30px auto;
@@ -1078,18 +1094,18 @@ input:checked+.slider:before {
   } */
 }
 
-.buttonshow{
-position: absolute;
-z-index: 100;
+.buttonshow {
+  position: absolute;
+  z-index: 100;
 }
 
-.modelwhole{
+.modelwhole {
 
   position: absolute;
   z-index: 1000;
   display: block;
- height: 100%;
- width: 100%;
+  height: 100%;
+  width: 100%;
   padding: 0px;
   margin: 0;
   font-size: 1rem;
@@ -1103,39 +1119,48 @@ z-index: 100;
   list-style-type: none;
 
 }
-.photossection{
+
+.photossection {
   height: 200px;
 }
-.gym-detail-btn{
-  border:1px solid black;
-  color:black !important;
+
+.gym-detail-btn {
+  border: 1px solid black;
+  color: black !important;
   background-color: #fff;
 }
-.gym-detail-btn:hover{
-  border:1px solid black;
-  color:#fff !important;
+
+.gym-detail-btn:hover {
+  border: 1px solid black;
+  color: #fff !important;
   background-color: #000;
 }
-.carousel-item{
-  width:100%;
-  height:500
+
+.carousel-item {
+  width: 100%;
+  height: 500
 }
-.carousel-inner1{
-  width:80%;
-  height:500
+
+.carousel-inner1 {
+  width: 80%;
+  height: 500
 }
-.img-size{
+
+.img-size {
   background-size: cover;
 }
-.rating{
-  background-color:  var(--custom_pink);
-  color:#fff;
-  width:fit-content;
-  
+
+.rating {
+  background-color: var(--custom_pink);
+  color: #fff;
+  width: fit-content;
+
 }
+
 .modal-backdrop {
   background-color: transparent !important;
 }
+
 /* .nav-link:hover{
   background-color: black !important;
   color:#fff !important;
@@ -1148,6 +1173,7 @@ z-index: 100;
   color: #fff !important;
   background-color: black !important;
 }
+
 /* .nav-pills .nav-link:active {
   color: #fff;
   background-color: #000;
@@ -1161,7 +1187,7 @@ z-index: 100;
   background-color: #000;
 } */
 
-.centerlistmenus{
+.centerlistmenus {
   /* background-color:var(--custom_pink) ; */
   color: #fff;
   right: 20px;
@@ -1178,37 +1204,47 @@ z-index: 100;
   /* border: 1px solid rgba(0, 0, 0, .15); */
   border-radius: 0.25rem;
   list-style-type: none;
-  background-color:black ;
-  margin-top:-25px;
+  background-color: black;
+  margin-top: -25px;
   cursor: pointer;
 }
-.active-tabs:focus{
+
+.active-tabs:focus {
   color: #fff !important;
   background-color: #000 !important;
 }
-.active-tabs:hover{
+
+.active-tabs:hover {
   color: #fff !important;
   background-color: #000 !important;
 }
-.active-tabs:visited{
+
+.active-tabs:visited {
   color: #fff !important;
   background-color: #000 !important;
 }
-.active-tabs:focus-within{
+
+.active-tabs:focus-within {
   background-color: var(--custom_pink);
   color: #fff !important;
 }
-.active-tabs{
+
+.active-tabs {
   background-color: var(--custom_pink);
   color: #fff !important;
 }
-.vendorlistbutton{
-  width:20%;
+
+.vendorlistbutton {
+  width: 20%;
 }
-.element{
-  height: 100vh; /* For 100% screen height */
-  width:  100vw; /* For 100% screen width */
+
+.element {
+  height: 100vh;
+  /* For 100% screen height */
+  width: 100vw;
+  /* For 100% screen width */
 }
+
 .search-gym input {
   width: 80%;
   /* padding: 10px 20px 10px 40px; */
@@ -1247,12 +1283,14 @@ z-index: 100;
 .search-gym button:hover::before {
   left: -5px;
 }
+
 .search-gym {
   box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.25);
   display: flex;
   width: 80%;
   position: relative;
 }
+
 /* .about-us-textarea{
   width: 100%;
   height : auto;
@@ -1261,10 +1299,11 @@ z-index: 100;
   width: 80%;
   margin: 0 auto;
 } */
-.autoadjust{
+.autoadjust {
   resize: none;
   overflow-y: hidden;
 }
+
 /* .vendorfilter{
   background-color: var(--hover_pink);
   color: #fff;
@@ -1276,19 +1315,22 @@ z-index: 100;
   height: 850px;
   width: auto;
 }
+
 .dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
   height: 100px;
   vertical-align: top;
   text-align: right;
   color: #959595;
 }
+
 .dx-scheduler-date-table-cell {
   height: 25px;
 }
 
 .dx-scheduler-time-panel-cell {
-    height: 25px;
+  height: 25px;
 }
+
 .new .dx-radiobutton-checked .dx-radiobutton-icon .dx-radiobutton-icon-dot {
   background: gray;
 }
@@ -1317,49 +1359,59 @@ z-index: 100;
   -webkit-touch-callout: none;
   background-color: green;
   color: #fff;
-  -webkit-box-shadow: inset 0 2px 0 0 rgba(0,0,0,.3);
-  box-shadow: inset 0 2px 0 0 rgba(0,0,0,.3);
+  -webkit-box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, .3);
+  box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, .3);
   left: 0;
   min-width: 4px;
   min-height: 4px;
 }
-.billing{
+
+.billing {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #f5f5f5;
 }
-.basic_info{
+
+.basic_info {
   color: #fff !important;
 }
-.basic_info:hover{
+
+.basic_info:hover {
   color: #fff !important;
 }
-.center_details_btn{
+
+.center_details_btn {
   background-color: #000;
   color: #fff !important;
   border: none !important;
   font-size: 13px !important;
 }
-.form-control{
+
+.form-control {
   font-size: 13px !important;
 }
-.table{
+
+.table {
   font-size: 13px !important;
 }
-.hidemorefilter{
+
+.hidemorefilter {
   display: none;
 }
-.showmorefilter{
+
+.showmorefilter {
   display: block;
 }
-.filterbutton{
+
+.filterbutton {
   background-color: #fff;
-  color:#000;
-  border:1px solid #000;
+  color: #000;
+  border: 1px solid #000;
 }
+
 .filterbutton:focus {
   background-color: #000;
-  color:#fff;
-  border:1px solid #000;
+  color: #fff;
+  border: 1px solid #000;
 }
 
 .filtermenu {
@@ -1379,33 +1431,35 @@ z-index: 100;
   border-radius: 0.25rem;
   /* background-color:#000; */
   list-style-type: none;
-  top:100%;
+  top: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /* color:#f !important; */
 }
 
 
-.filterbutton{
+.filterbutton {
   background-color: #fff;
-  color:#000;
-  border:1px solid #000;
+  color: #000;
+  border: 1px solid #000;
   cursor: pointer;
 }
+
 .filterbutton:focus {
   background-color: #000;
-  color:#fff;
-  border:1px solid #000;
+  color: #fff;
+  border: 1px solid #000;
 }
 
-.tappingbutton{
+.tappingbutton {
   background-color: #000;
-  color:#fff;
+  color: #fff;
   cursor: pointer;
 }
 
-.logo_color{
-  color:#fe5b27;
+.logo_color {
+  color: #fe5b27;
 }
+
 .custom-date-input::-webkit-calendar-picker-indicator {
   background-image: url(../src/assets/slot-booking\ \(3\).png);
   background-size: cover;
@@ -1417,22 +1471,26 @@ z-index: 100;
   opacity: 0.7;
   /* margin-left: 5px; */
 }
-.trainer_list{
+
+.trainer_list {
   position: absolute;
   z-index: 99;
   background: white;
 }
+
 .order-box ul li {
   position: relative;
   text-align: right;
   padding-left: 20px;
   font-weight: 400;
 }
+
 .order-box img {
   margin-right: 10px;
   width: 50px;
   height: 50px;
 }
+
 .order-box ul li {
   position: relative;
   text-align: left;
@@ -1448,10 +1506,93 @@ z-index: 100;
   color: var(--custom_pink);
 }
 
-.border_color{
-  border-bottom:1px solid #fe5b27;
-  
+.border_color {
+  border-bottom: 1px solid #fe5b27;
+  /* border: 0 1px solid #fe5b27 0 0; */
 }
-.dx-toolbar-before{
+
+/* .dx-toolbar-before{
   display: none;
+} */
+/* .dx-scheduler-header-row{
+  display: none;
+} */
+/* .dx-scheduler-first-group-cell{
+  display: none;
+} */
+/* .dx-scheduler-header-panel-cell{
+  display: none;
+} */
+/* .dx-scheduler-cell-sizes-horizontal{
+display: none;
+} */
+/* .dx-scheduler-group-header, .dx-scheduler-header-panel, .dx-scheduler-time-panel {
+  font-size: 25px;
+} */
+/* .dx-scheduler-first-group-cell .dx-scheduler-time-panel{
+  display: none;
+} */
+/* .dx-scheduler-header-tables-container .dx-scheduler-group-header{
+  display: none;
+} */
+.appointment_box {
+  background-color: #fff;
+
+  margin: auto;
+}
+.modal_box_appoint{
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gym_list div:hover {
+  cursor: hand;
+}
+
+.mousechange:hover {
+  cursor: pointer;
+}
+
+.search .find_button::after {
+  /* background-color: orangered;
+  color: white; */
+  width: 30%;
+  padding: 10px 20px;
+  /* background: var(--custom_pink); */
+  border: navajowhite;
+  /* color: white; */
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+.search .find_button::before {
+  /* background-color: orangered;
+  color: white; */
+  width: 30%;
+  padding: 10px 20px;
+  background: var(--custom_pink);
+  border: navajowhite;
+  color: white;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+.pass_name{
+  position: absolute;
+  top: -5%;
+  right: 0;
+}
+.booking_box_button{
+  background-color: var(--custom_pink);
+  color: white;
+}
+.booking_box_button:hover{
+  background-color: white;
+  color: var(--custom_pink);
+  border:1px solid var(--custom_pink);
 }

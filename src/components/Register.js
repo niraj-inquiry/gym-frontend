@@ -318,9 +318,8 @@ const Register = () => {
                           <button type="submit" onClick={() => OnRegister()}>
                             Register
                           </button>
-                          <p className="m-0 w-100 py-2">
-                            Already a registered User?{" "}
-                            <Link to="/login"> Login</Link>
+                          <p className="m-0 w-100 py-2 fs-6 text-center">
+                          Already a registered User? <Link to="/login"> Login</Link>
                           </p>
                         </div>
                       </div>

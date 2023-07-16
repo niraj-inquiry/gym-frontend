@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Header, AllPageBanner, Footer } from ".";
 import "../css/Style.css";
 import Multiplesection_footer from "../Element/Multiplesection_footer";
@@ -7,27 +7,24 @@ import Card_passes from "./card/Card_passes";
 import { HomeBanner } from "../components";
 import { NavLink } from "react-router-dom";
 import { SubHomeBanner } from "../Element/HomeBanner";
+import axios from "axios";
 
 const Account = () => {
-  const tabbuttonactive = () => {
-    console.log("tabbutton active");
-    return (
-      <div>
-        <h1>hello</h1>
-      </div>
-    );
-  };
-
-  const tabbuttonlink = () => {
-    console.log("tabbutton link");
-    return (
-      <div>
-        <h1>hello</h1>
-      </div>
-    );
-  };
+  const loggedData=JSON.parse(localStorage.getItem('userAuth'))
   const selectedPData = JSON.parse(localStorage.getItem("selectdat"));
   const [cartData, setCartData] = useState([selectedPData]);
+  const [passData, setPassData]=useState([])
+  const orderData=()=>{
+     axios.get('https://gym-api-3r8c.onrender.com/orderapi/get-order')
+     .then((res)=>{
+      setPassData(res.data.data)
+     })
+  }
+  const filtPassData=passData.filter((item)=>item.userId===loggedData.userId)
+  console.log('passData',filtPassData);
+useEffect(()=>{
+  orderData()
+},[])
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -132,11 +129,45 @@ const Account = () => {
                         </div>
                       </div>
                       <hr />
-                      <div className="row">
-                        <div className="col-lg-12">
-                          <h2>Your Active Pass</h2>
-                        </div>
-                        <div className="col-lg-4 shadow my-4 ms-3 py-4">
+                      <div className="row pb-4">
+                        
+                       {filtPassData.length>0 ? 
+                       filtPassData.map((item, index)=>{
+                        return(
+                          <div className="col-lg-4 " key={index} >
+                            <div className="card">
+                                <img
+                                  src="/assets/cart-image.jpg"
+                                  className="card-img-top"
+                                  alt="..."
+                                />
+                                <div className="card-body">
+                                  <h3>
+                                   
+                                    <b> {item.centerId}</b>
+                                  </h3>
+                                  <h4>
+                                    <b>{selectedPData?.address}</b>
+                                  </h4>
+                                  <div className="d-flex w-100 border rounded p-2">
+                                    <div className="w-50">
+                                      <img src="/assets/pass.png" alt="" />
+                                    </div>
+                                    <div className="w-50">
+                                        <h3><b> ₹ {item.amount}</b>/{item.passtype}</h3>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        )
+                       })
+                       :
+                       
+                       <>
+                          <h2>Pass Not Found</h2>
+                       </> }
+                        {/* <div className="col-lg-4 shadow my-4 ms-3 py-4">
                           {cartData?.length > 0 ? (
                             <>
                               <div className="card">
@@ -169,7 +200,7 @@ const Account = () => {
                               <h2>You Don't have Any Active Pass</h2>
                             </>
                           )}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </section>

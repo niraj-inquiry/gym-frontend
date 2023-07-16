@@ -52,16 +52,23 @@ export const HomeBanner = ({
   };
 
   const onSearchLocation = async () => {
-    if (!isEmpty(country)) {
-      navigate(`${findstate}`, {
-        state: {
-          country: country,
-          searchdata: searchdata,
-          findstate: findstate,
-        },
-      });
-    } else {
-      navigate(`${findstate}`, { state: "" });
+    
+    if(isEmpty(findstate)){
+      navigate('/')
+    }
+    else{
+      if (!isEmpty(country)) {
+        navigate(`${findstate}`, {
+          state: {
+            country: country,
+            searchdata: searchdata,
+            findstate: findstate,
+          },
+        });
+      } else {
+        navigate(`${findstate}`, { state: "" });
+       
+      }
     }
   };
   // const findstate = findstate ? (([_, ...words]) => words.join("-"))(findstate.replace(",", "").split(" ")).toLowerCase() : '';
@@ -154,9 +161,12 @@ export const HomeBanner = ({
                 src={ImageLocate}
               />
 
-              <button type="submit" onClick={() => onSearchLocation()}>
+            
+                <button type="submit" onClick={() => onSearchLocation()}>
                 <span className="position-relative">Find</span>
               </button>
+              
+            
             </div>
             <div className="main-search">
               {status ? (

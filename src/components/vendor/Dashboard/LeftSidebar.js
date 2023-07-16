@@ -17,9 +17,9 @@ const list = [
   },
 
   {
-    name: "Payment",
+    name: "Orders",
     status: false,
-    component: "payment",
+    component: "orders",
     iconname: "	far fa-credit-card",
   },
   {
@@ -44,6 +44,7 @@ const list = [
   { name: "Plan",
    status: false, 
    component: "plans",
+  // component: "Plan",
     iconname: "fa-bar-chart" 
   },
 ];
@@ -56,9 +57,9 @@ const LeftSidebar = () => {
         {list.map((item, index) => {
           return (
             <li key={index}>
-              <Link to={item.component}>
-                <i className={`fa ${item.iconname} `}></i>
-                {item.name}
+              <Link to={item?.component}>
+                <i className={`fa ${item?.iconname} `}></i>
+                {item?.name}
               </Link>{" "}
             </li>
           );

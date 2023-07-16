@@ -28,8 +28,8 @@ const Gym_Listing_Details = () => {
   const [getPlan, setGetPlan] = useState([]);
   const getCenterById = () => {
     API.get(
-        `/v1.0/gymcenter/gymcenter-data/${cid}`
-      )
+      `/v1.0/gymcenter/gymcenter-data/${cid}`
+    )
       .then((res) => {
         setGetCentId(res.data.message);
       });
@@ -59,12 +59,17 @@ const Gym_Listing_Details = () => {
   useEffect(() => {
     onGetPlan();
     getCenterById();
+    window.scroll(0, 0);
   }, []);
+  const d = new Date();
+  let day = d.getDay();
+  var selectdat =JSON.parse( localStorage.getItem('selectdat'))
+  console.log('selectdat',selectdat);
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
 
-      <div className="container pt-5">
+      <div className="container pt-5 center-card">
         <div className="row">
           <div className="col-12">
             <div className="center-details">
@@ -77,7 +82,7 @@ const Gym_Listing_Details = () => {
               <div>
                 <p>
                   Includes access to: <b>Gym</b>
-                   <i class="fa fa-home" aria-hidden="true"></i>
+                  <i class="fa fa-home" aria-hidden="true"></i>
                 </p>
                 <p>
                   <span>
@@ -87,7 +92,7 @@ const Gym_Listing_Details = () => {
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-half" ></i>
                   </span>
-                 <span  > <b> 5k Reviews</b></span>
+                  <span  > <b> 5k Reviews</b></span>
                 </p>
               </div>
             </div>
@@ -129,7 +134,7 @@ const Gym_Listing_Details = () => {
             <button
               type="button"
               className="gym-detail-btn rounded w-20 px-2 py-1 m-3"
-              //   onClick={() => setShowmodal(!showmodal)}
+            //   onClick={() => setShowmodal(!showmodal)}
             >
               {"All Photos"}
             </button>
@@ -168,33 +173,31 @@ const Gym_Listing_Details = () => {
             amenities={getCentId?.amentitiesData}
           />
         </div>
-      </div>
-
-      <div>
-        <div className="">
-          <h2 className="text-center">Locate Our Center</h2>
-          <div className="row mt-4">
-            <div className="col-lg-6 col-md-5 p-0 position-relative">
-              <GoogleMapfilter
-                data={[
-                  {
-                    lat: gymstate?.gymcenterinfo?.lat,
-                    lng: gymstate?.gymcenterinfo?.lng,
-                  },
-                ]}
-              />
-            </div>
-            <div className="col-lg-6 col-md-7 p-4 bgg-white gym-timing">
-              <div className="row">
-                <h3>Location & Opening Hours</h3>
+        <div>
+          <div className="">
+            <h2 className="text-center">Locate Our Center</h2>
+            <div className="row mt-4 mx-0">
+              <div className="col-lg-6 col-md-5 p-0 position-relative">
+                <GoogleMapfilter
+                  data={[
+                    {
+                      lat: gymstate?.gymcenterinfo?.lat,
+                      lng: gymstate?.gymcenterinfo?.lng,
+                    },
+                  ]}
+                />
               </div>
+              <div className="col-lg-6 col-md-7 p-4 bgg-white gym-timing">
+                <div className="row">
+                  <h3>Location & Opening Hours</h3>
+                </div>
 
-              <small>
-                Opening times are for Super Active Day and Monthly+ passes
-              </small>
+                <small>
+                  Opening times are for Super Active Day and Monthly+ passes
+                </small>
 
-              <div className="row mt-4">
-                {/* {gymstate?.gymopenhours?.map((item) =>
+                <div className="row mt-4">
+                  {/* {gymstate?.gymopenhours?.map((item) =>
                                                 <div className="col-4">
                                                     <div className={daysname[day]?.toLowerCase() == item?.days?.toLowerCase() ? "time-box active-day" : "time-box"}>
                                                         <p>{item?.days}</p>
@@ -202,24 +205,28 @@ const Gym_Listing_Details = () => {
                                                     </div>
                                                 </div>
                                             )} */}
-                {/* {gymstate?.scheduleData?.map((item) =>
-                                                <div className="col-4">
-                                                    <div className={daysname[day]?.toLowerCase() == item?.day?.toLowerCase() ? "time-box active-day text-center" : "time-box"}>
-                                                        <p>{item?.day}</p>
-                                                        <small>{item?.startTime}-{item?.endTime}</small>
-                                                    </div>
-                                                </div>
-                                            )} */}
-              </div>
+                  {getCentId?.scheduleData?.map((item) =>
+                    <div className="col-4">
+                      <div 
+                      className={daysname[day]?.toLowerCase() == item?.day?.toLowerCase() ? "time-box active-day text-center" : "time-box"}>
+                        <p>{item?.day}</p>
+                        <small>{item?.startTime}-{item?.endTime}</small>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-              <div className="get-direction">
-                <i className="fa fa-map-marker"></i>
-                <a href="">Get directions to this gym</a>
+                <div className="get-direction">
+                  <i className="fa fa-map-marker"></i>
+                  <a href="">Get directions to this gym</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
       <Multiplesection_footer />
     </>
   );

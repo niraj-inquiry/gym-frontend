@@ -208,9 +208,8 @@ const Login = () => {
                         <button type="submit" onClick={() => onSubmit()}>
                           {isLogin === true ? "Processig.." : "Login"}
                         </button>
-                        <p className="m-0 w-100 py-3">
-                          New User? <Link to="/register"> Sign Up</Link>
-                        </p>
+                        <p className="m-0 w-100 py-3 fs-6 text-center">New User? <Link to="/register" > Sign Up</Link></p>
+                        
                       </div>
                     </div>
                   </div>

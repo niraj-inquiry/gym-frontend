@@ -39,7 +39,7 @@ const Gym_Listing_Details = () => {
     const ratings = location?.state?.rating;
     // console.log('centerid', location.state);
     const d = new Date();
-    let day = d.getDay()
+    let day = d.getDay();
     const [state, setState] = useState([])
     console.log('state',state);
     const [gymstate, setGymstate] = useState()

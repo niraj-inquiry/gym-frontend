@@ -6,32 +6,33 @@ import { API, baseURL } from "../../generalfunction";
 import { ImageShow } from '../../Element/ImageShow';
 import useGeoLocation from "../../geolocation";
 import region from '../../countryjson.json';
+import * as Images from '../../assets';
 
 
 const Card_passes = ({ data, onEditplan }) => {
-
+    console.log('Card_passes',data);
     return (
         <>
             <div className="col-lg-4 col-md-6 col-12 mt-5  layout">
                 <div className="card p-3 cardpass">
                     <div className="imgbody" style={{}}>
-                        <ImageShow imageurl={data?.photo} height="100%" width={80} style={{ borderRadius: '150px' }} />
-                       
+                        {/* <ImageShow imageurl={data?.photo} height="100%" width={80} style={{ borderRadius: '150px' }} /> */}
+                        <img src={Images.weeklypass} height="100%" width={60} style={{ borderRadius: '150px' }} />
                     </div>
 
                     <div className="card-body">
-                        <div className='edit-icon'> <i class="fa fa-edit editclass" onClick={onEditplan}></i><br></br>
-                        </div>
+                        {/* <div className='edit-icon'> <i class="fa fa-edit editclass" onClick={onEditplan}></i><br></br>
+                        </div> */}
                         <span
                             className="px-3 py-1 rounded passtype">
                             {data?.passtype}
                         </span>
-                        <div className="card-title fw-500 text-left mt-5 planname">
+                        <div className="card-title fw-500 text-left mt-5 planname fs-2">
                             {data?.planname}
                         </div>
-                        <div className="card-text aboutus">
+                        {/* <div className="card-text aboutus">
                             {data?.aboutus}
-                        </div>
+                        </div> */}
                         <div className='mb-5'>FROM /
                             <strong>$
                                 <span className='rate'>{data?.rate}</span>
@@ -52,7 +53,7 @@ const Card_passes = ({ data, onEditplan }) => {
                         {/* <div className="card-title fw-500 mb-3">{item?.benefits}</div>
                                 <div className="card-text mb-3">{item?.benefitsitem}</div> */}
                     </div>
-                    <NavLink to={"/centers"} style={{ bottom: 0 }}>
+                    <NavLink to={"/"} style={{ bottom: 0 }}>
                         <button type="button" className="explore-btn w-100">
                             <span className="position-relative fs-5">
                                 Explore

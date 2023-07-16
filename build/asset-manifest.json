@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d2ca5f44.css",
-    "main.js": "/static/js/main.f6f1b769.js",
+    "main.css": "/static/css/main.23ff782e.css",
+    "main.js": "/static/js/main.9a34cd1f.js",
     "static/js/787.4159b215.chunk.js": "/static/js/787.4159b215.chunk.js",
     "static/media/newbanimg.png": "/static/media/newbanimg.65d728f387c089802528.png",
     "static/media/android.png": "/static/media/android.ee50bdc7e9d3f75ca929.png",
@@ -49,6 +49,8 @@
     "static/media/Super_Active_Logo.jpg": "/static/media/Super_Active_Logo.41d6e276889be1484078.jpg",
     "static/media/gym-owner-list.jpg": "/static/media/gym-owner-list.d9f82ed39cf2e4e5ac56.jpg",
     "static/media/gym-owner.jpg": "/static/media/gym-owner.138b3c3ec3d88459c75f.jpg",
+    "static/media/dxicons.woff": "/static/media/dxicons.88c9febb051d9204a743.woff",
+    "static/media/dxicons.ttf": "/static/media/dxicons.dee5683ec0edb6c19034.ttf",
     "static/media/reward.png": "/static/media/reward.e020e4f7b846855b02c5.png",
     "static/media/work.png": "/static/media/work.66cbc5d59286289f1203.png",
     "static/media/avtarimage.png": "/static/media/avtarimage.8da72cf0a1c2ab0cf5b7.png",
@@ -56,15 +58,16 @@
     "static/media/ic_add.png": "/static/media/ic_add.132696644e79a1f05c3b.png",
     "static/media/add_schedule.png": "/static/media/add_schedule.24c974015dcc7b624f54.png",
     "static/media/add_trainer.png": "/static/media/add_trainer.a0c2e9095bcdaa6a5361.png",
+    "static/media/dxicons.woff2": "/static/media/dxicons.52cf573f82922400fd7f.woff2",
     "static/media/eye.png": "/static/media/eye.77791c932ab34a38b80f.png",
     "static/media/add_equipment.png": "/static/media/add_equipment.6aac3c419b2a432fed9a.png",
     "index.html": "/index.html",
-    "main.d2ca5f44.css.map": "/static/css/main.d2ca5f44.css.map",
-    "main.f6f1b769.js.map": "/static/js/main.f6f1b769.js.map",
+    "main.23ff782e.css.map": "/static/css/main.23ff782e.css.map",
+    "main.9a34cd1f.js.map": "/static/js/main.9a34cd1f.js.map",
     "787.4159b215.chunk.js.map": "/static/js/787.4159b215.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d2ca5f44.css",
-    "static/js/main.f6f1b769.js"
+    "static/css/main.23ff782e.css",
+    "static/js/main.9a34cd1f.js"
   ]
 }

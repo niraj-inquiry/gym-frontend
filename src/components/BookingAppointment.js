@@ -9,14 +9,32 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { isEmpty } from "../generalfunction";
 import "../css/Style.css";
 import { resources, generateAppointments } from '../json/data';
-
 import Scheduler, { View, Scrolling, Resource } from "devextreme-react/scheduler";
 import axios from "axios";
+import './style.css';
 
 const BookingAppointment = () => {
   const [countryindex, setCountryindex] = useState();
   const [statelist, setStatelist] = useState();
   const [districtslist, setDistrictlist] = useState();
+
+  const [modalBox, setModalbox] = useState();
+  const [start_time, setStart_time] = useState();
+  const [end_time, setEnd_time] = useState();
+
+  const scheduler_data = [
+    {
+
+      name: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      time: ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
+      items: ['', '', '', '', '', '', ''],
+    }
+  ]
+  const scheduler = scheduler_data[0];
+  const [cellValue, setCellValue] = useState('');
+  console.log('scheduler', scheduler);
+  const [appointment_name, setAppointment_name] = useState();
+  const [data, setData] = useState({ dayname: '', start_time: '', end_time: '', title: '' })
   const [district, setDistrict] = useState("");
   // const [userdata, setUserdata] = useState(JSON.parse(localStorage.getItem('userdata')));
   const [userdata, setUserdata] = useState(
@@ -111,11 +129,13 @@ const BookingAppointment = () => {
         // For other plans or empty startDate, return an empty string or handle accordingly
         return "";
       }
+
     };
 
     const calculatedEndDate = calculateEndDate();
 
     setEndDate(calculatedEndDate);
+    window.scroll(0, 0);
   }, [startDate, getPlan]);
   // Scheduler
   const startDay = new Date(startDate);
@@ -126,11 +146,13 @@ const BookingAppointment = () => {
   const groups = ['userId'];
   useEffect(() => {
     getTrainerList();
+    window.scroll(0, 0);
   }, []);
   console.log('appointments', appointments);
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
+
       <div className="container pt-4">
         <div className="py-5 border-bottom">
           <div className="row">
@@ -410,7 +432,7 @@ const BookingAppointment = () => {
                 <div className="col-lg-5">
                   <div className="input-group mb-3 ">
                     <span className="input-group-text border-0" id="basic-addon1">
-                     Start Date
+                      Start Time
                     </span>
                     <input
                       type="date"
@@ -423,7 +445,7 @@ const BookingAppointment = () => {
                 <div className="col-lg-5">
                   <div class="input-group mb-3">
                     <span class="input-group-text border-0" id="basic-addon1">
-                      End Date
+                      End Time
                     </span>
                     <input
                       type="date"
@@ -458,7 +480,7 @@ const BookingAppointment = () => {
                     <input
                       type="text"
                       id="name"
-                      value={UserDetails?.Uname}
+                      value={UserDetails.Uname}
                       name="name"
                       className="form-control  fs-6 py-2"
                       placeholder="Enter Your Full Name"
@@ -467,7 +489,7 @@ const BookingAppointment = () => {
                   <div className="col-lg-12 mb-4 ">
                     <input
                       type="email"
-                      value={UserDetails?.Uemail}
+                      value={UserDetails.Uemail}
                       id="email"
                       name="email"
                       placeholder="Enter Your Email Id"

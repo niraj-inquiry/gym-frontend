@@ -29,7 +29,8 @@ const Revieworders = () => {
       passtype:selectedPData?.planname,
       amount:selectedPData?.rate,
       userId:UserDetails?.userId,
-      vendorId:selectedPData?.created_by_userid
+      vendorId:selectedPData?.created_by_userid,
+      centerBanner:selectedPData?.centerBanner
     }).then((res)=>{
       const orderId = res.data.data._id; 
       localStorage.setItem('orderIds', orderId);

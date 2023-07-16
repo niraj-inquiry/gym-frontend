@@ -695,12 +695,15 @@ export const resources = [{
           
           
         });  
+        // console.log('appointments.push',appointments)
         textIndex += 1;  
         durationState += durationIncrement;
         startDate = new Date(endDate.getTime() + getRandomDuration(durationState));
         
       }
     }
+
+    // console.log('filterAppointmentsByTime',appointments);
   
     return filterAppointmentsByTime(appointments, startDayHour, endDayHour);
   }

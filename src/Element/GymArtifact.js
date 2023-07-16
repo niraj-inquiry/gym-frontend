@@ -13,7 +13,7 @@ export const GymArtifact = ({ equipmentdata, amenities }) => {
     return (
         <div style={{ width: 1000 }} className="py-3">
             <div className="container-fluid  pb-0 desk-view">
-                <h2 className="text-start fw-bold">Gym Equipments</h2>
+                <h4 className="text-start fw-bold">Gym Equipments</h4>
                 <div className="d-flex mt-4">
                     {/* {uniqueObjArray?.length > 0 ? (uniqueObjArray?.map((item, index) => (
                         <div className="d-flex me-5 align-items-center">
@@ -27,10 +27,10 @@ export const GymArtifact = ({ equipmentdata, amenities }) => {
                     )} */}
                     {equipmentdata?.length>0 ? (equipmentdata?.map((item,index) => {
                         return(
-                            <div className="d-flex me-5 align-items-center" key={index}>
+                            <div className="d-flex me-4 align-items-center" key={index}>
                             {/* <ImageShow imageurl={item?.equipment_image} height={30} width={30} /> */}
-                            <img src={Images.Cardio} height={30} width={30} />
-                            <span className="ms-2 fs-5">{item?.equipment_name}</span>
+                            <img src={Images.Cardio} height={25} width={25} />
+                            <span className="ms-2 fs-6">{item?.equipment_name}</span>
                         </div>
                         )
                     }))
@@ -50,7 +50,7 @@ export const GymArtifact = ({ equipmentdata, amenities }) => {
 
             </div>
             <div className="container-fluid  desk-view pt-2">
-                <h2 className="text-start fw-bold">Gym Amenities</h2>
+                <h4 className="text-start fw-bold">Gym Amenities</h4>
                 <div className="d-flex mt-4">
                     {/* {amenities?.length > 0 ? (amenities?.map((item) =>
                         <div className="d-flex me-5 align-items-center">
@@ -63,8 +63,8 @@ export const GymArtifact = ({ equipmentdata, amenities }) => {
                     {amenities?.length>0 ? (amenities?.map((item,index) => {
                         return(
                             <div className="d-flex me-5 align-items-center" key={index}>
-                            <img src={Images.studio} height={30} width={30} />
-                            <span className="ms-2 fs-5">{item?.amentitiesName}</span>
+                            <img src={Images.studio} height={25} width={25} />
+                            <span className="ms-2 fs-6">{item?.amentitiesName}</span>
                         </div>
                         
                         )
