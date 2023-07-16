@@ -67,7 +67,7 @@ const UserHistory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filtPassData.map((item, index) => {
+                  {filtPassData.length>0 ?  filtPassData.map((item, index) => {
                     const date = new Date(item?.created_date);
 
                     const indiaOffset = 330; 
@@ -91,7 +91,13 @@ const UserHistory = () => {
                         <td>{item.payment_status === "1" ? "Paid" : "Unpaid"}</td>
                       </tr>
                     )
-                  })}
+                  })  
+                  :
+                  <tr>
+                    <h2 className="text-center w-100" >Order History Not Found</h2>
+                  </tr>
+                
+                }
                 </tbody>
               </table>
             </div>
