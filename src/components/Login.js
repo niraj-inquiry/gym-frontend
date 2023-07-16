@@ -122,13 +122,13 @@ const Login = () => {
         <div className="refer-friend-box">
           <div className="container p-0 m-0">
             <div className="row align-items-center m-0">
-              <div className="col-lg-6 col-md-6 p-0">
+              <div className="col-lg-6  p-0">
                 <img
                   className="w-100 form-image control-height-login"
                   src={Images.LoginImage}
                 />
               </div>
-              <div className="col-lg-6 col-md-6 px-0 ">
+              <div className="col-lg-6  px-0 ">
                 {/* <div className="tab-btn">
                                     <button className="active-tab">
                                         User Login
@@ -203,7 +203,7 @@ const Login = () => {
 
                       <div className="col-lg-12 position-relative">
                         <a href="/forgot-password" className="forgot-password">
-                          Forgot Password
+                          Forgot Password ?
                         </a>
                       </div>
 
@@ -211,7 +211,7 @@ const Login = () => {
                         <button type="submit" onClick={() => onSubmit()}>
                           Login
                         </button>
-                        <p className="m-0 w-100 py-3 fs-6 text-center">New User? <Link to="/register" > Sign Up</Link></p>
+                        <p className="m-0 w-100 py-3 text-center user-res">New User? <Link to="/register" > Sign Up</Link></p>
                         
                       </div>
                     </div>

@@ -110,7 +110,7 @@ const SocialWithFirebase = () => {
             <div onClick={handleGoogleSignIn} className="row">
                 {/* <a href="#" onClick={handleGoogleSignIn}></a> */}
 
-                <div className="ps-3 mb-0 col-lg-3 col-md-12">
+                <div className="ps-3 mb-0 col-lg-3 col-md-4 col-sm-3">
                     <img src={Images.google} />
                 </div>
                 {/* <div className="px-3  col">{"Continue with Google"}</div> */}
@@ -118,7 +118,7 @@ const SocialWithFirebase = () => {
             </div>
 
             <div onClick={() => handleFacebookSignIn()} className="row">
-                <div className="ps-3  mb-0 col-lg-3 col-md-12">
+                <div className="ps-3  mb-0 col-lg-3 col-md-4 col-sm-3">
                     <img src={Images.facebookk} />
                 </div>
 
@@ -127,12 +127,12 @@ const SocialWithFirebase = () => {
             </div>
 
             <div className="row">
-                <div className="ps-3  mb-0 col-lg-3 col-md-12">
+                <div className="ps-3  mb-0 col-lg-3 col-md-4 col-sm-3">
                     <img src={Images.apple} />
                 </div>
 
                 {/* <div className="px-3  col">{"Continue with Apple"}</div> */}
-                <div className="login-icon-text  mb-0 col">{"Continue with Apple"}</div>
+                <div className="login-icon-text  mb-0 col ">{"Continue with Apple"}</div>
             </div>
         </div>
     )

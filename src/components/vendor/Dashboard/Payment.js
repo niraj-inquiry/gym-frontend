@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+import { API } from '../../../generalfunction'
 const Orders = () => {
   const [getCenter, setGetCenter] = useState([]);
 
   const centerMember = () => {
     // axios.get("http://localhost:8080/vendor/get-member").then((res) => {
-    axios.get("http://10.5.51.44:8000/vendor/get-member").then((res) => {
+    API.get(`orderapi/get-order`).then((res) => {
       setGetCenter(res.data.data);
     });
   };
   useEffect(() => {
     centerMember();
   }, []);
+  const data = getCenter?.map((item) => item?.created_date).join(' ')
+  console.log('getCenter', getCenter);
+  
+  
   return (
     <>
       <div className="container py-4">
@@ -33,24 +38,30 @@ const Orders = () => {
                 </thead>
                 <tbody>
                   {getCenter.map((item, index) => {
-                    return (
-                      <tr key={index} style={{verticalAlign:'middle'}}>
-                        <td>{item.name}</td>
-                        <td>{item.center_type}</td>
-                        <td>{item.payment ? "Paid" : "Unpaid"}</td>
-                        <td>{item.phone}</td>
-                        <td>{item.email}</td>
-                        {/* <td>Edit | Delete </td> */}
-                        <td className='d-flex justify-content-evenly align-items-center'>
-                          <button style={{ verticalAlign: 'middle' }}>
+                    const date = new Date(item?.created_date);
 
-                            <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                          </button>
-                          |
-                          <button  style={{ verticalAlign: 'middle' }}>
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                          </button>
-                        </td>
+                    const indiaOffset = 330;
+                    const indiaTime = new Date(date.getTime() + indiaOffset * 60 * 1000);
+                    const year = indiaTime.getFullYear();
+                    const month = indiaTime.getMonth() + 1;
+                    const day = indiaTime.getDate();
+                    const hours = indiaTime.getHours();
+                    const minutes = indiaTime.getMinutes();
+                    const seconds = indiaTime.getSeconds();
+                    const indiaTimeString = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day} ${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                    console.log('indiaTimeString',indiaTimeString);
+                    return (
+                      <tr key={index} style={{ verticalAlign: 'middle' }}>
+                        <td>{index + 1}</td>
+                        <td>{item?.centerId}</td>
+                        {/* <td>{item.payment ? "Paid" : "Unpaid"}</td> */}
+                        <td>{item?.userName}</td>
+                        <td>{indiaTimeString}</td>
+                        <td>{item?.passtype}</td>
+                        <td>{item.amount}</td>
+                        <td>{item?.transactionId}</td>
+                        <td>{item?.payment_status === "1" ? "Success" : "Failed"} </td>
+                        
                       </tr>
                     );
                   })}

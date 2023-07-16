@@ -443,6 +443,7 @@ h6 {
     background: #ffffff;
     box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.25);
     position: relative;
+    border-radius: 7px;
 }
 
 .center-box h5 a {
@@ -2002,6 +2003,14 @@ img {
 }
 
 @media screen and (max-width: 991px) {
+    .form-image{
+        display: none;
+       
+    }
+    .form-info-box{
+        padding: 50px;
+        
+    }
 
     .banner-sec h1,
     .banner-sec p {
@@ -2102,6 +2111,14 @@ img {
 }
 
 @media screen and (max-width: 950px) {
+    .form-image{
+        display: none;
+       
+    }
+    .form-info-box{
+        padding: 50px;
+        
+    }
     .logo-div {
         width: 100% !important;
     }
@@ -2196,6 +2213,14 @@ img {
     .pass-box {
         margin-bottom: 25px;
     }
+    .form-image{
+        display: none;
+       
+    }
+    .form-info-box{
+        padding: 50px;
+        
+    }
 
     .gmap {
         height: 100%;
@@ -2222,10 +2247,13 @@ img {
         background: white;
         width: 100%;
         left: 0;
-        display: none;
+        /* display: none; */
         margin-top: 50px;
     }
-
+    .form-image{
+        display: none;
+       
+    }
     .small-screen button {
         width: 100%;
     }
@@ -2235,7 +2263,10 @@ img {
     }
 
     .large-screen {
-        display: none;
+        /* display: none; */
+        width:100%;
+        padding: 15px;
+        /* border:1px solid; */
     }
 
     .nav-btn button:last-child {
@@ -2245,29 +2276,68 @@ img {
         color: #000000;
     }
 
-    
     .menu-ham {
         display: block;
     }
+    .form-image{
+        display: none;
+       
+    }
+    .form-info-box{
+        padding: 50px;
+        
+    }
+    .login-icon-text {
+        text-align: center !important; 
+    }
+    .info-form button{
+        font-size: 18px !important;
+    }
+    .forgot-password{
+        font-size: 13px;
+    }
+    .user-res{
+        font-size: 13px !important;   
+    }
+
+}
+/* .user-res{
+    font-size: 20px !important;  
+} */
+.mobile-device{
+    width: 60% !important;
 }
 
 @media screen and (max-width: 575px) {
     .logo-div {
         width: 30% !important;
     }
+    .mobile-device{
+        width: 25% !important;
+    }
 
     .small-screen {
         margin-top: 10px;
     }
-
+    .form-image{
+        display: none;
+       
+    }
     .blog-box .gutter {
         padding: 10px 10px !important;
     }
+    .nav_header {
+        height:
+            /*191px*/
+            auto;
+    }
+
 }
 
 @media screen and (max-width: 680px) {
     .logo-div {
-        width: 100% !important;
+        /* width: 100% !important; */
+        width: 100% ;
     }
     .small-screen {
         display: block;

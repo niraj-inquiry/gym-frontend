@@ -24,7 +24,8 @@ const CommunicationForm = ({ communicationjson,onClick }) => {
                             {item?.name}
                     </div>
                     <div className='col-lg-6 col-md-6 col-sm-6 py-2 text-center'>
-                    <ToggleButton status={item?.status} onClick={(item,index)=>onClick(item,index)} />
+                    
+                    <ToggleButton status={item?.status} onClick={(item,index)=>onClick(index,item)}  T={console.log('status button',item?.name)}/>
                     </div>
                 </div>
                 ))}

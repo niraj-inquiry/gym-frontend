@@ -41,7 +41,7 @@ export const GymCenter = ({
     };
     return (
 
-        <div className="col-lg-3 col-md-6  center-card"
+        <div className="col-lg-3 col-md-6  center-card rounded"
             onClick={() => handleNavigate(data?._id)}
         >
             <div className="">
@@ -51,7 +51,7 @@ export const GymCenter = ({
                     )}
                     <div style={{ width: '100%', height: 'auto' }}>
                         {/* <img className="w-100" src={img?img:Images.app_store} height={250} />  */}
-                        <img className="w-100" src={Images.Aboutus} height={250} />
+                        <img className="w-100 rounded-top" src={Images.Aboutus} height={250}/>
                     </div>
 
                     <div className="py-4 center-location-box-content" style={{ height: 'fit-content' }}>

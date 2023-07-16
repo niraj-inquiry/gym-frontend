@@ -65,6 +65,7 @@ const Gym_Listing_Details = () => {
   let day = d.getDay();
   var selectdat =JSON.parse( localStorage.getItem('selectdat'))
   console.log('selectdat',selectdat);
+  
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -150,7 +151,7 @@ const Gym_Listing_Details = () => {
             <div className="row d-flex" style={{ width: 1000 }}>
               {getPlan?.length > 0 &&
                 getPlan?.map((item, index) => (
-                  <div className="col-4 pt-4">
+                  <div className="col-lg-4 col-md-6 col-sm-12 pt-4">
                     <GymPlan
                       item={item}
                       key={index}

@@ -13,6 +13,9 @@ import * as AspNetData from 'devextreme-aspnet-data-nojquery';
 import Scheduler, { View, Scrolling, Resource } from "devextreme-react/scheduler";
 import axios from "axios";
 import './style.css';
+import { Calender } from "../Element/Calender/index";
+import Scheduler_calendar from "../Element/Scheduler_calendar";
+
 
 const BookingAppointment = () => {
   const [countryindex, setCountryindex] = useState();
@@ -208,6 +211,7 @@ const BookingAppointment = () => {
     setCellValue(item)
   }
   console.log('setCellValue', cellValue);
+  localStorage.setItem('trainername',strainer)
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -272,8 +276,8 @@ const BookingAppointment = () => {
                     className="form-select"
                   >
                     <option>Choose Trainer</option>
-                    {getTrainer.newTrainerData?.map((item, index) => {
-                      return <option key={index}>{item.tName}</option>;
+                    {getTrainer?.newTrainerData?.map((item, index) => {
+                      return <option key={index} >{item.tName}</option>;
                     })}
                   </select>
                 </div>
@@ -352,20 +356,21 @@ const BookingAppointment = () => {
             <div className="col-lg-8">
               <h2 className="mb-3 logo_color">Schedule Your Flexible Timing</h2>
               <div className="row justify-content-between mx-0">
-                <div className="col-lg-5">
+                {/* <div className="col-lg-5">
                   <div className="input-group mb-3 ">
                     <span className="input-group-text border-0" id="basic-addon1">
                       Start Time
                     </span>
                     <input
-                      type="date"
+                      // type="date"
+                      type="datetime-local"
                       className="form-control border-0 border-bottom"
                       value={startDate}
                       onChange={(e) => setStartDate(e.target.value)}
                     />
                   </div>
-                </div>
-                <div className="col-lg-5">
+                </div> */}
+                {/* <div className="col-lg-5">
                   <div class="input-group mb-3">
                     <span class="input-group-text border-0" id="basic-addon1">
                       End Time
@@ -377,10 +382,10 @@ const BookingAppointment = () => {
                       disabled
                     />
                   </div>
-                </div>
-                <div className="col-lg-12">
+                </div> */}
+                <div className="col-lg-12 mb-5">
                   {/* <Scheduler
-                    currentView="week"
+                    currentView="month"
                     
                     dataSource={appointments}
                     startDayHour={startDayHour}
@@ -390,9 +395,10 @@ const BookingAppointment = () => {
                     className='boxshow w-100'
                   >
                   
-                    <View type="week" startDayHour={10} endDayHour={19} />
+                    <View type="month" startDayHour={10} endDayHour={19} />
                     
                   </Scheduler> */}
+                  <Scheduler_calendar/>
 
                   {/* <Scheduler
                     timeZone="America/Los_Angeles"
@@ -415,9 +421,9 @@ const BookingAppointment = () => {
                  
                   /> */}
 
-                  <h3>Selected Cell Value: {cellValue}</h3>
+                  {/* <h3>Selected Cell Value: {cellValue}</h3> */}
 
-                  <table className="table table-bordered position-relative text-center">
+                  {/* <table className="table table-bordered position-relative text-center">
                     <thead>
                       <tr>
                         <th></th>
@@ -445,15 +451,7 @@ const BookingAppointment = () => {
                       )
                       )}
                       
-                        {/* {scheduler?.time.map((item) => (
-                          <tr key={item.id}>
-                            {item.cells.map((cell, index) => (
-                              <td key={index}>
-                               {cell}
-                              </td>
-                            ))}
-                          </tr>
-                        ))} */}
+                       
                      
                     </tbody>
                     {modalBox &&
@@ -475,7 +473,7 @@ const BookingAppointment = () => {
                             <div className="text-start col">
                               <label htmlFor="exampleFormControlInput1" className="form-label fs-6">Start Time</label>
                               <input
-                                // type="time"
+                                
                                 className="form-control"
                                 value={start_time ? start_time : ""}
                                 onChange={() => setData({ start_time: `${start_time}` })}
@@ -516,9 +514,9 @@ const BookingAppointment = () => {
                         </div>
                       </div>
                     }
-                  </table>
+                  </table> */}
 
-
+{/* <Calender/> */}
 
                   {/* <div className="border">
                     <div className="d-flex justify-content-evenly border">
@@ -549,7 +547,7 @@ const BookingAppointment = () => {
                 </div>
               </div>
             </div>
-            <div className="col border rounded billing py-3 border h-100">
+            <div className="col border rounded billing py-3 border mb-5">
               <div className="">
                 <h1 className="text-center pb-3 logo_color">
                   Billing Information
@@ -559,16 +557,17 @@ const BookingAppointment = () => {
                     <input
                       type="text"
                       id="name"
-                      value={UserDetails.Uname}
+                      value={UserDetails?.Uname}
                       name="name"
                       className="form-control  fs-6 py-2"
                       placeholder="Enter Your Full Name"
+                      required
                     />
                   </div>
                   <div className="col-lg-12 mb-4 ">
                     <input
                       type="email"
-                      value={UserDetails.Uemail}
+                      value={UserDetails?.Uemail}
                       id="email"
                       name="email"
                       placeholder="Enter Your Email Id"
@@ -611,7 +610,7 @@ const BookingAppointment = () => {
                       <option>Choose State</option>
                       {statelist?.map((item) => (
                         <option
-                          value={item.state}
+                          value={item?.state}
                           T={console.log("item state", item?.state)}
                         >
                           {item?.state}
@@ -639,114 +638,20 @@ const BookingAppointment = () => {
                       id="exampleFormControlTextarea1"
                       placeholder="Enter Your Address"
                       rows="3"
+                      required
                     ></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className="col-lg-4 border rounded billing py-3 border h-100">
-            <div className="">
-              <h1 className="text-center pb-3 logo_color">
-                Billing Information
-              </h1>
-              <div className=" row mx-auto px-3">
-                <div className="col-lg-12 mb-4 ">
-                  <input
-                    type="text"
-                    id="name"
-                    value={UserDetails.Uname}
-                    name="name"
-                    className="form-control  fs-6 py-2"
-                    placeholder="Enter Your Full Name"
-                  />
-                </div>
-                <div className="col-lg-12 mb-4 ">
-                  <input
-                    type="email"
-                    value={UserDetails.Uemail}
-                    id="email"
-                    name="email"
-                    placeholder="Enter Your Email Id"
-                    className="form-control  fs-6 py-2"
-                    onChange={(e) => handleInput(e)}
-                    required
-                  />
-                </div>
-                <div className="col-lg-12 mb-4 ">
-                  <input
-                    type="text"
-                    className="form-control  fs-6 py-2"
-                    placeholder="Phone Number"
-                  />
-                </div>
-                <div className="col-lg-12 mb-4 ">
-                  <select
-                    id="country"
-                    name="country"
-                    className="form-control  fs-6 py-2"
-                    onChange={(e) => onSelectCountry(e)}
-                    required
-                  >
-                    <option>Choose Country</option>
-                    {Countries?.map((item) => (
-                      <option value={item.country_name}>
-                        {item?.country_name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="col-lg-12 mb-4 ">
-                  <select
-                    id="state"
-                    name="state"
-                    className="form-control  fs-6 py-2"
-                    onChange={(e) => onSelectstate(e)}
-                    required
-                  >
-                    <option>Choose State</option>
-                    {statelist?.map((item) => (
-                      <option
-                        value={item.state}
-                        T={console.log("item state", item?.state)}
-                      >
-                        {item?.state}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="col-lg-12 mb-4 ">
-                  <select
-                    id="city"
-                    name="city"
-                    className="form-control  fs-6 py-2"
-                    onChange={(e) => setDistrict(e.target.value)}
-                    required
-                  >
-                    <option>Choose City</option>
-                    {districtslist?.map((item) => (
-                      <option value={item}>{item}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-4 ">
-                  <textarea
-                    className="form-control  fs-6 py-2"
-                    id="exampleFormControlTextarea1"
-                    placeholder="Enter Your Address"
-                    rows="3"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          </div> */}
-
-          {/* <div className=''>Book Appointment</div> */}
+          
+         
           <div className="row my-3 ">
             <div className="col-12 pe-0">
               <button
                 type="submit"
-                className="w-auto search border-0 rounded ms-auto"
+                className="w-auto search border-0 rounded ms-auto booking_box_button"
                 onClick={() => navigation("/revieworder")}
               >
                 <span className="position-relative py-2 px-3 ">

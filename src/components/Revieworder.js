@@ -21,6 +21,9 @@ const Revieworders = () => {
   const navigate = useNavigate();
   const UserDetails=JSON.parse(localStorage.getItem('userAuth'))
   const selectedPData = JSON.parse(localStorage.getItem('selectdat'))
+  const booking_data = JSON?.parse(localStorage.getItem('newEvent'))
+  const trainer_name = localStorage.getItem('trainername')
+  console.log('Trainer_name',trainer_name,booking_data.start);
 const handlePayment = () => {
   fetch("https://gym-api-3r8c.onrender.com/order", {
     method: "GET",
@@ -60,6 +63,7 @@ const handlePayment = () => {
 console.log('selectedPData',selectedPData);
 useEffect(() => {
   loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  window.scroll(0,0)
 }, []);
   return (
     <>
@@ -72,25 +76,25 @@ useEffect(() => {
             <h3 className="logo_color">Gym Details</h3>
           </div>
           <div className="col-6 text-end col-md-6 col-sm-6">
-            <h3 className="fw-bold">{selectedPData.center_name}</h3>
+            <h3 className="fw-bold">{selectedPData?.center_name}</h3>
             {/* <h3>All Features included with plan</h3> */}
-            <h3>{selectedPData.address}</h3>
+            <h3>{selectedPData?.address}</h3>
           </div>
         </div>
         <hr className="my-5" />
         {/* Plan Details */}
         <div className="row mx-0 px-5 align-items-center">
-          <div className="col-lg-6 col-md-6">
+          <div className="col-lg-6 col-md-6 col-sm-6">
             <div className="h-100 d-flex flex-column justify-content-around">
               <h3 className="logo_color mb-3">Selected Plan Details</h3>
               <div className="d-flex mb-3">
                 <img src={Images.booking_pass_name} width={35} height={30} />
-                <h4 className="fw-500 ms-2 mb-0 fw-bold">{selectedPData.planname}</h4>
+                <h4 className="fw-500 ms-2 mb-0 fw-bold">{selectedPData?.planname}</h4>
               </div>
               <div className="d-flex align-items-center text-center mb-3">
                 <h4 className="fw-medium mb-0">
                   {" "}
-                  <b> ₹ {selectedPData.rate}/{selectedPData.planname}</b>
+                  <b> ₹ {selectedPData?.rate}/{selectedPData?.planname}</b>
                 </h4>
               </div>
               <button type="button" className="btn btn-outline-success w-50">
@@ -98,9 +102,9 @@ useEffect(() => {
               </button>
             </div>
           </div>
-          <div className="col-lg-6 text-end col-md-6 ">
+          <div className="col-lg-6 text-end col-md-6 col-sm-6 ">
             <h3 className="logo_color">All Features included with plan</h3>
-            <div className="w-75 ms-auto mt-3">
+            <div className=" ms-auto mt-3">
               <div className="row order-box border-0 p-0">
                 <div className="col-lg-6">
                   <ul className=" col" style={{ listStyle: "none" }}>
@@ -128,9 +132,9 @@ useEffect(() => {
           </div>
           <div className="col-lg-6 col-md-6">
             <div className="d-flex justify-content-end">
-              <div className="d-flex align-items-center w-25 justify-content-evenly">
+              <div className="d-flex align-items-center w-50 justify-content-evenly">
                 <img src={Images.Review_order_calendar} width={20} />
-                <div className="ms-2">July 7, 2023</div>
+                <div className="ms-2">{booking_data?.start?.slice(0,10)} - {booking_data?.end?.slice(0,10)}</div>
               </div>
               <div className="d-flex align-items-center w-suto justify-content-between">
                 <img src={Images.clock} width={20} />
@@ -147,14 +151,14 @@ useEffect(() => {
           </div>
           <div className="col-lg-6  col-md-6  col-sm-6 ">
             <div className="d-flex justify-content-end align-items-center">
-              <img src={Images.Dummy_profile} width={100} />
+              <img src={Images?.Dummy_profile} width={100} />
               <div className="ms-3">
                 <h3 className="mb-0">
                   {" "}
-                  <b> Instructor John</b>
+                  <b> Instructor :{trainer_name}</b>
                 </h3>
                 <div>Gym Fitness.</div>
-                <img src={Images.five_stars} width={70} />
+                <img src={Images?.five_stars} width={70} />
               </div>
             </div>
           </div>

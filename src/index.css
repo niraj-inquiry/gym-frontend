@@ -840,6 +840,10 @@ input:checked+.slider:before {
 }
 
 @media screen and (max-width: 575px) {
+  .logo-div {
+    width: 10% ;
+  }
+
   .not-found-layout {
     top: 15%;
     left: 15%;
@@ -1540,16 +1544,18 @@ display: none;
 
   margin: auto;
 }
-.modal_box_appoint{
+
+.modal_box_appoint {
   width: 100%;
   top: 0;
   left: 0;
   height: 100%;
-   
+
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .gym_list div:hover {
   cursor: hand;
 }
@@ -1570,6 +1576,7 @@ display: none;
   position: relative;
   overflow: hidden;
 }
+
 .search .find_button::before {
   /* background-color: orangered;
   color: white; */
@@ -1582,17 +1589,64 @@ display: none;
   position: relative;
   overflow: hidden;
 }
-.pass_name{
+
+.pass_name {
   position: absolute;
   top: -5%;
   right: 0;
 }
-.booking_box_button{
+
+.booking_box_button {
   background-color: var(--custom_pink);
   color: white;
 }
-.booking_box_button:hover{
+
+.booking_box_button:hover {
   background-color: white;
   color: var(--custom_pink);
-  border:1px solid var(--custom_pink);
+  border: 1px solid var(--custom_pink);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* font-family: "Roboto Mono", monospace; */
+  font-family: "Euclid Circular A", sans-serif;
+}
+
+.App {
+  margin: 5px;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.rbc-month-view {
+  margin-top: 15px;
+}
+
+.rbc-row rbc-month-header {
+  padding: 15px;
+}
+
+.rbc-btn-group>button:not(:first-child):not(:last-child) {
+  border-radius: 0;
+  /* display: none; */
+}
+
+.rbc-btn-group>button:last-child:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  /* display: none; */
 }

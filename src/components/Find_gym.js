@@ -4,16 +4,18 @@ import Multiplesection_footer from "../Element/Multiplesection_footer";
 import axios from "axios";
 import "../css/Style.css";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { GoogleMapfilter } from "../Element/GoogleMapfilter";
 
 const Findgym = () => {
   const { centerparameter } = useParams();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false)
   const [getCenter, setGetCenter] = useState([]);
   const [getPlan, setGetPlan] = useState([]);
   const [getFilterData, setGetFilterData] = useState("");
   const [showFilterItem, setShowFilterItem] = useState(false);
   const [getCategory, setGetCategory] = useState([]);
+  const [gymstate, setGymstate] = useState();
   const [activeClasses, setActiveClasses] = useState(
     Array(getCategory.length).fill(false)
   );
@@ -28,7 +30,7 @@ const Findgym = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [getCateData, setGetCateData] = useState("");
   const [getCateItem, setGetCateItem] = useState([]);
-  const [distance, setDistance]=useState(0)
+  const [distance, setDistance] = useState(0)
   const getCenterData = () => {
     axios
       .get(
@@ -39,7 +41,7 @@ const Findgym = () => {
         setGetCenter(res.data.data);
       });
   };
-  console.log('distance',distance);
+  console.log('distance', distance);
   const getAllPlan = () => {
     axios
       .get("https://gym-api-3r8c.onrender.com/v1.0/plan/get-all-plan")
@@ -182,11 +184,14 @@ const Findgym = () => {
                 Filter <i class="fa fa-filter" aria-hidden="true"></i>{" "}
               </span>
               <span>
-                Map <i class="fa fa-map" aria-hidden="true"></i>
+                Map <i class="fa fa-map" aria-hidden="true" 
+                // onClick={() => setOpen(!open)}
+                ></i>
               </span>
             </div>
           </div>
         </div>
+        
         <div
           className={showFilterItem ? "show-filter-item" : "hide-filter-item"}
         >
@@ -217,13 +222,11 @@ const Findgym = () => {
                     <span
                       key={index}
                       onClick={() => handleClickItem(index, item.name)}
-                      className={`${
-                        activeClasses[index] ? "category-active" : ""
-                      } ${
-                        selectedAmenities.includes(item.name)
+                      className={`${activeClasses[index] ? "category-active" : ""
+                        } ${selectedAmenities.includes(item.name)
                           ? "category-active"
                           : ""
-                      }`}
+                        }`}
                     >
                       {item.name.length > 0
                         ? item.name
@@ -308,7 +311,7 @@ const Findgym = () => {
                     itemEquipmentNames.includes(equipment)
                   )
                 );
-                
+
               }
             })
             .map((item, index) => (
@@ -326,12 +329,12 @@ const Findgym = () => {
                   />
                   <div className="card-body py-4">
                     <span>
-                      <i className="fa fa-map-marker" aria-hidden="true"></i> {}
+                      <i className="fa fa-map-marker" aria-hidden="true"></i> { }
                     </span>
                     <h3 className="card-title py-2">{item.center_name}</h3>
                     <p className="card-text pb-2">{item.address}</p>
                     <div className="d-flex justify-content-between plan-btn">
-                      {getPlan.map((planitem, index) => (
+                      {getPlan?.map((planitem, index) => (
                         <button className="rounded" key={index}>
                           {planitem.planname} <br />{" "}
                           {planitem.country === "India"
@@ -346,6 +349,16 @@ const Findgym = () => {
             ))}
         </div>
       </div>
+      {/* {open && <div>
+          <GoogleMapfilter
+            data={[
+              {
+                lat: gymstate?.gymcenterinfo?.lat,
+                lng: gymstate?.gymcenterinfo?.lng,
+              },
+            ]}
+          />
+        </div>} */}
       {/* center end */}
 
       <Multiplesection_footer />

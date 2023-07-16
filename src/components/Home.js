@@ -88,7 +88,7 @@ const Home = () => {
                         unlimited access to fitness with just one pass.
                     </p>
                     <div className="row how_our_work">
-                        <div className="col-lg-4 col-md-4 col-sm-4 ">
+                        <div className="col-lg-4 col-md-4 col-sm-6 mb-3">
                             <div className="brouse-box">
                                 <svg style={{ border: '2px solid #FF5722', backgroundColor: '#FF5722' }} className="p-2 rounded" xmlns="http://www.w3.org/2000/svg" version="1.0" width="60.000000pt" height="60.000000pt" viewBox="0 0 100.000000 100.000000" preserveAspectRatio="xMidYMid meet">
 
@@ -100,7 +100,7 @@ const Home = () => {
                                 <div className="pt-3 pb-3" style={{ fontSize: '15px' }}>Centers wherever you are</div>
                             </div>
                         </div>
-                        <div className="col-lg-4 col-md-4 col-sm-4 second-box">
+                        <div className="col-lg-4 col-md-4 col-sm-6 mb-3">
                             <div className="brouse-box">
                                 <svg style={{ border: '2px solid #FF5722', backgroundColor: '#FF5722' }} className="p-2 rounded" xmlns="http://www.w3.org/2000/svg" version="1.0" width="60.000000pt" height="60.000000pt" viewBox="0 0 100.000000 100.000000" preserveAspectRatio="xMidYMid meet">
 
@@ -120,7 +120,7 @@ const Home = () => {
                             </div>
 
                         </div>
-                        <div className="col-lg-4 col-md-4 col-sm-4">
+                        <div className="col-lg-4 col-md-4 col-sm-6 mb-3">
                             <div className="third-box">
                                 <svg style={{ border: '2px solid #FF5722', backgroundColor: '#FF5722' }} className="p-2 rounded" xmlns="http://www.w3.org/2000/svg" version="1.0" width="60.000000pt" height="60.000000pt" viewBox="0 0 100.000000 100.000000" preserveAspectRatio="xMidYMid meet">
 
@@ -385,7 +385,7 @@ const Home = () => {
                     <p className="text-center">
                         100% enjoyment from beginning to end
                     </p>
-                    <div className="row row-cols-lg-5 row-cols-md-3 row-cols-sm-1 mt-4">
+                    <div className="row row-cols-lg-5 row-cols-md-5 row-cols-sm-2 mt-4">
                         <CustomerFirstExperience
                             Image={Images.price}
                             Title={"Best Prices"}

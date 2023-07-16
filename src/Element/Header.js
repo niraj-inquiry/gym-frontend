@@ -147,8 +147,8 @@ export const Header = ({ Logo, Hamburger }) => {
     return (
         <div className="nav_header">
             <div className="container-fluid">
-                <div className="row align-items-center">
-                    <div className="col-lg-4 col-md-3 col-sm-3">
+                <div className="row align-items-center justify-content-between flex-nowrap">
+                    <div className="col-lg-4 col-md-3 col-sm-3 col-xs-3">
                         <div className="logo-div">
                             <NavLink to={"/"}>
                                 <img className="logo" src={Images.logo} />
@@ -156,7 +156,7 @@ export const Header = ({ Logo, Hamburger }) => {
                         </div>
                     </div>
 
-                    <div className="col-lg-8 col-md-9 col-sm-9 pe-3" >
+                    <div className="col-lg-8 col-md-9 col-sm-9 col-xs-9 pe-3" >
 
                         <div className="text-end nav-btn large-screen">
 
