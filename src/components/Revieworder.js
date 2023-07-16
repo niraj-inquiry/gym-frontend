@@ -26,7 +26,7 @@ const Revieworders = () => {
   const getBillingData=JSON.parse(localStorage.getItem('billingData'))
   console.log('getTrn',getTrn);
   const orderData = () => {
-    axios.post('https://gym-api-3r8c.onrender.comorderapi/create-order', {
+    axios.post('https://gym-api-3r8c.onrender.com/orderapi/create-order', {
       centerId: selectedPData?.center_name,
       passtype: selectedPData?.planname,
       amount: selectedPData?.rate,
@@ -48,7 +48,7 @@ const Revieworders = () => {
     const orderId = localStorage.getItem("orderIds"); // Retrieve the order ID from local storage or use the appropriate source
 
     // Make the update API call using the appropriate method (e.g., fetch, axios, etc.)
-    axios.patch(`https://gym-api-3r8c.onrender.comorderapi/update-order/${orderId}`, {
+    axios.patch(`https://gym-api-3r8c.onrender.com/orderapi/update-order/${orderId}`, {
       transactionId: response.razorpay_payment_id,
       orderId: response.razorpay_order_id,
       passtype: selectedPData?.planname,
@@ -74,7 +74,7 @@ const Revieworders = () => {
       orderData()
     }
 
-    fetch("https://gym-api-3r8c.onrender.comorder", {
+    fetch("https://gym-api-3r8c.onrender.com/order", {
       method: "GET",
       mode: "cors",
       headers: {},
