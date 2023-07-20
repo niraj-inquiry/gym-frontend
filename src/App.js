@@ -63,6 +63,7 @@ import Revieworders from "./components/Reviewordercopy";
 import AccountVerify from "./components/AccountVerify";
 import Plan from './components/vendor/Plan';
 import FailedPayment from './components/FailedPayment';
+import PassDetails from './components/PassDetails';
 function App() {
   const navigate = useNavigate();
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
@@ -118,9 +119,10 @@ function App() {
         <Route path="/:centerparameter" element={<Findgym />} />
         <Route path="/flexible-fitness" element={<Flexible_fitness />} />
         <Route
-          path="/account"
+          path="/account/*"
           element={isUserAuthenticated ? <Account /> : <Navigate to="/login" />}
         />
+        <Route path="/account/:id" element={<PassDetails/>} />
         <Route path="/Payment_Details" element={<Payment_Details />} />
         <Route path="/Partnership" element={<Partnership />} />
         <Route path="/How_it_works" element={<How_it_works />} />

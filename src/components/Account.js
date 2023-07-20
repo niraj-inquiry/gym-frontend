@@ -5,11 +5,13 @@ import Multiplesection_footer from "../Element/Multiplesection_footer";
 import * as Images from "../assets";
 import Card_passes from "./card/Card_passes";
 import { HomeBanner } from "../components";
-import { NavLink } from "react-router-dom";
+import { NavLink, Routes, useNavigate, Route, Link } from "react-router-dom";
 import { SubHomeBanner } from "../Element/HomeBanner";
 import axios from "axios";
+import PassDetails from "./PassDetails";
 
 const Account = () => {
+  const navigate=useNavigate();
   const loggedData=JSON.parse(localStorage.getItem('userAuth'))
   const selectedPData = JSON.parse(localStorage.getItem("selectdat"));
   const [cartData, setCartData] = useState([selectedPData]);
@@ -22,6 +24,10 @@ const Account = () => {
   }
   const filtPassData=passData.filter((item)=>item.userId===loggedData.userId && item.payment_status==="1")
   console.log('passData',filtPassData);
+
+// const handleNavigate=(id)=>{
+//   navigate(`/account/${id}`)
+// }
 useEffect(()=>{
   orderData()
 },[])
@@ -135,7 +141,8 @@ useEffect(()=>{
                        filtPassData.map((item, index)=>{
                         return(
                           <div className="col-lg-4 " key={index} >
-                            <div className="card">
+                            <Link to={item._id}>
+                            <div className="card" >
                                 <img
                                   src="/assets/cart-image.jpg"
                                   className="card-img-top"
@@ -144,7 +151,7 @@ useEffect(()=>{
                                 <div className="card-body">
                                   <h3>
                                    
-                                    <b> {item.centerId}</b>
+                                    <b> {item.centerName}</b>
                                   </h3>
                                   <h4>
                                     <b>{selectedPData?.address}</b>
@@ -159,6 +166,7 @@ useEffect(()=>{
                                   </div>
                                 </div>
                               </div>
+                            </Link>
                           </div>
                         )
                        })
@@ -167,40 +175,7 @@ useEffect(()=>{
                        <>
                           <h2>Pass Not Found</h2>
                        </> }
-                        {/* <div className="col-lg-4 shadow my-4 ms-3 py-4">
-                          {cartData?.length > 0 ? (
-                            <>
-                              <div className="card">
-                                <img
-                                  src="/assets/cart-image.jpg"
-                                  className="card-img-top"
-                                  alt="..."
-                                />
-                                <div className="card-body">
-                                  <h3>
-                                    {" "}
-                                    <b> {selectedPData?.center_name}</b>
-                                  </h3>
-                                  <h4>
-                                    <b>{selectedPData?.address}</b>
-                                  </h4>
-                                  <div className="d-flex w-100 border rounded p-2">
-                                    <div className="w-50">
-                                      <img src="/assets/pass.png" alt="" />
-                                    </div>
-                                    <div className="w-50">
-                                        <h3><b> ₹ {selectedPData?.rate}</b>/{selectedPData?.planname}</h3>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </>
-                          ) : (
-                            <>
-                              <h2>You Don't have Any Active Pass</h2>
-                            </>
-                          )}
-                        </div> */}
+                       
                       </div>
                     </div>
                   </section>
@@ -259,6 +234,7 @@ useEffect(()=>{
         </div>
       </section>
       {/* <Multiplesection_footer /> */}
+      
       <Footer />
     </>
   );

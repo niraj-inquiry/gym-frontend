@@ -148,6 +148,20 @@ const Findgym = () => {
     return isCategoryMatch && isAmenityMatch && isEquipmentMatch;
   });
 
+  const onLink = (item, planitem) => {
+    console.log("datai", item, planitem);
+    const forwardData = Object?.assign({}, item, planitem);
+    const newforwardData = JSON.stringify(forwardData);
+    console.log("newforwardData find gym", newforwardData);
+    localStorage.setItem("selectdat", newforwardData);
+    const loggedUser = JSON.parse(localStorage.getItem("userAuth"));
+    if (loggedUser) {
+      navigate("/booking_appointment");
+    } else {
+      navigate("/login");
+    }
+  };
+
   console.log("selectedEquipment", selectedEquipment);
   useEffect(() => {
     getCenterData();
@@ -311,28 +325,51 @@ const Findgym = () => {
                 
               }
             })
-            .map((item, index) => (
-              <div
-                className="col-lg-4 center-card"
-                key={index}
-                onClick={() => handleNavigate(item._id)}
-              >
-                <div className="card">
-                  <img
-                    src={item.centerBanner}
-                    height={250}
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body py-4">
-                    <span>
-                      <i className="fa fa-map-marker" aria-hidden="true"></i> {}
-                    </span>
-                    <h3 className="card-title py-2">{item.center_name}</h3>
-                    <p className="card-text pb-2">{item.address}</p>
-                    <div className="d-flex justify-content-between plan-btn">
+            .map((item, index) => {
+
+              return (
+
+                <div
+                  className="col-lg-4 center-card"
+                  key={index}
+                  // onClick={() => handleNavigate(item._id)}
+                  T={console.log('center item', item)}
+                >
+                  <div className="card">
+                    <img
+                      src={item.centerBanner}
+                      height={250}
+                      className="card-img-top"
+                      alt="..."
+                      onClick={() => handleNavigate(item._id)}
+                    />
+                    <div className="card-body pt-4 pb-0"  onClick={() => handleNavigate(item._id)}>
+                      <div className="d-flex justify-content-between">
+                      <span>
+                        <i className="fa fa-map-marker" aria-hidden="true"></i> <i>{"15 Miles"}</i>
+                      </span>
+                      <span> 
+                        <i className="fa fa-star logo_color"></i>
+                        <i className="fa fa-star logo_color"></i>
+                        <i className="fa fa-star logo_color"></i>
+                        <i className="fa fa-star logo_color"></i>
+                        <i className="fa fa-star logo_color"></i>
+                        </span>
+                      </div>
+                      <h3 className="card-title py-2 mb-0">{item.center_name}</h3>
+                      <p className="card-text pb-2 mb-0">{item.address}</p>
+                      <ul>
+                      {item?.amentitiesData?.map((item,index) => {
+                        return(
+                          <li key={index} className="small_text"><i>{item?.amentitiesName}</i></li>
+                        )
+                      })}
+                      </ul>
+                    
+                    </div>
+                    <div className="d-flex justify-content-between plan-btn px-3 pb-4">
                       {getPlan.map((planitem, index) => (
-                        <button className="rounded" key={index}>
+                        <button className="rounded" key={index} T={console.log('plan item', planitem, item)} onClick={() => onLink(planitem, item)}>
                           {planitem.planname} <br />{" "}
                           {planitem.country === "India"
                             ? ` ₹ ${planitem.rate}`
@@ -342,8 +379,8 @@ const Findgym = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
         </div>
       </div>
       {/* center end */}

@@ -1599,6 +1599,9 @@ display: none;
 .rbc-month-view{
   margin-top: 15px;
 }
-.rbc-row rbc-month-header{
+.rbc-row .rbc-month-header{
   padding: 15px;
+}
+.small_text{
+  font-size: small;
 }

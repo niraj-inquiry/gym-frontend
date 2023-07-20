@@ -63,8 +63,8 @@ const Gym_Listing_Details = () => {
   }, []);
   const d = new Date();
   let day = d.getDay();
-  var selectdat =JSON.parse( localStorage.getItem('selectdat'))
-  console.log('selectdat',selectdat);
+  var selectdat = JSON.parse(localStorage.getItem('selectdat'))
+  console.log('selectdat', selectdat);
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -78,6 +78,10 @@ const Gym_Listing_Details = () => {
                 <p>
                   <b>{getCentId.address}</b>
                 </p>
+                <p>
+                  <i className="fa fa-map-marker" aria-hidden="true" style={{ color: '#000' }}></i> <i style={{ color: '#000' }}>{"15 Miles"}</i>
+                </p>
+
               </div>
               <div>
                 <p>
@@ -140,6 +144,15 @@ const Gym_Listing_Details = () => {
             </button>
           </div>
         </div>
+
+        {/* equiment and amentities */}
+        <div className="row justify-content-center align-items-center my-5">
+          <GymArtifact
+            equipmentdata={getCentId?.equipmentData}
+            amenities={getCentId?.amentitiesData}
+            trainerdata={getCentId?.newTrainerData}
+          />
+        </div>
         {/* plan cards */}
         <div
           className="w-100 justify-content-center align-items-center py-5 "
@@ -165,13 +178,6 @@ const Gym_Listing_Details = () => {
                 ))}
             </div>
           </div>
-        </div>
-        {/* equiment and amentities */}
-        <div className="row justify-content-center align-items-center my-5">
-          <GymArtifact
-            equipmentdata={getCentId?.equipmentData}
-            amenities={getCentId?.amentitiesData}
-          />
         </div>
         <div>
           <div className="">
@@ -207,8 +213,8 @@ const Gym_Listing_Details = () => {
                                             )} */}
                   {getCentId?.scheduleData?.map((item) =>
                     <div className="col-4">
-                      <div 
-                      className={daysname[day]?.toLowerCase() == item?.day?.toLowerCase() ? "time-box active-day text-center" : "time-box"}>
+                      <div
+                        className={daysname[day]?.toLowerCase() == item?.day?.toLowerCase() ? "time-box active-day text-center" : "time-box"}>
                         <p>{item?.day}</p>
                         <small>{item?.startTime}-{item?.endTime}</small>
                       </div>

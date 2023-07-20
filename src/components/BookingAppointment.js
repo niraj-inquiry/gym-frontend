@@ -25,7 +25,7 @@ const BookingAppointment = () => {
   const [modalBox, setModalbox] = useState();
   const [start_time, setStart_time] = useState();
   const [end_time, setEnd_time] = useState();
-
+  // console.log('schedulerTime',schedulerTime);
   const scheduler_data = [
     {
 

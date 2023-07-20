@@ -196,3 +196,18 @@ font-weight: 600;
 .linkbutton:hover a{
  color: #FD5824;
 }
+
+.react-datepicker__month-container{
+  background-color: #fff !important;
+}
+.rbc-month-view{
+    z-index: 0;
+}
+.rbc-allday-cell {
+    display: none !important;
+  }
+.item1{
+    display:flex;
+    justify-content: space-between;
+    padding-top:3rem;
+}

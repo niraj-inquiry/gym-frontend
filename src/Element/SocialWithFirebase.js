@@ -92,7 +92,9 @@ const SocialWithFirebase = () => {
                 localStorage.setItem("token", res?.data?.accessToken)
                 localStorage.setItem("userdata", JSON.stringify(tempdata))
                 localStorage.setItem("usertype", "User")
+                localStorage.setItem("userdata", JSON.stringify(tempdata))
                 onLogin(tempdata)
+                
                 navigate('/account')
             }
 
