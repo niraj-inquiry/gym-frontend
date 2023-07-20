@@ -25,8 +25,8 @@ const Revieworders = () => {
   const getTrn=localStorage.getItem('trainername')
   const getBillingData=JSON.parse(localStorage.getItem('billingData'))
   const schedulerTime=JSON.parse(localStorage.getItem("newEvent"));
-
-  console.log('getTrn',selectedPData?._id);
+  const trainerName=localStorage.getItem('trainername')
+  console.log('getTrn',trainerName);
   const orderData = () => {
     axios.post('https://gym-api-3r8c.onrender.com/orderapi/create-order', {
       centerId: selectedPData?._id,
@@ -38,7 +38,8 @@ const Revieworders = () => {
       centerBanner: selectedPData?.centerBanner,
       userAddress:getBillingData?.address+'' +getBillingData?.city+'-'+getBillingData?.state+','+getBillingData?.country ,
       userName:UserDetails?.Uname,
-      phone:getBillingData?.phone
+      phone:getBillingData?.phone,
+      trainerName:trainerName
 
     }).then((res) => {
       const orderId = res.data.data._id;

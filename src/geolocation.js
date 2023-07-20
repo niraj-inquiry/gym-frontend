@@ -9,7 +9,7 @@ const useGeoLocation = () => {
   });
 
   const [country, setCountry] = useState();
-
+  console.log('locations',location);
   useEffect(() => {
     navigator?.permissions
       .query({ name: "geolocation" })

@@ -4,7 +4,7 @@ import Multiplesection_footer from "../Element/Multiplesection_footer";
 import axios from "axios";
 import "../css/Style.css";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { calculateDistance } from "../CalculateDistance";
 
 const Findgym = () => {
   const { centerparameter } = useParams();
@@ -28,18 +28,17 @@ const Findgym = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [getCateData, setGetCateData] = useState("");
   const [getCateItem, setGetCateItem] = useState([]);
-  const [distance, setDistance]=useState(0)
+
   const getCenterData = () => {
     axios
       .get(
         "https://gym-api-3r8c.onrender.com/v1.0/gymcenter/get-verify-all-data"
       )
       .then((res) => {
-        setDistance(res.data.data)
         setGetCenter(res.data.data);
       });
   };
-  console.log('distance',distance);
+
   const getAllPlan = () => {
     axios
       .get("https://gym-api-3r8c.onrender.com/v1.0/plan/get-all-plan")
@@ -106,7 +105,10 @@ const Findgym = () => {
     const centerAddress = center.address.toLowerCase();
     const centerPincode = center.pincode.toLowerCase();
     const searchParameter = centerparameter.toLowerCase();
-    return centerAddress.includes(searchParameter) || centerPincode.includes(searchParameter);
+    return (
+      centerAddress.includes(searchParameter) ||
+      centerPincode.includes(searchParameter)
+    );
   });
 
   console.log("reg", filteredCenters);
@@ -148,6 +150,29 @@ const Findgym = () => {
     return isCategoryMatch && isAmenityMatch && isEquipmentMatch;
   });
 
+  const filterData1 = categoryFilteredData.filter((filteritem) =>
+    filteritem.centertype.toLowerCase().includes(getCateData.toLowerCase())
+  );
+
+  const [userLocation, setUserLocation] = useState(null);
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+        },
+        (error) => {
+          console.error("Error getting user's location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+ 
+
+  console.log("userLocation", userLocation);
   const onLink = (item, planitem) => {
     console.log("datai", item, planitem);
     const forwardData = Object?.assign({}, item, planitem);
@@ -168,7 +193,49 @@ const Findgym = () => {
     getAllPlan();
     getItemByCategory();
     getCateItems();
+    getUserLocation();
   }, []);
+  const filterData2 = filterData1
+    .map((item) => {
+      if (userLocation) {
+        const { latitude, longitude } = userLocation;
+        const distance = calculateDistance(
+          latitude,
+          longitude,
+          item.lat,
+          item.lng
+        );
+
+        // Add the calculated distance to each item in the filterData1 array
+        return { ...item, distance };
+      }
+
+      // If userLocation is not available, just return the item without distance
+      return item;
+    })
+    .filter((item) => {
+      // Your existing filtering logic goes here
+      if (selectedAmenities.length === 0 && selectedEquipment.length === 0) {
+        return true; // No amenities or equipment selected, include all items
+      } else {
+        const itemAmenities = item.amentitiesData || []; // Ensure amenitiesData is an array
+        const itemEquipment = item.equipmentData || []; // Ensure equipmentData is an array
+        const itemAmenityNames = itemAmenities.map(
+          (amenity) => amenity.amentitiesName
+        );
+        const itemEquipmentNames = itemEquipment.map(
+          (equipment) => equipment.equipment_name // Use 'equipment_name' property
+        );
+        return (
+          selectedAmenities.every((amenity) =>
+            itemAmenityNames.includes(amenity)
+          ) &&
+          selectedEquipment.every((equipment) =>
+            itemEquipmentNames.includes(equipment)
+          )
+        );
+      }
+    });
   return (
     <>
       <Header />
@@ -293,94 +360,75 @@ const Findgym = () => {
           </div>
         </div>
         <div className="row pt-5">
-          {categoryFilteredData
-            .filter((filteritem) =>
-              filteritem.centertype
-                .toLowerCase()
-                .includes(getCateData.toLowerCase())
-            )
-            .filter((item) => {
-              if (
-                selectedAmenities.length === 0 &&
-                selectedEquipment.length === 0
-              ) {
-                return true; // No amenities or equipment selected, include all items
-              } else {
-                const itemAmenities = item.amentitiesData || []; // Ensure amenitiesData is an array
-                const itemEquipment = item.equipmentData || []; // Ensure equipmentData is an array
-                const itemAmenityNames = itemAmenities.map(
-                  (amenity) => amenity.amentitiesName
-                );
-                const itemEquipmentNames = itemEquipment.map(
-                  (equipment) => equipment.equipment_name // Use 'equipment_name' property
-                );
-                return (
-                  selectedAmenities.every((amenity) =>
-                    itemAmenityNames.includes(amenity)
-                  ) &&
-                  selectedEquipment.every((equipment) =>
-                    itemEquipmentNames.includes(equipment)
-                  )
-                );
+          {filterData2.map((item, index) => {
+            return (
+              <div
+                className="col-lg-4 center-card"
+                key={index}
                 
-              }
-            })
-            .map((item, index) => {
-
-              return (
-
-                <div
-                  className="col-lg-4 center-card"
-                  key={index}
-                  // onClick={() => handleNavigate(item._id)}
-                  T={console.log('center item', item)}
-                >
-                  <div className="card">
-                    <img
-                      src={item.centerBanner}
-                      height={250}
-                      className="card-img-top"
-                      alt="..."
-                      onClick={() => handleNavigate(item._id)}
-                    />
-                    <div className="card-body pt-4 pb-0"  onClick={() => handleNavigate(item._id)}>
-                      <div className="d-flex justify-content-between">
+               
+              >
+                <div className="card">
+                  <img
+                    src={item.centerBanner}
+                    height={250}
+                    className="card-img-top"
+                    alt="..."
+                    onClick={() => handleNavigate(item._id)}
+                  />
+                  <div
+                    className="card-body pt-4 pb-0"
+                    onClick={() => handleNavigate(item._id)}
+                  >
+                    <div className="d-flex justify-content-between">
                       <span>
-                        <i className="fa fa-map-marker" aria-hidden="true"></i> <i>{"15 Miles"}</i>
+                        <i className="fa fa-map-marker" aria-hidden="true"></i>{" "}
+                        <i>
+                          {userLocation
+                            ? `${item.distance.toFixed(2)} Miles`
+                            : "Location not available"}
+                        </i>{" "}
+                        
                       </span>
-                      <span> 
+                      <span>
                         <i className="fa fa-star logo_color"></i>
                         <i className="fa fa-star logo_color"></i>
                         <i className="fa fa-star logo_color"></i>
                         <i className="fa fa-star logo_color"></i>
                         <i className="fa fa-star logo_color"></i>
-                        </span>
-                      </div>
-                      <h3 className="card-title py-2 mb-0">{item.center_name}</h3>
-                      <p className="card-text pb-2 mb-0">{item.address}</p>
-                      <ul>
-                      {item?.amentitiesData?.map((item,index) => {
-                        return(
-                          <li key={index} className="small_text"><i>{item?.amentitiesName}</i></li>
-                        )
+                      </span>
+                    </div>
+                    <h3 className="card-title py-2 mb-0">{item.center_name}</h3>
+                    <p className="card-text pb-2 mb-0">{item.address}</p>
+                    <ul>
+                      {item?.amentitiesData?.map((item, index) => {
+                        return (
+                          <li key={index} className="small_text">
+                            <i>{item?.amentitiesName}</i>
+                          </li>
+                        );
                       })}
-                      </ul>
-                    
-                    </div>
-                    <div className="d-flex justify-content-between plan-btn px-3 pb-4">
-                      {getPlan.map((planitem, index) => (
-                        <button className="rounded" key={index} T={console.log('plan item', planitem, item)} onClick={() => onLink(planitem, item)}>
-                          {planitem.planname} <br />{" "}
-                          {planitem.country === "India"
-                            ? ` ₹ ${planitem.rate}`
-                            : `$ ${planitem.rate}`}{" "}
-                        </button>
-                      ))}
-                    </div>
+                    </ul>
+                  </div>
+                  <div className="d-flex justify-content-between plan-btn px-3 pb-4">
+                    {getPlan.map((planitem, index) => (
+                      <button
+                        className="rounded"
+                        key={index}
+                        T={console.log("plan item", planitem, item)}
+                        onClick={() => onLink(planitem, item)}
+                      >
+                        {planitem.planname} <br />{" "}
+                        {planitem.country === "India"
+                          ? ` ₹ ${planitem.rate}`
+                          : `$ ${planitem.rate}`}{" "}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              )
-            })}
+              </div>
+            );
+          })}
         </div>
       </div>
       {/* center end */}

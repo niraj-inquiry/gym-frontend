@@ -64,6 +64,7 @@ import AccountVerify from "./components/AccountVerify";
 import Plan from './components/vendor/Plan';
 import FailedPayment from './components/FailedPayment';
 import PassDetails from './components/PassDetails';
+import YourComponent from './YourComponent';
 function App() {
   const navigate = useNavigate();
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
@@ -92,7 +93,7 @@ function App() {
           path="/verify-user/:verificationToken"
           element={<AccountVerify />}
         />
-
+        <Route path='/location' element={<YourComponent />} />
         <Route path="/" element={<Home />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path='/failed-payment' element={<FailedPayment/>} />

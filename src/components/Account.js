@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Header, AllPageBanner, Footer } from ".";
 import "../css/Style.css";
-import Multiplesection_footer from "../Element/Multiplesection_footer";
+
 import * as Images from "../assets";
-import Card_passes from "./card/Card_passes";
-import { HomeBanner } from "../components";
-import { NavLink, Routes, useNavigate, Route, Link } from "react-router-dom";
+
+import { NavLink, useNavigate,  Link } from "react-router-dom";
 import { SubHomeBanner } from "../Element/HomeBanner";
 import axios from "axios";
-import PassDetails from "./PassDetails";
+
 
 const Account = () => {
   const navigate=useNavigate();
@@ -25,9 +24,7 @@ const Account = () => {
   const filtPassData=passData.filter((item)=>item.userId===loggedData.userId && item.payment_status==="1")
   console.log('passData',filtPassData);
 
-// const handleNavigate=(id)=>{
-//   navigate(`/account/${id}`)
-// }
+
 useEffect(()=>{
   orderData()
 },[])
@@ -140,34 +137,43 @@ useEffect(()=>{
                        {filtPassData.length>0 ? 
                        filtPassData.map((item, index)=>{
                         return(
-                          <div className="col-lg-4 " key={index} >
-                            <Link to={item._id}>
-                            <div className="card" >
-                                <img
-                                  src="/assets/cart-image.jpg"
-                                  className="card-img-top"
-                                  alt="..."
-                                />
-                                <div className="card-body">
-                                  <h3>
-                                   
-                                    <b> {item.centerName}</b>
-                                  </h3>
-                                  <h4>
-                                    <b>{selectedPData?.address}</b>
-                                  </h4>
-                                  <div className="d-flex w-100 border rounded p-2">
-                                    <div className="w-50">
-                                      <img src="/assets/pass.png" alt="" />
-                                    </div>
-                                    <div className="w-50">
-                                        <h3><b> ₹ {item.amount}</b>/{item.passtype}</h3>
+                          <div className="col-lg-4" key={index} >
+                                <Link to={item?._id} className="text-decoration-none">
+                                  <div className="card " >
+                                    <img
+                                      src="/assets/cart-image.jpg"
+                                      className="card-img-top"
+                                      alt="..."
+                                    />
+                                    <div className="card-body d-flex align-items-baseline">
+                                      <div className="w-50">
+                                        <h3 className="mb-3">
+
+                                          <b> {item.centerName}</b>
+                                        </h3>
+                                        <h4 className="">
+                                          <b>{selectedPData?.address}</b>
+                                        </h4>
+                                      </div>
+                                      <div className=" d-flex flex-column w-50 justify-content-evenly">
+                                      <div className="d-flex w-100 justify-content-between align-items-center mb-3">
+                                        <img src="/assets/pass.png" alt="" width={30} height={20} />
+                                        <div className=" m-0"><b> ₹ {item?.amount} /</b> {item?.passtype}</div>
+
+                                      </div>
+                                      
+                                      <div className="d-flex w-100 justify-content-between align-items-center">
+                                        <div className="fw-bold">Expiry Date: </div>
+                                        <div className=" m-0">22-08-23</div>
+
+                                      
+                                      </div>
+                                      </div>
+                                     
                                     </div>
                                   </div>
-                                </div>
+                                </Link>
                               </div>
-                            </Link>
-                          </div>
                         )
                        })
                        :
