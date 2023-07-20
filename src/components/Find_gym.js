@@ -173,19 +173,7 @@ const Findgym = () => {
  
 
   console.log("userLocation", userLocation);
-  const onLink = (item, planitem) => {
-    console.log("datai", item, planitem);
-    const forwardData = Object?.assign({}, item, planitem);
-    const newforwardData = JSON.stringify(forwardData);
-    console.log("newforwardData find gym", newforwardData);
-    localStorage.setItem("selectdat", newforwardData);
-    const loggedUser = JSON.parse(localStorage.getItem("userAuth"));
-    if (loggedUser) {
-      navigate("/booking_appointment");
-    } else {
-      navigate("/login");
-    }
-  };
+ 
 
   console.log("selectedEquipment", selectedEquipment);
   useEffect(() => {
@@ -214,9 +202,9 @@ const Findgym = () => {
       return item;
     })
     .filter((item) => {
-      // Your existing filtering logic goes here
+      
       if (selectedAmenities.length === 0 && selectedEquipment.length === 0) {
-        return true; // No amenities or equipment selected, include all items
+        return true; 
       } else {
         const itemAmenities = item.amentitiesData || []; // Ensure amenitiesData is an array
         const itemEquipment = item.equipmentData || []; // Ensure equipmentData is an array
@@ -236,6 +224,21 @@ const Findgym = () => {
         );
       }
     });
+    const onLink = (item, planitem) => {
+      console.log("datai", item, planitem);
+      
+      const forwardData = Object?.assign({}, item, planitem);
+      const newforwardData = JSON.stringify(forwardData);
+      console.log("newforwardData find gym", newforwardData);
+      localStorage.setItem("selectdat", newforwardData);
+      const loggedUser = JSON.parse(localStorage.getItem("userAuth"));
+      if (loggedUser) {
+        navigate("/booking_appointment");
+      } else {
+        navigate("/login");
+      }
+    };
+    
   return (
     <>
       <Header />
@@ -364,10 +367,7 @@ const Findgym = () => {
             return (
               <div
                 className="col-lg-4 center-card"
-                key={index}
-                
-               
-              >
+                key={index}>
                 <div className="card">
                   <img
                     src={item.centerBanner}
@@ -387,7 +387,7 @@ const Findgym = () => {
                           {userLocation
                             ? `${item.distance.toFixed(2)} Miles`
                             : "Location not available"}
-                        </i>{" "}
+                        </i>
                         
                       </span>
                       <span>

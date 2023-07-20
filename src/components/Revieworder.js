@@ -119,6 +119,7 @@ const Revieworders = () => {
   useEffect(() => {
     loadScript("https://checkout.razorpay.com/v1/checkout.js");
   }, []);
+  const booking_data = JSON?.parse(localStorage.getItem('newEvent'))
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -186,9 +187,9 @@ const Revieworders = () => {
           </div>
           <div className="col-lg-6 col-md-6">
             <div className="d-flex justify-content-end">
-              <div className="d-flex align-items-center w-25 justify-content-evenly">
+              <div className="d-flex align-items-center w-50 justify-content-evenly">
                 <img src={Images.Review_order_calendar} width={20} />
-                <div className="ms-2">July 7, 2023</div>
+                <div className="ms-2">{booking_data?.start?.slice(0,10)} - {booking_data?.end?.slice(0,10)}</div>
               </div>
               <div className="d-flex align-items-center w-suto justify-content-between">
                 <img src={Images.clock} width={20} />

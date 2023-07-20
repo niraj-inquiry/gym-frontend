@@ -70,21 +70,10 @@ function App() {
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
   const isVendorAuthenticated = JSON.parse(localStorage.getItem("vendorAuth"));
   console.log("isVendorAuthenticated", isVendorAuthenticated);
-  // useEffect(() => {
-  //   if (isUserAuthenticated) {
-  //       navigate('/account')
-  //   }
-
-  // }, []);
-  // useEffect(() => {
-  //   if (isVendorAuthenticated) {
-  //       navigate('/dashboard')
-  //   }
-
-  // }, []);
+ 
   return (
     <div className="App">
-      {/* <AuthContextProvider> */}
+      
 
       <Routes>
         <Route path="/review" element={<Revieworders />} />
@@ -127,9 +116,7 @@ function App() {
         <Route path="/Payment_Details" element={<Payment_Details />} />
         <Route path="/Partnership" element={<Partnership />} />
         <Route path="/How_it_works" element={<How_it_works />} />
-        {/* <Route path="*" element={<Navigate to="/page_not_found" />} /> */}
-        {/* <Route path="*" element={<Navigate to="/home" />} /> */}
-        {/* vendor section */}
+       
         <Route path="/vendor" element={<VendorHome />} />
         <Route path="/event" element={<Event />} />
         <Route path="/history" element={<History />} />

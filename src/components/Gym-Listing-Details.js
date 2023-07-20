@@ -65,6 +65,25 @@ const Gym_Listing_Details = () => {
   let day = d.getDay();
   var selectdat = JSON.parse(localStorage.getItem('selectdat'))
   console.log('selectdat', selectdat);
+  const distance=localStorage.getItem('distance')
+  const [distanceValue, setDistanceValue] = useState(null);
+
+  useEffect(() => {
+    const distance = localStorage.getItem('distance');
+    setDistanceValue(distance);
+
+    window.addEventListener('pageshow', handlePageShow);
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow);
+    };
+  }, []);
+
+  const handlePageShow = (event) => {
+    if (event.persisted) {
+      localStorage.removeItem('distance');
+      setDistanceValue(null);
+    }
+  };
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -79,7 +98,7 @@ const Gym_Listing_Details = () => {
                   <b>{getCentId.address}</b>
                 </p>
                 <p>
-                  <i className="fa fa-map-marker" aria-hidden="true" style={{ color: '#000' }}></i> <i style={{ color: '#000' }}>{"15 Miles"}</i>
+                  <i className="fa fa-map-marker" aria-hidden="true" style={{ color: '#000' }}></i> <i style={{ color: '#000' }}>{distanceValue}</i>
                 </p>
 
               </div>
