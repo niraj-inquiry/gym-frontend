@@ -20,11 +20,13 @@ const loadScript = (src) => {
 
 const Revieworders = () => {
   const navigate = useNavigate();
+  const appointmentDetails=JSON.parse(localStorage.getItem('scheduleData'))
+  const appData=JSON.stringify(appointmentDetails)
   const UserDetails = JSON.parse(localStorage.getItem('userAuth'))
   const selectedPData = JSON.parse(localStorage.getItem('selectdat'))
   const getTrn=localStorage.getItem('trainername')
   const getBillingData=JSON.parse(localStorage.getItem('billingData'))
-  const schedulerTime=JSON.parse(localStorage.getItem("newEvent"));
+ 
   const trainerName=localStorage.getItem('trainername')
   console.log('getTrn',trainerName);
   const orderData = () => {
@@ -39,7 +41,8 @@ const Revieworders = () => {
       userAddress:getBillingData?.address+'' +getBillingData?.city+'-'+getBillingData?.state+','+getBillingData?.country ,
       userName:UserDetails?.Uname,
       phone:getBillingData?.phone,
-      trainerName:trainerName
+      trainerName:trainerName,
+      bookingSlot:appData
 
     }).then((res) => {
       const orderId = res.data.data._id;
@@ -119,7 +122,8 @@ const Revieworders = () => {
   useEffect(() => {
     loadScript("https://checkout.razorpay.com/v1/checkout.js");
   }, []);
-  const booking_data = JSON?.parse(localStorage.getItem('newEvent'))
+ 
+ console.log('appointmentDetails',appointmentDetails);
   return (
     <>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -186,16 +190,26 @@ const Revieworders = () => {
             <h3 className="logo_color">Appointment Details </h3>
           </div>
           <div className="col-lg-6 col-md-6">
-            <div className="d-flex justify-content-end">
-              <div className="d-flex align-items-center w-50 justify-content-evenly">
-                <img src={Images.Review_order_calendar} width={20} />
-                <div className="ms-2">{booking_data?.start?.slice(0,10)} - {booking_data?.end?.slice(0,10)}</div>
-              </div>
-              <div className="d-flex align-items-center w-suto justify-content-between">
-                <img src={Images.clock} width={20} />
-                <div className="ms-3">11:46 AM - 2:00 PM</div>
-              </div>
-            </div>
+            <table className="table table-bordered table-striped" >
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appointmentDetails?.map((item, index)=>{
+                  return(
+                    <tr key={index} >
+                      <td>{item?.date}</td>
+                      <td>{item?.startTime}</td>
+                      <td>{item?.endTime}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
         <hr className="my-5" />

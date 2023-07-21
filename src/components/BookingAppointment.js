@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "../Element/Header";
 import * as Images from "../assets";
-import Calendar from "../Element/Calendar";
-import DayCalendar from "../Element/DayCalendar";
+
 import Countries from "../../src/json/Countries.json";
-import AllBooking from "../Element/AllBooking";
+
 import { useLocation, useNavigate } from "react-router-dom";
-import { isEmpty } from "../generalfunction";
+
 import "../css/Style.css";
-import { resources, generateAppointments } from '../json/data';
-// import * as AspNetData from 'devextreme-aspnet-data-nojquery';
-// import Scheduler, { View, Scrolling, Resource } from "devextreme-react/scheduler";
+
 import axios from "axios";
 import './style.css';
-// import { Calender } from "../Element/Calender/index";
-import Scheduler_calendar from "../Element/Scheduler_calendar";
+
+import Scheduler from "./Scheduler";
 
 
-const BookingAppointment = () => {
+const BookingAppointment = (props) => {
   const [countryindex, setCountryindex] = useState();
   const [statelist, setStatelist] = useState();
   const [districtslist, setDistrictlist] = useState();
@@ -50,19 +47,19 @@ const BookingAppointment = () => {
   const UserDetails = JSON.parse(localStorage.getItem("userAuth"));
   const selectedPData = JSON.parse(localStorage.getItem("selectdat"));
   const [getData, setGetData] = useState({
-    name: UserDetails.Uname,
+    name: UserDetails?.Uname,
     address: "",
     city: "",
     state: "",
     country: "",
     phone: "",
-    email: UserDetails.Uemail,
+    email: UserDetails?.Uemail,
   });
 
   console.log('getData', getData);
   const [getTrainer, setGetTrainer] = useState([]);
   const [strainer, setStrainer] = useState("");
-  console.log("selectedPData", selectedPData.planname);
+  console.log("selectedPData", selectedPData?.planname);
   const getTrainerList = () => {
     axios
       .get(
@@ -70,13 +67,13 @@ const BookingAppointment = () => {
       )
       .then((res) => {
         const filterTrainer = res.data.data.find(
-          (item) => item.center_name === selectedPData.center_name
+          (item) => item.center_name === selectedPData?.center_name
         );
         setGetTrainer(filterTrainer);
       });
   };
-  console.log("getTrainer", getTrainer.newTrainerData);
-  const filtTrainerData = Array.isArray(getTrainer.newTrainerData)
+  console.log("getTrainer", getTrainer?.newTrainerData);
+  const filtTrainerData = Array.isArray(getTrainer?.newTrainerData)
     ? getTrainer.newTrainerData.find((item) => item.tName === strainer)
     : "";
   console.log("filtTrainerData", filtTrainerData);
@@ -113,7 +110,8 @@ const BookingAppointment = () => {
     console.log("find-gym-item", localStorage.getItem("usertype"));
     navigation("/revieworder");
   };
-  const getPlan = selectedPData.planname;
+  const getPlan = selectedPData?.planname;
+  console.log('getPlan',getPlan);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   console.log("startDate", startDate);
@@ -243,19 +241,19 @@ const BookingAppointment = () => {
           <div className="row">
             <div className="col-lg-6 col-6">
               <h3 className="logo_color">GYM Details</h3>
-              <h3 className="fw-bold">{selectedPData.center_name}</h3>
-              <h5>{selectedPData.address}</h5>
+              <h3 className="fw-bold">{selectedPData?.center_name}</h3>
+              <h5>{selectedPData?.address}</h5>
             </div>
             <div className="col-lg-6 col-6 text-end">
               <p className=" logo_color">
                 ₹
                 <span className="fw-bold">
-                  {selectedPData.rate}/{selectedPData.planname}
+                  {selectedPData?.rate}/{selectedPData?.planname}
                 </span>
               </p>
               <p>
                 {" "}
-                <b> ({selectedPData.planname})</b>
+                <b> ({selectedPData?.planname})</b>
               </p>
             </div>
           </div>
@@ -381,7 +379,8 @@ const BookingAppointment = () => {
 
                 <div className="col-lg-12">
 
-                  <Scheduler_calendar />
+                  {/* <Scheduler_calendar /> */}
+                  <Scheduler getPlan={selectedPData?.planname}  />
 
                 </div>
               </div>

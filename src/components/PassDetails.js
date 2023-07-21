@@ -6,7 +6,7 @@ import axios from "axios";
 import "./style.css";
 const PassDetails = () => {
   const { id } = useParams();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [passData, setPassData] = useState([]);
   const [getCenterD, setGetCenterD] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,21 +19,30 @@ const PassDetails = () => {
       });
   };
   const cid = passData.centerId;
-  // const centerData = () => {
-  //   axios
-  //     .get(
-  //       `https://gym-api-3r8c.onrender.com/v1.0/gymcenter/get-gym-by-id/${cid}`
-  //     )
-  //     .then((res) => {
-  //       setGetCenterD(res.data.data);
-  //     });
-  // };
-  // const filtTrainerData=getCenterD.newTrainerData?.find((item)=>item.newTrainerData.tName===passData.trainerName)
-  // console.log("passurl",filtTrainerData);
-  // console.log("getCenterD", getCenterD);
+
+  let bookingSlot; // Declare the variable outside the block
+
+  if (
+    passData.bookingSlot &&
+    typeof passData.bookingSlot === "string" &&
+    passData.bookingSlot.trim() !== ""
+  ) {
+    try {
+      // Parse the JSON string into an array of objects and assign it to bookingSlot
+      bookingSlot = JSON.parse(passData.bookingSlot);
+      console.log(bookingSlot);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+    }
+  } else {
+    console.error("passData.bookingSlot is not a valid JSON string.");
+  }
 
   useEffect(() => {
     orderData();
+    // const bookingSlot =JSON.parse(passData.bookingSlot);
+    // console.log("passData", bookingSlot);
+
     // centerData();
   }, []);
   useEffect(() => {
@@ -79,7 +88,10 @@ const PassDetails = () => {
                 </h3>
               </div>
               <div>
-                Pass Status : <span className="bg-success p-2 text-white rounded fw-bold ">Active</span>
+                Pass Status :{" "}
+                <span className="bg-success p-2 text-white rounded fw-bold ">
+                  Active
+                </span>
               </div>
             </div>
             <hr />
@@ -112,8 +124,8 @@ const PassDetails = () => {
                 <thead>
                   <tr>
                     <th>Day Name</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
+                    <th>Opening Time</th>
+                    <th>Closing Time</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -156,17 +168,21 @@ const PassDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>24-04-2023</td>
-                    <td>06:00 Pm</td>
-                    <td>07:00Pm</td>
-                  </tr>
+                  {bookingSlot?.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{item.date}</td>
+                        <td>{item.startTime}</td>
+                        <td>{item.endTime}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
             <hr />
             <div className="pass-btn-d">
-              <button  >GO BACK</button>
+              <button>GO BACK</button>
               <button disabled>CANCEL PASS</button>
             </div>
           </div>
