@@ -231,7 +231,7 @@ const BookingAppointment = (props) => {
       navigation("/revieworder");
     }
   }
-
+  const distance=localStorage.getItem('distance')
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -243,6 +243,7 @@ const BookingAppointment = (props) => {
               <h3 className="logo_color">GYM Details</h3>
               <h3 className="fw-bold">{selectedPData?.center_name}</h3>
               <h5>{selectedPData?.address}</h5>
+              <p><i className="fa fa-map-marker" aria-hidden="true"></i> {`${distance} Miles`} </p>
             </div>
             <div className="col-lg-6 col-6 text-end">
               <p className=" logo_color">

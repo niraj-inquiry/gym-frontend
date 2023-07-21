@@ -97,6 +97,10 @@ const Findgym = () => {
   };
   const handleNavigate = (id) => {
     localStorage.setItem("selectedId", id);
+    if (userLocation) {
+      const distance = filterData2.find((item) => item._id === id)?.distance;
+      localStorage.setItem("distance", distance.toFixed(2));
+    }
     navigate("/gym_listing_details");
   };
   console.log("center", centerparameter);
@@ -232,6 +236,10 @@ const Findgym = () => {
       console.log("newforwardData find gym", newforwardData);
       localStorage.setItem("selectdat", newforwardData);
       const loggedUser = JSON.parse(localStorage.getItem("userAuth"));
+      if (userLocation && item?.distance !== undefined) {
+        const distance = item.distance;
+        localStorage.setItem("distance", distance.toFixed(2));
+      }
       if (loggedUser) {
         navigate("/booking_appointment");
       } else {

@@ -205,6 +205,7 @@ const Revieworders = () => {
                       <td>{item?.date}</td>
                       <td>{item?.startTime}</td>
                       <td>{item?.endTime}</td>
+                      <td>{item.title}</td>
                     </tr>
                   )
                 })}
