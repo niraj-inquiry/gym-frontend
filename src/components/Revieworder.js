@@ -29,6 +29,8 @@ const Revieworders = () => {
  
   const trainerName=localStorage.getItem('trainername')
   console.log('getTrn',trainerName);
+  const stime=localStorage.getItem('stime')
+ const etime=localStorage.getItem('etime')
   const orderData = () => {
     axios.post('https://gym-api-3r8c.onrender.com/orderapi/create-order', {
       centerId: selectedPData?._id,
@@ -42,7 +44,9 @@ const Revieworders = () => {
       userName:UserDetails?.Uname,
       phone:getBillingData?.phone,
       trainerName:trainerName,
-      bookingSlot:appData
+      bookingSlot:appData,
+      passEndDate:etime,
+      passStartDate:stime
 
     }).then((res) => {
       const orderId = res.data.data._id;
@@ -148,12 +152,13 @@ const Revieworders = () => {
               <h3 className="logo_color mb-3">Selected Plan Details</h3>
               <div className="d-flex mb-3">
                 <img src={Images.booking_pass_name} width={35} height={30} />
-                <h4 className="fw-500 ms-2 mb-0 fw-bold">{selectedPData?.planname}</h4>
+                <h4 className="fw-500 ms-2 mb-0 fw-bold text-center">{selectedPData?.planname} <br/>
+               (₹ {selectedPData?.rate}/{selectedPData?.planname})
+                 </h4>
               </div>
               <div className="d-flex align-items-center text-center mb-3">
                 <h4 className="fw-medium mb-0">
-                  {" "}
-                  <b> ₹ {selectedPData?.rate}/{selectedPData?.planname}</b>
+                  Pass Duration :- <b>{stime} - {etime}</b>
                 </h4>
               </div>
               <button type="button" className="btn btn-outline-success w-50">

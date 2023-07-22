@@ -111,7 +111,7 @@ const BookingAppointment = (props) => {
     navigation("/revieworder");
   };
   const getPlan = selectedPData?.planname;
-  console.log('getPlan',getPlan);
+  console.log('getPlan', getPlan);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   console.log("startDate", startDate);
@@ -195,10 +195,16 @@ const BookingAppointment = (props) => {
 
 
   const validateForm = (data) => {
-    const { address, city, state, country, phone} = data;
-
+    const { address, city, state, country, phone } = data;
+    const scheduleData=localStorage.getItem('scheduleData')
     // Perform validation logic
     switch (true) {
+      case !strainer:
+        alert('Choose Trainer')
+        return false;
+      case !scheduleData:
+        alert("Schedule your timing.");
+        return false;
       case !address:
         alert("Address is required.");
         return false;
@@ -218,7 +224,7 @@ const BookingAppointment = (props) => {
       case !phone:
         alert("Phone number is required.");
         return false;
-      
+
       default:
         console.log("Validation successful");
         return true;
@@ -231,7 +237,7 @@ const BookingAppointment = (props) => {
       navigation("/revieworder");
     }
   }
-  const distance=localStorage.getItem('distance')
+  const distance = localStorage.getItem('distance')
   return (
     <div>
       <Header Logo={Images.logo} Hamburger={Images.menu} />
@@ -381,7 +387,7 @@ const BookingAppointment = (props) => {
                 <div className="col-lg-12">
 
                   {/* <Scheduler_calendar /> */}
-                  <Scheduler getPlan={selectedPData?.planname}  />
+                  <Scheduler getPlan={selectedPData?.planname} />
 
                 </div>
               </div>

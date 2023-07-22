@@ -37,7 +37,7 @@ const ThankYou = () => {
                 <span>{getOrder?.orderId}</span>
               </div>
               <div className="thank-you-item1">
-                <div>
+                {/* <div>
                   <p>
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                   </p>
@@ -48,7 +48,8 @@ const ThankYou = () => {
                 <div>
                   <p><i class="fa fa-clock-o" aria-hidden="true"></i></p>
                   <p>Time <br />  <span>11:46 AM</span> </p>
-                </div>
+                </div> */}
+                {getOrder?.created_date}
               </div>
               <div className="thank-you-item">
                 <span>Status</span>

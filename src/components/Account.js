@@ -164,7 +164,7 @@ useEffect(()=>{
                                       
                                       <div className="d-flex w-100 justify-content-between align-items-center">
                                         <div className="fw-bold">Expiry Date: </div>
-                                        <div className=" m-0">22-08-23</div>
+                                        <div className=" m-0">{item?.passEndDate}</div>
 
                                       
                                       </div>

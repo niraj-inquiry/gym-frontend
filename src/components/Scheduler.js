@@ -14,14 +14,23 @@ const Scheduler = ({ getPlan }) => {
   const [popupTitle, setPopupTitle] = useState("");
   const [popupStartTime, setPopupStartTime] = useState("");
   const [popupEndTime, setPopupEndTime] = useState("");
-  const [scheduledDataArray, setScheduledDataArray] = useState([]); // Add the scheduledDataArray state
+  const [scheduledDataArray, setScheduledDataArray] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null); // Track the selected date for booking
   const calendarRef = useRef(null);
   console.log("scheduledDataArray", scheduledDataArray);
+  console.log('es', startDate, endDate);
 
+  localStorage.setItem('stime', startDate)
+  localStorage.setItem('etime', endDate)
   const setCalendarInitialDate = (date) => {
     if (calendarRef.current) {
       calendarRef.current.getApi().gotoDate(date);
     }
+  };
+
+  const clearScheduledData = () => {
+    setScheduledDataArray([]);
+    localStorage.removeItem("scheduleData");
   };
 
   const handleEventCreate = (eventInfo) => {
@@ -45,6 +54,7 @@ const Scheduler = ({ getPlan }) => {
   const handleStartDateChange = (e) => {
     const selectedDate = e.target.value;
     setStartDate(selectedDate);
+    clearScheduledData();
 
     let newEndDate = selectedDate;
     if (getPlan === "Weekly Pass") {
@@ -55,6 +65,7 @@ const Scheduler = ({ getPlan }) => {
     setEndDate(newEndDate);
 
     setCalendarInitialDate(selectedDate);
+   
   };
 
   const isDateInRange = (date, plan) => {
@@ -66,37 +77,28 @@ const Scheduler = ({ getPlan }) => {
   };
 
   const handleDateRangeSelect = (arg) => {
-    if (
-      !isDateInRange(arg.start, getPlan) ||
-      !isDateInRange(arg.end, getPlan)
-    ) {
+    if (!isDateInRange(arg.start, getPlan)) {
       alert("Please select a date within the allowed date range.");
       return;
     }
 
-    if (getPlan === "Day Pass" && events.length === 1) {
-      alert("You can schedule only one appointment with a one-day pass.");
+    if (
+      (getPlan === "Day Pass" && events.length === 1) ||
+      ((getPlan === "Weekly Pass" || getPlan === "Monthly Pass") &&
+        events.length >= 7)
+    ) {
+      alert("You have reached the appointment limit for this pass.");
       return;
     }
 
-    if (
-      (getPlan === "Weekly Pass" || getPlan === "Monthly Pass") &&
-      events.length >= 7
-    ) {
-      alert(
-        "You can schedule only seven appointments within the allowed date range."
-      );
-      return;
-    }
+    // Call the clearScheduledData function before allowing the user to schedule a new appointment
+    // clearScheduledData();
 
     setShowPopup(true);
     setPopupStartTime(moment(arg.start).format("HH:mm"));
     setPopupEndTime(moment(arg.endStr).format("HH:mm"));
 
-    const selectedStartDate = moment(arg.startStr).format("YYYY-MM-DD");
-    if (startDate !== selectedStartDate) {
-      setStartDate(selectedStartDate);
-    }
+    setSelectedDate(moment(arg.startStr).format("YYYY-MM-DD"));
   };
 
   const handleClosePopup = () => {
@@ -111,7 +113,7 @@ const Scheduler = ({ getPlan }) => {
 
     const eventData = {
       title: popupTitle,
-      date: moment(endDate).format("YYYY-MM-DD"),
+      date: selectedDate, // Use the selected date for the appointment
       startTime: popupStartTime,
       endTime: popupEndTime,
     };
@@ -119,10 +121,7 @@ const Scheduler = ({ getPlan }) => {
     setScheduledDataArray([...scheduledDataArray, eventData]);
 
     // Update the local storage with the updated scheduledDataArray
-    localStorage.setItem(
-      "scheduleData",
-      JSON.stringify([...scheduledDataArray, eventData])
-    );
+    localStorage.setItem("scheduleData", JSON.stringify([...scheduledDataArray, eventData]));
 
     // Do something with the scheduledDataArray or update it in local storage
     console.log("Scheduled Data Array:", scheduledDataArray);
@@ -146,13 +145,20 @@ const Scheduler = ({ getPlan }) => {
     setCalendarInitialDate(startDate);
   }, [startDate]);
 
-  // Function to get booked slots
+  // Fetch scheduleData from localStorage on component mount
+  useEffect(() => {
+    const storedScheduledData = localStorage.getItem("scheduleData");
+    if (storedScheduledData) {
+      setScheduledDataArray(JSON.parse(storedScheduledData));
+    }
+  }, []);
+
   const getBookedSlots = () => {
     const bookedSlots = scheduledDataArray.map((event) => {
       return {
-        title: event.title,
-        start: `${event.date}T${event.startTime}`,
-        end: `${event.date}T${event.endTime}`,
+        title: ` (${event.startTime} - ${event.endTime})`, // Show start and end time in the event title
+        start: event.date,
+        end: event.date,
       };
     });
     return bookedSlots;
@@ -175,22 +181,21 @@ const Scheduler = ({ getPlan }) => {
             />
           </div>
         </div>
-      
-     
-      <div className="col-lg-5">
-        <div className="input-group mb-3">
-          <span className="input-group-text" id="basic-addon1">
-            End Date:
-          </span>
-          <input
-            type="date"
-            className="form-control"
-            id="endDate" value={endDate} readOnly
-          />
+        <div className="col-lg-5">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              End Date:
+            </span>
+            <input
+              type="date"
+              className="form-control"
+              id="endDate"
+              value={endDate}
+              readOnly
+            />
+          </div>
         </div>
       </div>
-      </div>
-     
 
       <div className="popup-container">
         <FullCalendar
@@ -202,7 +207,7 @@ const Scheduler = ({ getPlan }) => {
             center: "title",
             right: "timeGridWeek,timeGridDay",
           }}
-          events={[...eventSource.events(), ...getBookedSlots()]} // Merge the booked slots with events
+          events={[...eventSource.events(), ...getBookedSlots()]}
           editable={true}
           selectable={true}
           selectMirror={true}
@@ -211,6 +216,25 @@ const Scheduler = ({ getPlan }) => {
           select={handleEventCreate}
           selectAllow={handleDateRangeSelect}
           validRange={{ start: startDate, end: endDate }}
+          eventTimeFormat={{
+            hour: "numeric",
+            minute: "2-digit",
+            meridiem: false,
+            hour12: false,
+          }}
+          slotLabelFormat={{
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          }}
+          dayHeaderFormat={{
+            weekday: "long",
+            day: "2-digit",
+            month: "2-digit",
+            omitCommas: true,
+          }}
+          slotMinTime="08:00:00" // Set the minimum time to 8 AM
+          slotMaxTime="21:00:00" // Set the maximum time to 8 PM
           ref={calendarRef}
         />
 
