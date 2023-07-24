@@ -98,7 +98,7 @@ const Gym_Listing_Details = () => {
                   <b>{getCentId.address}</b>
                 </p>
                 <p>
-                  <i className="fa fa-map-marker" aria-hidden="true" style={{ color: '#000' }}></i> <i style={{ color: '#000' }}>{distanceValue}</i>
+                  <i className="fa fa-map-marker" aria-hidden="true" style={{ color: '#000' }}></i> <i style={{ color: '#000' }}>{distance}</i>
                 </p>
 
               </div>
