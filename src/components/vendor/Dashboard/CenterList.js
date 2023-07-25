@@ -112,7 +112,7 @@ const CenterList = ({ data }) => {
   };
   useEffect(() => {
     centerGet();
-    handleDelete();
+    // handleDelete();
   }, []);
   console.log(getCenter, getGymId);
   return (

@@ -13,8 +13,13 @@ const Orders = () => {
   useEffect(() => {
     centerMember();
   }, []);
-  const data = getCenter?.map((item) => item?.created_date).join(' ')
-  console.log('getCenter', getCenter);
+  // const data = getCenter?.map((item) => item?.created_date).join(' ')
+  // console.log('getCenter', getCenter);
+  
+const loggedUser=JSON.parse(localStorage.getItem('vendorAuth'))
+// vendor
+const getFilterData=getCenter.filter((item)=>item?.vendorId===loggedUser?.vendor)
+console.log('getFilterData',getFilterData);
   
   
   return (
@@ -37,7 +42,8 @@ const Orders = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {getCenter.map((item, index) => {
+                  {getFilterData.length> 0 ? 
+                  getFilterData.map((item, index) => {
                     const date = new Date(item?.created_date);
 
                     const indiaOffset = 330;
@@ -64,7 +70,10 @@ const Orders = () => {
                         
                       </tr>
                     );
-                  })}
+                  })
+                :
+                <div className='text-center mt-5 fw-bold'>Data not Found...</div>
+                }
                 </tbody>
               </table>
             </div>

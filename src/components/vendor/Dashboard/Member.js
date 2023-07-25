@@ -7,21 +7,29 @@ import { API } from "../../../generalfunction";
 
 const Member = () => {
 
-  const [data,setData] = useState([]);
+  const [data, setData] = useState([]);
 
 
-  const onLoad = async() => {
-   
+  const onLoad = async () => {
+
     API.get(`orderapi/get-order`).then((res) => {
+
       setData(res?.data?.data);
     });
   };
+
+
+
   useEffect(() => {
     onLoad();
   }, []);
 
+  console.log('data', data);
 
-console.log('onData',data);
+  const loggedUser = JSON.parse(localStorage.getItem('vendorAuth'))
+  // vendor
+  const getFilterData = data.filter((item) => item.vendorId === loggedUser?.vendor)
+  console.log('getFilterData', getFilterData);
 
   return (
     <>
@@ -226,31 +234,29 @@ console.log('onData',data);
                 <table class="table table-striped table-responsive">
                   <thead>
                     <tr>
-
                       <th>S.No.</th>
                       <th>Mem. Name</th>
                       <th>Location</th>
                       <th>Mobile No.</th>
                       <th>Pass Status</th>
-                      
-
-
-                     
                     </tr>
                   </thead>
                   <tbody>
-                   {data?.map((item,index) => {
-                    return(
-                      <tr key={index}>
-                        <th>{index +1 }</th>
-                        <th>{item?.userName}</th>
-                        <th>{item?.userAddress}</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    )
-                   })}
-                    
+                    {getFilterData.length > 0 ? getFilterData.map((item, index) => {
+                      return (
+                        <tr key={index}>
+                          <th>{index + 1}</th>
+                          <th>{item?.userName}</th>
+                          <th>{item?.userAddress}</th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      )
+                    }) :
+                      <div className="mt-5 text-center w-100 fw-bold">
+                        Data not found...
+                      </div>
+                    }
                   </tbody>
                 </table>
               </div>
@@ -258,9 +264,7 @@ console.log('onData',data);
           </div>
         </div>
       </div>
-      {/* </div>
-        </div>
-      </div> */}
+
 
     </>
   )
