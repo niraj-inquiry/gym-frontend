@@ -59,7 +59,7 @@ console.log('getFilterData',getFilterData);
                     return (
                       <tr key={index} style={{ verticalAlign: 'middle' }}>
                         <td>{index + 1}</td>
-                        <td>{item?.centerId}</td>
+                        <td>{item?.centerName}</td>
                         {/* <td>{item.payment ? "Paid" : "Unpaid"}</td> */}
                         <td>{item?.userName}</td>
                         <td>{indiaTimeString}</td>

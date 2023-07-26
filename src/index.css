@@ -1605,3 +1605,20 @@ display: none;
 .small_text{
   font-size: small;
 }
+
+.dashboard_member_count{
+  
+  font-size:300%;
+}
+.dashboard_recent_orders{
+  display: block;
+ 
+  width: 506px !important;
+
+  font-size: medium;
+}
+.order_modal_box{
+  top:30%;
+  left:30%;
+  background-color: #fff;
+}
