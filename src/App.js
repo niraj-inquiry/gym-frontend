@@ -65,6 +65,7 @@ import Plan from './components/vendor/Plan';
 import FailedPayment from './components/FailedPayment';
 import PassDetails from './components/PassDetails';
 import YourComponent from './YourComponent';
+import Profile from './components/vendor/Dashboard/Profile';
 function App() {
   const navigate = useNavigate();
   const isUserAuthenticated = JSON.parse(localStorage.getItem("userAuth"));
@@ -100,7 +101,7 @@ function App() {
         <Route path="/vendor-login" element={<VenderLogin />} />
         <Route path="/gym_listing" element={<Gym_Listing />} />
         <Route path="/page_not_found" element={<PageNotFound />} />
-
+        <Route path="/profile" element={<Profile />} />
         <Route path="/gym_listing_details" element={<Gym_Listing_Details />} />
         <Route
           path="/flexible-gym-day-and-monthly-passes"

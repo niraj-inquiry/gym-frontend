@@ -12,6 +12,7 @@ const CenterList = ({ data }) => {
   const [selectedChoice, setSelectedChoice] = useState("");
   const [showForm, setShowForm] = useState(false);
 
+
   // center registration start
   const [center_name, setCenterName] = useState("");
   const [centertype, setCenterType] = useState("");
@@ -38,6 +39,8 @@ const CenterList = ({ data }) => {
   const handleChoiceChange = (e) => {
     setSelectedChoice(e.target.value);
   };
+
+  console.log("country----",country);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -72,7 +75,7 @@ const CenterList = ({ data }) => {
         });
         centerGet();
 
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -340,7 +343,9 @@ const CenterList = ({ data }) => {
                           </div>
                         </>
                       )}
-                      {selectedChoice === "Activities Center" && (
+                      
+                      {/* {selectedChoice === "Activities Center" && ( */}
+                      {selectedChoice === "Activity Center" && (
                         <>
                           <div className="col-lg-6 mb-4 ">
                             <label htmlFor="center_name">Center Name</label>
@@ -504,7 +509,8 @@ const CenterList = ({ data }) => {
                       )}
                       <div className="col-lg-12">
                         <button type="submit" className="w-50">
-                          Add Gym Center
+                          {/* Add Gym Center */}
+                          Save
                         </button>
                       </div>
                     </div>
@@ -518,6 +524,7 @@ const CenterList = ({ data }) => {
                 <table class="table table-striped table-responsive">
                   <thead>
                     <tr>
+                      <th>Sr.No.</th>
                       <th>Center Name</th>
                       <th>Country</th>
                       <th>Email</th>
@@ -534,6 +541,7 @@ const CenterList = ({ data }) => {
                       .map((item, index) => {
                         return (
                           <tr key={index} style={{ verticalAlign: "middle" }}>
+                             <td>{index + 1}</td>
                             <td>{item.center_name}</td>
                             <td>{item.country}</td>
                             <td>{item.email}</td>

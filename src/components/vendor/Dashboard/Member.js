@@ -236,6 +236,7 @@ const Member = () => {
                     <tr>
                       <th>S.No.</th>
                       <th>Mem. Name</th>
+                      <th>Center Name</th>
                       <th>Location</th>
                       <th>Mobile No.</th>
                       <th>Pass Status</th>
@@ -245,11 +246,12 @@ const Member = () => {
                     {getFilterData.length > 0 ? getFilterData.map((item, index) => {
                       return (
                         <tr key={index}>
-                          <th>{index + 1}</th>
-                          <th>{item?.userName}</th>
-                          <th>{item?.userAddress}</th>
-                          <th></th>
-                          <th></th>
+                          <td>{index + 1}</td>
+                          <td>{item?.userName}</td>
+                          <td>{item?.centerName}</td>
+                          <td>{item?.userAddress}</td>
+                          <td>{item?.phone}</td>
+                          <td>{item?.payment_status === "1" ? "Success" : "Failed"}</td>
                         </tr>
                       )
                     }) :

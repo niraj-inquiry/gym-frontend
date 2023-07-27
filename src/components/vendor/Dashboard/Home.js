@@ -81,8 +81,8 @@ const Home = () => {
   console.log('chatrdat', membercount.map((item) => item.created_date.slice(0, 10)))
 
 
-  const membermonth = membercount.map((item) => item.created_date.slice(0, 10));
-  const activemembersdata = membercount.map((item) => item.created_date.slice(0, 10) && item.payment_status);
+  const membermonth = getFilterData.map((item) => item.created_date.slice(0, 10));
+  const activemembersdata = getFilterData.map((item) => item.created_date.slice(0, 10) && item.payment_status);
 
   // const monthlyrevenuedata = getOrderCount.map((item) => {
   //   const monthlydata = item.created_date.slice(0, 10);
@@ -106,6 +106,8 @@ const Home = () => {
 
   const activemembers = activemembersdata;
   const fivemonth = membermonth;
+
+  console.log("activemembers",membermonth);
 
   // starting monthly revenue code
   //calculating monthly revenue per month
@@ -600,8 +602,8 @@ const Home = () => {
                     })}
                   </tbody>
                 </table>
-                <NavLink to="orders">
-                  <div className=" text-end fs-6">
+                <NavLink to="orders" className=" text-decoration-none">
+                  <div className=" text-end fs-6 logo_color">
                     <b>{"View All"}</b>
                   </div>
                 </NavLink>

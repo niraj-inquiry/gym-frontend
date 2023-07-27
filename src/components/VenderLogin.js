@@ -34,11 +34,15 @@ const VenderLogin = () => {
         email: email,
         password: password,
       }).then((response) => {
+        
         const { data } = response;
         const vData = {
           vendor: data.data.email,
           vpass: data.data.password,
           Vusertype: data.data.user_type,
+          vid:data.data._id,
+          vName:data.data.first_name+" "+data.data.last_name,
+          vpost_code:data.data.post_code
         };
         if (data.data.email && data.data.password) {
           if (data.data.user_type === "Vendor") {

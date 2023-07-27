@@ -11,6 +11,7 @@ export { default as mail } from "./icons8-envelope-100.png";
 export { default as google_play } from "./playstore.png";
 export { default as darkmail } from "./dark-mail.png";
 export { default as app_store } from "./appstore.png";
+export { default as placeholderImages} from './placeholderImages.png';
 export { default as book } from "./book.png";
 export { default as arrow } from "./arrow.png";
 export { default as cycle } from "./cycle.png";

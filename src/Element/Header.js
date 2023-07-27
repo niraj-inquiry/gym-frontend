@@ -25,13 +25,7 @@ export const VendorMenus = ({ onClick }) => {
                 <ul className="custommenu">
                     {/* <li><NavLink className="dropdown-item" to={'/vendor'}>Dashboard</NavLink></li> */}
                     <li><NavLink className="dropdown-item" to={'/dashboard'}>Dashboard</NavLink></li>
-                    {/*<li><NavLink className="dropdown-item" to={'/Payment_Details'}>Payment Details</NavLink></li>
-             <li><NavLink className="dropdown-item" to={'/account'}>Settings</NavLink></li>
-         <li><NavLink className="dropdown-item" to={'/user-history'}>History</NavLink></li>
-             <li><NavLink className="dropdown-item" to={'/account'}>Feedback</NavLink></li>
-          <li><NavLink className="dropdown-item" to={'/account'}>Redeem a voucher</NavLink></li>
-           <li><NavLink className="dropdown-item" to={'/refer_friend'}>Refer a friend</NavLink></li>
-          <li><NavLink className="dropdown-item" to={'/Contact_Us'}>FAQs & Contact</NavLink></li> */}
+                    <li><NavLink className="dropdown-item" to={'/profile'}>Profile</NavLink></li>
                     <li><NavLink className="dropdown-item"
                         // to={'/home'}
                         onClick={onClick}
