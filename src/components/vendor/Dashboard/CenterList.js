@@ -391,7 +391,7 @@ const CenterList = ({ data }) => {
                               name="country"
                               value={country}
                               className="form-control"
-                              onChange={(e) => setCountry(e.target.country)}
+                              onChange={(e) => setCountry(e.target.value)}
                               required
                             >
                               <option>Choose Country</option>
